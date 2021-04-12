@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Описание страницы для SEO и соцсетей">
+	<meta name="keywords" content="ключевые, слова, через, запятую">
+	<link rel="shortcut icon" type='image/png' href="img/icons/favicon.ico" />
+	<title>Title</title>
+	<link rel="stylesheet" href="css/index.css" type="text/css">
+	<link rel="stylesheet" href="vendors/css/owl.carousel.min.css" type="text/css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Raleway:wght@600;700&display=swap"
+		rel="stylesheet">
+</head>
+
+<body>
+	@import "header.html"
+	<main class="main">
+		
+		<section class="programs programs--catalog">
+			<div class="wrapper">
+				@import "breadcrumbs.html"
+				<div class="programs__header programs__header--catalog">
+					<h1 class="programs__title"><span class='accent'>5 программ</span><br>питания</h1>
+					<p class="programs__desc">Построены в зависимости от суточный нормы каллорий в соответствии <br>с вашими целями</p>
+				</div>
+				<div class="programs__container">
+					@import "card.html"
+					@import "card.html"
+					@import "card.html"
+					@import "card.html"
+					@import "card.html"
+					<a href=/# class="programs__individual">
+						<div class="programs__individualContent">
+							<h4 class="programs__individualName">Хотите подобрать индивидуальную программу?</h4>
+							<p class="programs__individualText">Специальная программа для улучшения общего состояния организма.</p>
+						</div>
+						<img src="img/individual.webp" alt="" class="programs__individualImage">
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+	@import "footer.html"
+	<script src="vendors/js/jquery-3.5.1.min.js"></script>
+	<script src="js/scripts.js"></script>
+</body>

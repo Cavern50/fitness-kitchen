@@ -1,0 +1,118 @@
+@import "main";
+
+.delivery {
+    &__container {
+        margin-top: 67px;
+    }
+    &__title {
+        color: $accent;
+    }
+    &__terms {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 72px;
+    }
+    &__block {
+        width: 580px;
+    }
+    &__subtitle,
+    &__list {
+        max-width: 70%;
+    }
+    &__subtitle {
+        @extend %accent;
+        min-height: 60px;
+    }
+    &__list {
+        margin-top: 38px;
+    }
+    &__item {
+        position: relative;
+        padding-left: 44px;
+        &:not(:first-child) {
+            margin-top: 28px;
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background-color: $accent;
+            background-image: url('../img/done.svg');
+            background-size: 9px;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 4px;
+        }
+        &--payment {
+            display: flex;
+        }
+        &Pay {
+            @extend %flexbox;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background-color: $light;
+            transform: translateY(-30%);
+            & img {
+                mix-blend-mode: multiply;
+                object-fit: contain;
+            }
+            
+        }
+        & span {
+            margin-right: 14px;
+            &:first-child {
+                margin-right: 30px;
+            }
+        }
+    }
+}
+
+.terms {
+    padding-top: 115px;
+    &__box {
+        display: flex;
+        justify-content: space-between;
+        padding: 42px;
+        border-radius: 16px;
+        background-color: $light;
+        &:not(:first-child) {
+            margin-top: 38px;
+        }
+        & >:first-child {
+            width: 480px;
+        }
+        & >:last-child {
+            width: 540px;
+        }
+        &:nth-child(even) {
+            & >:last-child {
+                order: -1;
+                width: 480px;
+            }
+            & >:first-child {
+                width: 540px;
+            }
+        }
+        & h2 {
+            max-width: 380px;
+        }
+        & p {
+            max-width: 326px;
+            margin-top: 17px;
+        }
+    }
+    &__image {
+        object-fit: cover;
+        border-radius: 12px;
+    }
+    &__order {
+        @extend %button;
+        width: 211px;
+        margin-top: 32px;
+    }
+}

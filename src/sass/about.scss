@@ -1,0 +1,58 @@
+@import 'features';
+@import 'main';
+
+.about {
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 42px;
+    }
+
+    &__title {
+        margin-right: 340px;
+        color: $accent;
+    }
+
+    &__text {
+        max-width: 272px;
+        margin-top: 6px;
+    }
+
+    &__video {
+        @extend %video;
+        width: 100%;
+        height: 500px;
+        margin-top: 66px;
+        border-radius: 19px;
+        overflow: hidden;
+    }
+}
+
+.certificates {
+    padding-top: 95px;
+
+    &__header {
+        @extend %flexbox;
+        justify-content: space-between;
+    }
+
+    &__nav {
+        & .owl-prev {
+            margin-right: 12px;
+        }
+        & button {
+            &:hover {
+                & circle {
+                    fill: $accent;
+                }
+
+                & path {
+                    fill: #ffffff;
+                }
+            }
+        }
+    }
+    &__slider {
+        margin-top: 36px;
+    }
+}

@@ -1,0 +1,122 @@
+@import 'root';
+@import 'mixins';
+.dpicker {
+    display: none;
+    width: 390px;
+    height: 450px;
+    padding: 16px 18px 30px 18px;
+    border-radius: 16px;
+    background-color: $light;
+    overflow: hidden;
+    &__header {
+        @extend %flexbox;
+
+        &--nav {
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+    }
+
+    &__current {
+        text-transform: uppercase;
+    }
+
+    &__arrows {
+        @extend %flexbox;
+    }
+
+    &__arrow {
+        opacity: 0.4;
+        padding: 4px;
+
+        &.prev {
+            margin-right: 4px;
+        }
+    }
+
+    &__arrow:hover {
+        opacity: 1;
+    }
+
+    &__body {
+        @extend %flexbox;
+        z-index: 1;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        @extend %flexbox;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        justify-content: center;
+        margin-right: 12px;
+        margin-bottom: 12px;
+        border: 1px solid #ffffff;
+        border-radius: 50%;
+        box-sizing: border-box;
+        position: relative;
+        color: $gen;
+        font-size: 12px;
+        z-index: 1;
+        background-color: #dfdfdf;
+        transition: background-color 0.3s, color 0.3s;
+        font-family: $inter;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50px;
+            height: 100%;
+            width: 80px;
+            background-color: $accent;
+            border-radius: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+        }
+        &:nth-child(7n) {
+            margin-right: 0;
+        }
+
+        &.current {
+            background-color: transparent;
+            border-color: #dfdfdf;
+        }
+
+        &.today {
+            border-color: $accent;
+            color: $gen;
+            background-color: transparent;
+        }
+
+        &.disabled {
+            pointer-events: none;
+        }
+
+
+        &:not(.dpicker__item--header) {
+            &::after {
+                content: '';
+                position: absolute;
+            }
+            &:hover,
+            &.active,
+            &.ranged {
+                background-color: $accent;
+                border-color: #ffffff;
+                color: #ffffff;
+            }
+            &.ranged {
+                &:not(.first)::before {
+                    opacity: .2;
+                }
+            }
+
+            &--header {
+                border-color: transparent;
+                background-color: transparent;
+            }
+        }
+    }
+}

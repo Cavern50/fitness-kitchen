@@ -1,0 +1,1057 @@
+@import 'root';
+@import 'keyframes';
+@import 'mixins';
+
+html {
+    font-size: 14px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $inter;
+    cursor: default;
+    background-color: $bgc;
+    color: $gen;
+    @extend %scrollbar;
+}
+
+section {
+    position: relative;
+}
+
+p {
+    font-size: 14px;
+}
+
+ul {
+    list-style: none;
+}
+
+.wrapper {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    max-width: 1180px;
+}
+
+a {
+    color: $gen;
+    display: inline-block;
+    text-decoration: none;
+    transition: background-color .3s, border-color .3s, opacity .3s, color .3s;
+}
+
+svg {
+    min-height: 1rem;
+    height: 1rem;
+}
+
+path,
+circle {
+    transition: fill .3s, stroke .3s;
+}
+
+textarea,
+button,
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: $raleway;
+    border: none;
+    background: none;
+    outline: none;
+    transition: background-color .3s, border-color .3s, opacity .3s;
+
+    &[disabled] {
+        cursor: default;
+        opacity: .7;
+    }
+}
+
+button {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+// убирает цвет автокомплита у инпута
+input {
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        font-size: 1rem;
+        -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    &[type='number'] {
+        -moz-appearance: textfield;
+    }
+}
+
+img {
+    width: 100%;
+}
+
+h1,
+.number {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 36px;
+    // font-weight: 700;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+h3 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    font-family: $raleway
+}
+
+p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+span {
+    display: inline-block;
+}
+
+.subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    font-family: $raleway;
+}
+
+.accent {
+    color: $accent;
+}
+
+.owl-prev,
+.owl-next {
+
+    & svg {
+        width: 46px;
+        height: 46px;
+    }
+
+    & .timer {
+        stroke-dasharray: 140px;
+        transform: rotate(-90deg);
+        transform-origin: 50%;
+    }
+}
+
+// Шаблон для модального окна
+// .modal Обязательный класс для всех модальных окон, для попапов используем класс .popup который экстендит(@extend) класс modal или описываем свой.
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    @extend %flexbox;
+    justify-content: center;
+
+    //Вложенное окно с контентом, необходимо задать фиксированные размерыж
+    &__box {
+        padding: 2rem 3rem;
+        box-sizing: border-box;
+        position: relative;
+        background-color: $bgc;
+        overflow: auto;
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    // Кнопка закрытия
+    &__close {
+        @extend %close-btn;
+    }
+}
+
+.breadcrumbs {
+    @extend %flexbox;
+    margin-top: 40px;
+    &:hover {
+        & .breadcrumbs__back {
+            background-color: #6D9240; 
+        }
+    }
+    &__back {
+        @extend %button;
+        width: 46px;
+        height: 46px;
+        margin-right: 16px;
+        border-radius: 50%;
+        transition: background-color .3s;
+    }
+    &__text {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .72px;
+        color: $grey;
+    }
+}
+
+.header {
+
+    padding-top: 20px;
+
+    &__container {
+        @extend %flexbox;
+        justify-content: space-between;
+        height: 55px;
+    }
+
+    &__city {
+        margin-bottom: 8px;
+        margin-right: 20px;
+        text-decoration: underline;
+    }
+
+    &__list {
+        @extend %flexbox;
+    }
+
+    &__item {
+        margin-right: 30px;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-family: $raleway;
+        letter-spacing: .72px;
+        &:last-child {
+            margin-right: 0;
+        }
+
+        & a {
+            position: relative;
+            border-bottom: 1px solid transparent;
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -3px;
+                width: 0;
+                height: 1px;
+                opacity: 0;
+                background-color: $accent;
+                transition: opacity .3s, width .3s;
+            }
+            &:hover {
+                color: $accent;
+                &::after {
+                    width: 100%;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    &__contacts {
+        @extend %flexbox;
+    }
+    &__call {
+        margin-right: 42px;
+        color: $accent;
+        border-bottom: 1px solid $accent;
+        font-family: $inter;
+    }
+
+    &__basket {
+        @extend %flexbox;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 2px solid $light;
+        background-color: $light;
+
+        &:hover {
+            border-color: $accent;
+            background-color: transparent;
+        }
+
+        & svg {
+            width: 18px;
+            height: 20px;
+        }
+    }
+}
+
+.footer {
+    padding-top: 100px;
+    padding-bottom: 78px;
+
+    &__box {
+        @extend %flexbox;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        &:hover {
+            & path {
+                fill: #6d9240;
+            }
+        }
+        & svg {
+            width: 139px;
+            height: 28px;
+            margin-bottom: 10px;
+        }
+    }
+
+    &__nav {
+        text-transform: uppercase;
+    }
+
+    &__link {
+        position: relative;
+        display: inline-block;
+        margin-right: 20px;
+        font-family: $raleway;
+        font-size: 12px;
+        letter-spacing: .72px;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 1px;
+            opacity: 0;
+            background-color: $accent;
+            transition: opacity .3s, width .3s;
+        }
+        &:hover {
+            color: $accent;
+            &::after {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__social {
+        @extend %flexbox;
+    }
+
+    &__inst {
+        margin-right: 17px;
+        height: 50px;
+        &:hover {
+            & path {
+                fill: #6d9240;
+            }
+        }
+        & svg {
+            width: 50px;
+            height: 100%;
+        }
+    }
+
+    &__menu {
+        @extend %flexbox;
+        justify-content: center;
+        border: 1px solid $accent;
+        border-radius: 12px;
+        width: 211px;
+        height: 50px;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: $accent;
+        & span {
+            margin-right: 14px;
+        }
+        &:hover {
+            color: #ffffff;
+            background-color: $accent;
+            & path {
+                fill: #ffffff;
+                stroke: #ffffff;
+            }
+        }
+    }
+    &__info {
+        @extend %flexbox;
+        justify-content: space-between;
+        margin-top: 54px;
+    }
+    &__resp {
+        font-size: 12px;
+        margin-right: 60px;
+    }
+    &__agree {
+        font-size: 12px;
+        opacity: 0.8;
+        transition: opacity .3s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    &__asap {
+        &:hover {
+            & path {
+                fill: $accent;
+            }
+        }
+        & svg {
+            width: 77px;
+            height: 32px;
+        }
+    }
+}
+
+
+.programs {
+    padding-top: 60px;
+    &--catalog {
+        padding-top: 0;
+    }
+    &__header {
+        @extend %flexbox;
+        &--catalog {
+            margin-top: 42px;
+        }
+    }
+    &__desc {
+        margin-left: 250px;
+        max-width: 355px;
+    }
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 38px;
+    }
+    &__card,
+    &__individual {
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+        width: 380px;
+        margin-right: 20px;
+        margin-bottom: 25px;
+        padding: 26px 0 26px 28px;
+        background-color: $accent;
+        color: #ffffff;
+        border-radius: 12px;
+        transition: transform .3s;
+        &:hover {
+            transform: translateY(-10px);
+        }
+        &:nth-child(2) {
+            background-color: $blue;
+        }
+
+        &:nth-child(3) {
+            background-color: $yellow;
+        }
+
+        &:nth-child(4) {
+            background-color: $red;
+        }
+
+        &:nth-child(5) {
+            background-color: $aqua;
+        }
+
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+
+    &__individual {
+        position: relative;
+        display: block;
+        background-color: $light;
+        color: $gen;
+
+        &Content {
+            width: 240px;
+        }
+
+        &Text {
+            margin-top: 20px;
+        }
+
+        &Image {
+            position: absolute;
+            width: 170px;
+            height: 100%;
+            right: 0;
+            top: 0;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 200px;
+    }
+
+    &__name {
+        text-transform: uppercase;
+    }
+
+    &__amount {
+        margin-top: 6px;
+    }
+
+    &__about {
+        margin-top: 17px;
+    }
+
+    &__more {
+        @extend %button--card;
+        align-self: flex-start;
+        width: 145px;
+        height: 35px;
+        margin-top: 28px;
+    }
+
+    &__image {
+        transform: translateX(34px);
+
+        & img {
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+.choose {
+    padding-top: 95px;
+    &--chosen {
+        padding-top: 53px;
+    }
+    &__header {
+        margin-top: 18px;
+    }
+
+    &__programs {
+        @extend %flexbox;
+    }
+
+    &__container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-top: 22px;
+    }
+
+    &__box {
+        width: 760px;
+    }
+
+    &__program {
+        position: relative;
+        width: 144px;
+        height: 70px;
+        overflow: hidden;
+        margin-right: 10px;
+        padding: 14px 6px 14px 14px;
+        border-radius: 8px;
+        background-color: $light;
+
+        &[data-name="lite"] .choose__programBackground {
+            background-color: $blue;
+        }
+
+        &[data-name="fit"] .choose__programBackground {
+            background-color: $yellow;
+        }
+
+        &[data-name="balance"] .choose__programBackground {
+            background-color: $red;
+        }
+
+        &[data-name="super-power"] .choose__programBackground {
+            background-color: $aqua;
+        }
+
+        &--chosen {
+            width: 100%;
+            margin-right: 0;
+            background-color: $accent;
+            & > span {
+                color: #ffffff;
+            }
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover,
+        &.active {
+            & .choose__programBackground {
+                height: 100%;
+            }
+
+            & span {
+                color: #ffffff;
+            }
+        }
+
+        & span {
+            display: block;
+            text-align: left;
+            transition: color .3s, height .3s;
+        }
+
+        &Name {
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        &Amount {
+            position: relative;
+            margin-top: 6px;
+            color: $grey;
+        }
+
+        &Background {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 7px;
+            background-color: $accent;
+            z-index: 0;
+        }
+    }
+
+    &__days {
+        @extend %flexbox;
+        margin-top: 18px;
+    }
+
+    &__day {
+        @extend %flexbox;
+        justify-content: center;
+        width: 97px;
+        height: 30px;
+        margin-right: 14px;
+        border-radius: 4px;
+        background-color: $light;
+
+        &:hover,
+        &.active {
+            background-color: $blue;
+            color: #ffffff;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__card {
+        position: relative;
+        width: 240px;
+        margin-right: 20px;
+        margin-top: 125px;
+        padding: 92px 30px 35px 30px;
+        border-radius: 12px;
+        background-color: $light;
+        counter-increment: num;
+
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+
+    &__image {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -75px;
+        width: 198px;
+        height: 150px;
+    }
+
+    &__eating {
+        position: relative;
+        display: block;
+        color: $blue;
+        padding-left: 40px;
+
+        &::before {
+            @extend %flexbox;
+            justify-content: center;
+            content: counter(num, decimal-leading-zero);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: $blue;
+            color: #ffffff;
+        }
+    }
+
+    &__name {
+        margin-top: 23px;
+    }
+
+    &__amount {
+        margin-top: 10px;
+        color: $grey;
+    }
+}
+
+
+.calc {
+    width: 380px;
+
+    &__section {
+        margin-top: 12px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__item {
+        padding: 20px 20px 14px 20px;
+        margin-top: 16px;
+        border-radius: 16px;
+        background-color: $light;
+    }
+
+    &__fields {
+        @extend %flexbox;
+        flex-wrap: wrap;
+    }
+
+    &__field {
+        @extend %flexbox;
+        flex-wrap: wrap;
+        margin-right: 20px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &--point,
+        &--level {
+            & button {
+                margin-right: 7px;
+                margin-bottom: 10px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        &--gender {
+            width: 100%;
+
+            & button {
+                margin-right: 20px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &--person {
+            width: 90px;
+            margin-top: 18px;
+        }
+
+        &--height,
+        &--weight {
+            position: relative;
+
+            &::after {
+                position: absolute;
+                right: 7px;
+                bottom: 7px;
+                color: $grey;
+                pointer-events: none;
+            }
+        }
+
+        &--height::after {
+            content: 'см.';
+        }
+
+        &--weight::after {
+            content: 'кг.';
+        }
+
+        &--level {
+            margin-top: 20px;
+        }
+    }
+
+    &__label {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    &__checkbox,
+    &__input {
+        @extend %button--card;
+        height: 30px;
+        padding: 0 16px;
+        background-color: #ffffff;
+        color: $gen;
+        text-transform: none;
+
+        &:hover,
+        &.active {
+            box-shadow: none;
+            background-color: $accent;
+            color: #ffffff;
+        }
+    }
+
+    &__input {
+        width: 100%;
+        padding-right: 30px;
+        font-family: $inter;
+
+        &:hover {
+            box-shadow: none;
+            background-color: #ffffff;
+            color: $gen;
+        }
+    }
+
+    &__line {
+        display: block;
+        margin-top: 27px;
+        padding-top: 10px;
+        border-top: 1px solid $grey;
+        color: $grey;
+    }
+}
+
+.result {
+    margin-top: 18px;
+    border-radius: 16px;
+    background-color: #ffffff;
+
+    &__program {
+        @extend %flexbox;
+        justify-content: space-between;
+        height: 55px;
+        padding: 0 20px;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        background-color: $blue;
+        color: #ffffff;
+    }
+
+    &__body {
+        padding: 16px 20px 20px 20px;
+    }
+
+    &__name {
+        text-transform: uppercase;
+    }
+
+    &__nutrients {
+        @extend %flexbox;
+
+        &Item {
+            @extend %flexbox;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 50px;
+            height: 40px;
+            padding: 5px 0;
+            margin-right: 10px;
+            border: 1px solid $blue;
+            border-radius: 6px;
+
+            & span {
+                display: block;
+                width: 100%;
+                text-align: center;
+                font-weight: 600;
+                font-size: 12px;
+            }
+        }
+
+        &Stuff {
+            opacity: 0.6;
+        }
+    }
+
+    &__params {
+        margin-top: 21px;
+    }
+
+    &__list {
+        position: relative;
+        height: 40px;
+        margin-top: 10px;
+
+        &:first-of-type {
+            & .result__box {
+                z-index: 3;
+
+                &~.result__arrow {
+                    z-index: 4;
+                }
+            }
+        }
+    }
+
+    &__arrow {
+        position: absolute;
+        right: 16px;
+        top: 13px;
+        transition: transform .3s;
+        z-index: 2;
+    }
+
+    &__box {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        width: 100%;
+        height: 39px;
+        border-radius: 6px;
+        background-color: $light;
+        transition: height .3s;
+        z-index: 1;
+
+        &.open {
+            &~svg {
+                transform: rotate(-180deg);
+            }
+        }
+
+        & button {
+            &:not(.result__choose) {
+                @extend %flexbox;
+                justify-content: space-between;
+                width: 100%;
+                height: 30px;
+                padding: 10px 42px 12px 11px;
+                font-family: $inter;
+
+                &.active {
+                    height: 40px;
+                    order: -1;
+                }
+            }
+        }
+
+
+    }
+
+    &__item {
+        &:not(.active) {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+            &:hover {
+                background-color: $accent;
+                color: #ffffff;
+                border-color: $accent;
+
+                & .result__discount {
+                    color: #ffffff;
+                }
+            }
+
+            & span {
+                transition: color .3s;
+            }
+        }
+
+        &.active {
+            transition: none;
+        }
+    }
+
+    &__discount {
+        color: $red;
+    }
+
+    &__choose {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 140px;
+        min-height: 28px;
+        max-height: 28px;
+        padding: 4px 8px 4px 11px;
+        border-radius: 4px;
+        background-color: $accent;
+        margin: 15px 0 15px 15px;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    &__price {
+        margin-top: 28px;
+        text-align: right;
+
+        &Before {
+            opacity: 0.2;
+            margin-right: 9px;
+        }
+
+        &After {
+            display: inline-block;
+        }
+    }
+
+    &__order {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 40px;
+        margin-top: 14px;
+        border-radius: 5px;
+        background-color: $blue;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size: 12px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

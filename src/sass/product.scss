@@ -1,0 +1,48 @@
+@import 'main';
+@import 'features';
+
+.intro {
+    padding-top: 50px;
+    &__container {
+        height: 576px;
+        margin-top: 34px;
+    }
+    &__header {
+        height: 192px;
+        padding: 48px 45px 0 38px;
+        background-color: $accent;
+        border-radius: 12px 12px 0px 0px;
+        color: #ffffff;
+    }
+    &__image {
+        height: calc(100% - 192px);
+        object-fit: cover;
+    }
+    &__title {
+        text-transform: uppercase;
+    }
+    &__block {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    &__order {
+        @extend %button--empty;
+        width: 238px;
+        border-color: #ffffff;
+        color: #ffffff;
+        &:hover {
+            background-color: rgba(255,255,255, .2);
+            color: #ffffff;
+        }
+    }
+    &__subtitle {
+        max-width: 770px;
+        margin-top: 58px;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+}
+
+
