@@ -219,7 +219,7 @@
         transform: scale(1.2);
     }
 
-    & > button {
+    &>button {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -231,13 +231,13 @@
         }
     }
 
-    & > img {
+    &>img {
         position: absolute;
         object-fit: cover;
         height: 100%;
     }
 
-    & > span {
+    &>span {
         @extend %flexbox;
         justify-content: center;
         position: relative;
@@ -246,12 +246,14 @@
         border-radius: 50%;
         background-color: $red;
         pointer-events: none;
-        & > img {
+
+        &>img {
             position: absolute;
             width: 125%;
             height: 125%;
             animation: rotate 12s linear infinite;
         }
+
         & svg {
             width: 35px;
             height: 35px;
@@ -262,8 +264,86 @@
             }
         }
     }
+
     & iframe {
         width: 100%;
         height: 100%;
+    }
+}
+
+
+%list {
+    position: relative;
+    height: 40px;
+
+    & [class*=arrow] {
+        position: absolute;
+        right: 16px;
+        top: 13px;
+        z-index: 2;
+        pointer-events: none;
+        transition: transform .3s;
+    }
+
+    & [class*=box] {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        width: 100%;
+        height: 39px;
+        border-radius: 6px;
+        background-color: $light;
+        transition: height .3s, box-shadow .3s;
+        z-index: 1;
+
+        &.open {
+            z-index: 3;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+            &~[class*=arrow] {
+                z-index: 4;
+                transform: rotate(-180deg);
+            }
+        }
+    }
+
+    & button {
+        @extend %flexbox;
+        justify-content: space-between;
+        width: 100%;
+        height: 30px;
+        padding: 10px 42px 12px 11px;
+        font-family: $inter;
+
+        &.active {
+            height: 40px;
+            order: -1;
+        }
+
+        &:not(.active) {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+            &:hover {
+                background-color: $accent;
+                color: #ffffff;
+                border-color: $accent;
+
+                & [class*=discount] {
+                    color: #ffffff;
+                }
+            }
+
+            & span {
+                transition: color .3s;
+            }
+        }
+
+        &.active {
+            transition: none;
+        }
+    }
+
+    & [class*=discount] {
+        color: $red;
     }
 }
