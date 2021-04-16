@@ -9,9 +9,9 @@
 	<meta name="keywords" content="ключевые, слова, через, запятую">
 	<link rel="shortcut icon" type='image/png' href="img/icons/favicon.ico" />
 	<title>Title</title>
-	<link rel="stylesheet" href="css/index.css?t=1618406329145" type="text/css">
-	<link rel="stylesheet" href="vendors/css/owl.carousel.min.css?t=1618406329145" type="text/css">
-	<!-- <link rel="stylesheet" href="vendors/css/owl.theme.default.min.css" type="text/css"> -->
+	<link rel="stylesheet" href="css/main.css?t=1618568089958" type="text/css">
+	<link rel="stylesheet" href="css/index.css?t=1618568089958" type="text/css">
+	<link rel="stylesheet" href="vendors/css/owl.carousel.min.css?t=1618568089958" type="text/css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link
 		href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Raleway:wght@600;700&display=swap"
@@ -34,9 +34,9 @@
                     <li class="header__item"><a href='/'>Программы</a></li>
                     <li class="header__item"><a href='/'>Информация +</a></li>
                 </ul>
-            </nav>
-            <div class="header__contacts">
                 <button type="button" class="header__call">+7 (8452) 24-83-24</button>
+            </nav>
+            <div class="header__buttons">
                 <button type="button" class="header__basket">
                     <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -47,6 +47,7 @@
                             stroke="#92B676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
+                <button type='button' class="header__burger"><span></span></button>
             </div>
         </div>
     </div>
@@ -55,10 +56,13 @@
 		<section class="intro">
 			<div class="wrapper">
 				<div class="intro__container">
+					<span class="circle" data-top="260" data-range='160, 360'>
+
+					</span>
 					<div class="intro__block">
 						<h1 class="intro__title"><span class='accent'>Ежедневная</span> доставка здоровой еды</h1>
 						<p class="intro__text">Сбалансирована под вас для похудения, набора веса или поддержания формы</p>
-						<a href='/#' class="intro__link">подобрать программу</a>
+						<a href='#programs' class="intro__link">подобрать программу</a>
 					</div>
 					<div class="intro__block">
 						<img src="/img/intro_pic.jpg" alt="">
@@ -88,12 +92,10 @@
 						<div class="offers__item offers__item--blue">
 							<div class="offers__header">
 								<div class="offers__discount">
-									<h3 class="offers__title">300</h3>
-									<div class="offers__image">
-										<img src="img/uds.png" alt="">
-									</div>
+									<h3 class="offers__title">10%</h3>
+									<h3 class="offers__desc">При заказе<br> на месяц</h3>
 								</div>
-								<p class="offers__text">Баллов За регистрацию в приложении UDS</p>
+								<p class="offers__text">Оплатите программу на месяц и получите скидку на все блюда.</p>
 							</div>
 							<div class='offers__footer'>
 								<button type='button' class="offers__join">Присоединиться</button>
@@ -103,8 +105,9 @@
 							<div class="offers__header">
 								<div class="offers__discount">
 									<h3 class="offers__title">5%</h3>
+									<h3 class="offers__desc">Скидка на<br>семейный заказ</h3>
 								</div>
-								<p class="offers__text">Скидка за семейный заказ</p>
+								<p class="offers__text">Предложение действует, если закажите меню на двух и более человек.</p>
 							</div>
 							<div class='offers__footer'>
 								<button type='button' class="offers__join">Присоединиться</button>
@@ -114,8 +117,9 @@
 							<div class="offers__header">
 								<div class="offers__discount">
 									<h3 class="offers__title">25%</h3>
+									<h3 class="offers__desc">Пробный<br>день</h3>
 								</div>
-								<p class="offers__text">При заказе пробного дня</p>
+								<p class="offers__text">Закажите еду на один<br> день с 25% скидкой.</p>
 							</div>
 							<div class='offers__footer'>
 								<button type='button' class="offers__join">Присоединиться</button>
@@ -129,6 +133,7 @@
 		<section class="about">
 			<div class="wrapper">
 				<div class="about__container">
+					<span class="circle" data-top='220' data-range='120, 320'></span>
 					<div class="about__block">
 						<h2 class="about__title">С 2016 года готовим правильное питание на&nbsp;своей фабрике-кухне</h2>
 						<p class="about__text">40 профессионалов работают над тем, чтобы для каждого нашего клиента еда готовилась, паковалась и доставлялась вовремя.</p>
@@ -153,7 +158,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="programs">
+		<section class="programs" id='programs'>
 			<div class="wrapper">
 				<h2 class="programs__title">5 программ питания</h2>
 				<div class="programs__container">
@@ -232,35 +237,35 @@
 		<section class="choose">
 			<div class="wrapper">
 				<h2 class="choose__title">Подобрать программу</h2>
-				<div class="choose__container">
+				<div class="choose__container" data-program='Lite'>
 					<div class="choose__box">
 
 						<span class="choose__subtitle">Программы</span>
 						<header class="choose__header">
 							<div class="choose__programs">
-								<button type='button' class="choose__program" data-name='super-lite'>
-									<span class="choose__programBackground"></span>
-									<span class="choose__programName">Super Lite</span>
-									<span class="choose__programAmount">1000 Ккал.</span>
-								</button>
-								<button type='button' class="choose__program active" data-name='lite'>
+								<button type='button' class="choose__program active" data-name='Lite'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Lite</span>
-									<span class="choose__programAmount">1500 Ккал.</span>
+									<span class="choose__programAmount">1000 Ккал.</span>
 								</button>
-								<button type='button' class="choose__program" data-name='fit'>
+								<button type='button' class="choose__program" data-name='Fit'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Fit</span>
+									<span class="choose__programAmount">1500 Ккал.</span>
+								</button>
+								<button type='button' class="choose__program" data-name='Active'>
+									<span class="choose__programBackground"></span>
+									<span class="choose__programName">Active</span>
 									<span class="choose__programAmount">2000 Ккал.</span>
 								</button>
-								<button type='button' class="choose__program" data-name='balance'>
+								<button type='button' class="choose__program" data-name='Balance'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Balance</span>
 									<span class="choose__programAmount">2500 Ккал.</span>
 								</button>
-								<button type='button' class="choose__program" data-name='super-power'>
+								<button type='button' class="choose__program" data-name='Vitality'>
 									<span class="choose__programBackground"></span>
-									<span class="choose__programName">Super Power</span>
+									<span class="choose__programName">Vitality</span>
 									<span class="choose__programAmount">3000 Ккал.</span>
 								</button>
 							</div>
@@ -457,6 +462,82 @@
 										</div>
 										<button type='button' class="result__order">Заказать</button>
 									</div>
+									<div class="dpicker">
+    <div class="dpicker__header dpicker__header--nav">
+        <span class="dpicker__current">Апрель 2021</span>
+        <div class="dpicker__arrows">
+            <button type="button" class="dpicker__arrow prev">
+                <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M7.54294 0.542908L8.95715 1.95712L3.16426 7.75001L8.95715 13.5429L7.54294 14.9571L0.335833 7.75001L7.54294 0.542908Z"
+                        fill="black" />
+                </svg>
+            </button>
+            <button type="button" class="dpicker__arrow next">
+                <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M1.45706 14.9571L0.0428466 13.5429L5.83574 7.74999L0.0428461 1.95709L1.45706 0.542879L8.66417 7.74999L1.45706 14.9571Z"
+                        fill="black" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="dpicker__box">
+        <div class="dpicker__header">
+            <div class="dpicker__item dpicker__item--header">Пн</div>
+            <div class="dpicker__item dpicker__item--header">Вт</div>
+            <div class="dpicker__item dpicker__item--header">Ср</div>
+            <div class="dpicker__item dpicker__item--header">Чт</div>
+            <div class="dpicker__item dpicker__item--header">Пт</div>
+            <div class="dpicker__item dpicker__item--header">Сб</div>
+            <div class="dpicker__item dpicker__item--header">Вс</div>
+        </div>
+        <div class="dpicker__body"><button class="dpicker__item " data-date="29 3 2021">29</button><button
+                class="dpicker__item " data-date="30 3 2021">30</button><button class="dpicker__item "
+                data-date="31 3 2021">31</button><button class="dpicker__item current"
+                data-date="1 4 2021">1</button><button class="dpicker__item current"
+                data-date="2 4 2021">2</button><button class="dpicker__item current"
+                data-date="3 4 2021">3</button><button class="dpicker__item current"
+                data-date="4 4 2021">4</button><button class="dpicker__item current"
+                data-date="5 4 2021">5</button><button class="dpicker__item current"
+                data-date="6 4 2021">6</button><button class="dpicker__item current"
+                data-date="7 4 2021">7</button><button class="dpicker__item today"
+                data-date="8 4 2021">8</button><button class="dpicker__item current"
+                data-date="9 4 2021">9</button><button class="dpicker__item current"
+                data-date="10 4 2021">10</button><button class="dpicker__item current"
+                data-date="11 4 2021">11</button><button class="dpicker__item current"
+                data-date="12 4 2021">12</button><button class="dpicker__item current"
+                data-date="13 4 2021">13</button><button class="dpicker__item current"
+                data-date="14 4 2021">14</button><button class="dpicker__item current active"
+                data-date="15 4 2021">15</button><button class="dpicker__item current"
+                data-date="16 4 2021">16</button><button class="dpicker__item current"
+                data-date="17 4 2021">17</button><button class="dpicker__item current"
+                data-date="18 4 2021">18</button><button class="dpicker__item current"
+                data-date="19 4 2021">19</button><button class="dpicker__item current"
+                data-date="20 4 2021">20</button><button class="dpicker__item current"
+                data-date="21 4 2021">21</button><button class="dpicker__item current"
+                data-date="22 4 2021">22</button><button class="dpicker__item current"
+                data-date="23 4 2021">23</button><button class="dpicker__item current"
+                data-date="24 4 2021">24</button><button class="dpicker__item current"
+                data-date="25 4 2021">25</button><button class="dpicker__item current"
+                data-date="26 4 2021">26</button><button class="dpicker__item current"
+                data-date="27 4 2021">27</button><button class="dpicker__item current"
+                data-date="28 4 2021">28</button><button class="dpicker__item current"
+                data-date="29 4 2021">29</button><button class="dpicker__item current"
+                data-date="30 4 2021">30</button><button class="dpicker__item "
+                data-date="1 5 2021">1</button><button class="dpicker__item "
+                data-date="2 5 2021">2</button><button class="dpicker__item "
+                data-date="3 5 2021">3</button><button class="dpicker__item "
+                data-date="4 5 2021">4</button><button class="dpicker__item "
+                data-date="5 5 2021">5</button><button class="dpicker__item "
+                data-date="6 5 2021">6</button><button class="dpicker__item "
+                data-date="7 5 2021">7</button><button class="dpicker__item "
+                data-date="8 5 2021">8</button><button class="dpicker__item "
+                data-date="9 5 2021">9</button></div>
+    </div>
+</div>
 								</div>
 							</div>
 
@@ -465,87 +546,10 @@
 				</div>
 			</div>
 		</section>
-		<div class="wrapper">
-			<div class="dpicker">
-				<div class="dpicker__header dpicker__header--nav">
-					<span class="dpicker__current">Апрель 2021</span>
-					<div class="dpicker__arrows">
-						<button type="button" class="dpicker__arrow prev">
-							<svg width="9" height="15" viewBox="0 0 9 15" fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd" clip-rule="evenodd"
-									d="M7.54294 0.542908L8.95715 1.95712L3.16426 7.75001L8.95715 13.5429L7.54294 14.9571L0.335833 7.75001L7.54294 0.542908Z"
-									fill="black" />
-							</svg>
-						</button>
-						<button type="button" class="dpicker__arrow next">
-							<svg width="9" height="15" viewBox="0 0 9 15" fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd" clip-rule="evenodd"
-									d="M1.45706 14.9571L0.0428466 13.5429L5.83574 7.74999L0.0428461 1.95709L1.45706 0.542879L8.66417 7.74999L1.45706 14.9571Z"
-									fill="black" />
-							</svg>
-						</button>
-					</div>
-				</div>
-				<div class="dpicker__box">
-					<div class="dpicker__header">
-						<div class="dpicker__item dpicker__item--header">Пн</div>
-						<div class="dpicker__item dpicker__item--header">Вт</div>
-						<div class="dpicker__item dpicker__item--header">Ср</div>
-						<div class="dpicker__item dpicker__item--header">Чт</div>
-						<div class="dpicker__item dpicker__item--header">Пт</div>
-						<div class="dpicker__item dpicker__item--header">Сб</div>
-						<div class="dpicker__item dpicker__item--header">Вс</div>
-					</div>
-					<div class="dpicker__body"><button class="dpicker__item " data-date="29 3 2021">29</button><button
-							class="dpicker__item " data-date="30 3 2021">30</button><button class="dpicker__item "
-							data-date="31 3 2021">31</button><button class="dpicker__item current"
-							data-date="1 4 2021">1</button><button class="dpicker__item current"
-							data-date="2 4 2021">2</button><button class="dpicker__item current"
-							data-date="3 4 2021">3</button><button class="dpicker__item current"
-							data-date="4 4 2021">4</button><button class="dpicker__item current"
-							data-date="5 4 2021">5</button><button class="dpicker__item current"
-							data-date="6 4 2021">6</button><button class="dpicker__item current"
-							data-date="7 4 2021">7</button><button class="dpicker__item today"
-							data-date="8 4 2021">8</button><button class="dpicker__item current"
-							data-date="9 4 2021">9</button><button class="dpicker__item current"
-							data-date="10 4 2021">10</button><button class="dpicker__item current"
-							data-date="11 4 2021">11</button><button class="dpicker__item current"
-							data-date="12 4 2021">12</button><button class="dpicker__item current"
-							data-date="13 4 2021">13</button><button class="dpicker__item current"
-							data-date="14 4 2021">14</button><button class="dpicker__item current active"
-							data-date="15 4 2021">15</button><button class="dpicker__item current"
-							data-date="16 4 2021">16</button><button class="dpicker__item current"
-							data-date="17 4 2021">17</button><button class="dpicker__item current"
-							data-date="18 4 2021">18</button><button class="dpicker__item current"
-							data-date="19 4 2021">19</button><button class="dpicker__item current"
-							data-date="20 4 2021">20</button><button class="dpicker__item current"
-							data-date="21 4 2021">21</button><button class="dpicker__item current"
-							data-date="22 4 2021">22</button><button class="dpicker__item current"
-							data-date="23 4 2021">23</button><button class="dpicker__item current"
-							data-date="24 4 2021">24</button><button class="dpicker__item current"
-							data-date="25 4 2021">25</button><button class="dpicker__item current"
-							data-date="26 4 2021">26</button><button class="dpicker__item current"
-							data-date="27 4 2021">27</button><button class="dpicker__item current"
-							data-date="28 4 2021">28</button><button class="dpicker__item current"
-							data-date="29 4 2021">29</button><button class="dpicker__item current"
-							data-date="30 4 2021">30</button><button class="dpicker__item "
-							data-date="1 5 2021">1</button><button class="dpicker__item "
-							data-date="2 5 2021">2</button><button class="dpicker__item "
-							data-date="3 5 2021">3</button><button class="dpicker__item "
-							data-date="4 5 2021">4</button><button class="dpicker__item "
-							data-date="5 5 2021">5</button><button class="dpicker__item "
-							data-date="6 5 2021">6</button><button class="dpicker__item "
-							data-date="7 5 2021">7</button><button class="dpicker__item "
-							data-date="8 5 2021">8</button><button class="dpicker__item "
-							data-date="9 5 2021">9</button></div>
-				</div>
-			</div>
-		</div>
 		<section class="trial">
 			<div class="wrapper">
 				<div class="trial__container">
+					<span class="circle" data-top='170' data-range='70, 270'></span>
 					<div class="trial__content">
 						<h2 class="trial__title">
 							Закажите пробный день <br> <span class="accent">со скидкой 25%</span>
@@ -599,8 +603,7 @@
                 <nav class="footer__nav">
                     <a href="" class="footer__link">О приготовлении</a>
                     <a href="" class="footer__link">Программы</a>
-                    <a href="" class="footer__link">доставка и оплата</a>
-                    <a href="" class="footer__link">Контакты</a>
+                    <a href="" class="footer__link">Информация +</a>
                 </nav>
                 <div class="footer__social">
                     <a href="/" class="footer__inst">
@@ -819,11 +822,11 @@
     </div>
 </div>
 	</main>
-	<script src="vendors/js/jquery-3.5.1.min.js?t=1618406329145"></script>
-	<script src="vendors/js/owl.carousel.min.js?t=1618406329145"></script>
-	<script src="js/scripts.js?t=1618406329145"></script>
-	<script src="vendors/js/index.js?t=1618406329145"></script>
-	<script src="vendors/js/calendar.js?t=1618406329145"></script>
+	<script src="vendors/js/jquery-3.5.1.min.js?t=1618568089958"></script>
+	<script src="vendors/js/owl.carousel.min.js?t=1618568089958"></script>
+	<script src="js/scripts.js?t=1618568089958"></script>
+	<script src="vendors/js/index.js?t=1618568089958"></script>
+	<script src="vendors/js/calendar.js?t=1618568089958"></script>
 </body>
 
 </html>

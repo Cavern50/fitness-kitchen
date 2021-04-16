@@ -243,14 +243,24 @@ span {
         height: 55px;
     }
 
+    &__link {
+        margin-right: 293px;
+    }
+
     &__city {
         margin-bottom: 8px;
         margin-right: 20px;
         text-decoration: underline;
     }
 
+    &__nav {
+        @extend %flexbox;
+        margin-right: 42px;
+    }
+
     &__list {
         @extend %flexbox;
+        margin-right: 126px;
     }
 
     &__item {
@@ -291,12 +301,7 @@ span {
         }
     }
 
-    &__contacts {
-        @extend %flexbox;
-    }
-
     &__call {
-        margin-right: 42px;
         color: $accent;
         border-bottom: 1px solid $accent;
         font-family: $inter;
@@ -321,6 +326,11 @@ span {
             height: 20px;
         }
     }
+
+    &__burger {
+        @extend %burger;
+        display: none;
+    }
 }
 
 .footer {
@@ -337,6 +347,7 @@ span {
             & .footer__logoGreen {
                 fill: $gen;
             }
+
             & .footer__logoKitchen {
                 fill: $accent;
             }
@@ -488,7 +499,7 @@ span {
     &__container {
         display: flex;
         flex-wrap: wrap;
-        margin-top: 38px;
+        margin-top: 57px;
     }
 
     &__card,
@@ -610,6 +621,171 @@ span {
         align-items: flex-start;
         justify-content: space-between;
         margin-top: 22px;
+
+        &[data-program='Lite'] {
+
+            & .choose__day:hover,
+            & .choose__day.active,
+            & .choose__eating::before,
+            & .calc__checkbox:hover,
+            & .calc__checkbox.active,
+            & .result__program,
+            & .result__order,
+            & .result__item:not(.active):hover,
+            & .result__choose,
+            & button.dpicker__item:not(.dpicker__item--header).active,
+            & button.dpicker__item:not(.dpicker__item--header).ranged,
+            & button.dpicker__item:not(.dpicker__item--header):hover,
+            & button.dpicker__item::before {
+                background-color: $accent;
+            }
+
+            & .choose__eating {
+                color: $accent;
+
+            }
+
+            & .result__nutrientsItem,
+            & .dpicker__item.today {
+                border-color: $accent;
+            }
+
+            & .result__choose:hover {
+                background-color: darken($color: $accent, $amount: 7%);
+            }
+        }
+
+        &[data-program='Fit'] {
+
+            & .choose__day:hover,
+            & .choose__day.active,
+            & .choose__eating::before,
+            & .calc__checkbox:hover,
+            & .calc__checkbox.active,
+            & .result__program,
+            & .result__order,
+            & .result__item:not(.active):hover,
+            & .result__choose,
+            & button.dpicker__item:not(.dpicker__item--header).active,
+            & button.dpicker__item:not(.dpicker__item--header).ranged,
+            & button.dpicker__item:not(.dpicker__item--header):hover,
+            & button.dpicker__item::before {
+                background-color: $blue;
+            }
+
+            & .choose__eating {
+                color: $blue;
+
+            }
+
+            & .result__nutrientsItem,
+            & .dpicker__item.today {
+                border-color: $blue;
+            }
+
+            & .result__choose:hover {
+                background-color: darken($color: $blue, $amount: 7%);
+            }
+        }
+
+        &[data-program='Active'] {
+
+            & .choose__day:hover,
+            & .choose__day.active,
+            & .choose__eating::before,
+            & .calc__checkbox:hover,
+            & .calc__checkbox.active,
+            & .result__program,
+            & .result__order,
+            & .result__item:not(.active):hover,
+            & .result__choose,
+            & button.dpicker__item:not(.dpicker__item--header).active,
+            & button.dpicker__item:not(.dpicker__item--header).ranged,
+            & button.dpicker__item:not(.dpicker__item--header):hover,
+            & button.dpicker__item::before {
+                background-color: $yellow;
+            }
+
+            & .choose__eating {
+                color: $yellow;
+
+            }
+
+            & .result__nutrientsItem,
+            & .dpicker__item.today {
+                border-color: $yellow;
+            }
+
+            & .result__choose:hover {
+                background-color: darken($color: $yellow, $amount: 7%);
+            }
+        }
+
+        &[data-program='Balance'] {
+
+            & .choose__day:hover,
+            & .choose__day.active,
+            & .choose__eating::before,
+            & .calc__checkbox:hover,
+            & .calc__checkbox.active,
+            & .result__program,
+            & .result__order,
+            & .result__item:not(.active):hover,
+            & .result__choose,
+            & button.dpicker__item:not(.dpicker__item--header).active,
+            & button.dpicker__item:not(.dpicker__item--header).ranged,
+            & button.dpicker__item:not(.dpicker__item--header):hover,
+            & button.dpicker__item::before {
+                background-color: $red;
+            }
+
+            & .choose__eating {
+                color: $red;
+
+            }
+
+            & .result__nutrientsItem,
+            & .dpicker__item.today {
+                border-color: $red;
+            }
+
+            & .result__choose:hover {
+                background-color: darken($color: $red, $amount: 7%);
+            }
+        }
+
+        &[data-program='Vitality'] {
+
+            & .choose__day:hover,
+            & .choose__day.active,
+            & .choose__eating::before,
+            & .calc__checkbox:hover,
+            & .calc__checkbox.active,
+            & .result__program,
+            & .result__order,
+            & .result__item:not(.active):hover,
+            & .result__choose,
+            & button.dpicker__item:not(.dpicker__item--header).active,
+            & button.dpicker__item:not(.dpicker__item--header).ranged,
+            & button.dpicker__item:not(.dpicker__item--header):hover,
+            & button.dpicker__item::before {
+                background-color: $aqua;
+            }
+
+            & .choose__eating {
+                color: $aqua;
+
+            }
+
+            & .result__nutrientsItem,
+            & .dpicker__item.today {
+                border-color: $aqua;
+            }
+
+            & .result__choose:hover {
+                background-color: darken($color: $aqua, $amount: 7%);
+            }
+        }
     }
 
     &__box {
@@ -626,19 +802,23 @@ span {
         border-radius: 8px;
         background-color: $light;
 
-        &[data-name="lite"] .choose__programBackground {
+        &[data-name='Lite'] .choose__programBackground {
+            background-color: $accent;
+        }
+
+        &[data-name="Fit"] .choose__programBackground {
             background-color: $blue;
         }
 
-        &[data-name="fit"] .choose__programBackground {
+        &[data-name="Active"] .choose__programBackground {
             background-color: $yellow;
         }
 
-        &[data-name="balance"] .choose__programBackground {
+        &[data-name="Balance"] .choose__programBackground {
             background-color: $red;
         }
 
-        &[data-name="super-power"] .choose__programBackground {
+        &[data-name="Vitality"] .choose__programBackground {
             background-color: $aqua;
         }
 
@@ -754,6 +934,7 @@ span {
         display: block;
         color: $blue;
         padding-left: 40px;
+        transition: color .3s;
 
         &::before {
             @extend %flexbox;
@@ -768,6 +949,7 @@ span {
             border-radius: 50%;
             background-color: $blue;
             color: #ffffff;
+            transition: background-color .3s;
         }
     }
 
@@ -912,6 +1094,7 @@ span {
 }
 
 .result {
+    position: relative;
     margin-top: 18px;
     border-radius: 16px;
     background-color: #ffffff;
@@ -923,7 +1106,7 @@ span {
         padding: 0 20px;
         border-top-left-radius: 16px;
         border-top-right-radius: 16px;
-        background-color: $blue;
+        background-color: attr(data-color);
         color: #ffffff;
     }
 
@@ -948,6 +1131,7 @@ span {
             margin-right: 10px;
             border: 1px solid $blue;
             border-radius: 6px;
+            transition: border-color .3s;
 
             & span {
                 display: block;
@@ -972,9 +1156,10 @@ span {
         margin-top: 10px;
     }
 
-    &__choose {
+    & .result__choose {
         display: flex;
         align-items: center;
+        align-self: flex-start;
         justify-content: space-between;
         width: 140px;
         min-height: 28px;
@@ -986,6 +1171,10 @@ span {
         color: #ffffff;
         text-transform: uppercase;
         font-size: 12px;
+
+        &:hover {
+            background-color: #6d9240;
+        }
     }
 
     &__price {
@@ -1111,7 +1300,7 @@ span {
     opacity: 0.7;
     filter: blur(60px);
     z-index: -1;
-    transition: top .2s, bottom .2s;
+    transition: top .1s;
 }
 
 .modal {
@@ -1225,13 +1414,16 @@ span {
         &--street {
             width: 345px;
         }
+
         &--address {
             width: 138px;
             margin-right: 10px;
+
             &#entrance {
                 margin-right: 0;
             }
         }
+
         &--comment {
             width: 100%;
             height: 203px;
@@ -1251,6 +1443,7 @@ span {
         @extend %button;
         width: 176px;
     }
+
     &__submit {
         margin: 58px auto 0 auto;
     }
@@ -1288,6 +1481,7 @@ span {
                 width: 287px;
             }
         }
+
         &--delivery {
             & .cart__field {
                 &:not(:nth-child(-n+2)) {
@@ -1310,10 +1504,12 @@ span {
         height: 56px;
         margin-top: 8px;
         margin-right: 12px;
+
         &--payment {
             width: 100%;
             margin-top: 17px;
         }
+
         & .cart__box {
             height: 56px;
             border: 1px solid #cbcdce;
@@ -1322,6 +1518,7 @@ span {
 
         & .cart__arrow {
             top: 21px;
+
             & path {
                 fill: #979C9E;
             }
@@ -1330,11 +1527,7 @@ span {
         & button {
             min-height: 46px;
             height: 46px;
-            // &:not(.active):hover {
-            //     background-color: $light;
-            //     color: #222B45;
-            //     border-top-color: $light;
-            // }
+
             &.active {
                 min-height: 56px;
                 height: 56px;
@@ -1350,14 +1543,17 @@ span {
         padding: 0 24px 0 22px;
         background-color: $light;
         border-radius: 8px;
+
         &Label {
             font-size: 12px;
             color: $grey;
         }
     }
+
     &__total {
         display: flex;
         align-items: flex-end;
+
         &Label {
             margin-right: 17px;
         }
@@ -1395,6 +1591,7 @@ span {
         border-radius: 6px;
         background-color: $accent;
         color: #ffffff;
+        transition: border-color .3s;
     }
 
     &__name {
@@ -1448,7 +1645,7 @@ span {
         margin-right: 18px;
     }
 
-    
+
 
     &__remove {
         width: 12px;
@@ -1468,4 +1665,157 @@ span {
 
 
 
-@media (max-width: 1240px) {}
+@media (max-width: 1240px) {
+
+    // tablets
+    h1 {
+        font-size: 36px;
+        line-height: 40px;
+    }
+
+    h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    h3 {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    h4 {
+        line-height: 18px;
+    }
+
+    .wrapper {
+        width: calc(100% - 32px);
+        max-width: 100%;
+    }
+
+    .breadcrumbs__back {
+        width: 46px;
+        height: 46px;
+    }
+
+    .header {
+        position: relative;
+        height: 108px;
+        &__link {
+            margin-right: 0;
+        }
+        &__nav {
+            position: absolute;
+            left: 0;
+            top: 108px;
+            width: 100%;
+            height: calc(100vh - 108px);
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            opacity: 0;
+            visibility: hidden;
+            padding: 25px;
+            background-color: $accent;
+            z-index: 99;
+            transition: opacity .3s, visibility .3s;
+            &.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &__list {
+            width: 100%;
+            display: block;
+            align-self: flex-start;
+        }
+
+        &__item {
+            font-size: 20px;
+            text-transform: none;
+            & a {
+                color: #ffffff;
+                &:hover  {
+                    color: $gen;
+                }
+            }
+
+            &:not(:first-child) {
+                margin-top: 17px;
+            }
+        }
+
+        &__call {
+            position: relative;
+            align-self: flex-end;
+            font-size: 20px;
+            padding-left: 58px;
+            color: #ffffff;
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 42px;
+                width: 42px;
+                border-radius: 50%;
+                background-color: #ffffff;
+                background-image: url('../img/phone.svg');
+                background-size: 19px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+
+        &__basket {
+            margin-right: 24px;
+        }
+
+        &__burger {
+            display: block;
+        }
+
+        &__buttons {
+            display: flex;
+        }
+    }
+
+    .programs {
+        padding-top: 60px;
+        &__container {
+            margin-top: 33px;
+        }
+        &__card,
+        &__individual {
+            &:nth-of-type(3n) {
+                margin-right: 20px;
+            }
+            &:nth-of-type(2n) {
+                margin-right: 0;
+            }
+            &:hover {
+                transform: none;
+            }
+        }
+    }
+
+    .choose {
+        padding-top: 65px;
+        &__container {
+            flex-wrap: wrap;
+        }
+    } 
+    .calc {
+        padding-top: 80px;
+    }
+    .footer {
+        padding: 62px 0 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        
+    }
+}

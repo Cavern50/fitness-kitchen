@@ -1,4 +1,4 @@
-const mobile = $(window).width() < 1180;
+const mobile = $(window).width() < 1240;
 
 //навешиваем  обработчики открытия и закрытия на модалки
 const bindModalListeners = modalArr => {
@@ -60,7 +60,6 @@ const list = (box, e) => {
         parent.addClass('open');
         current.closest(parent).find('button').each((i, el) => {
             height += $(el).outerHeight(true);
-            console.log(height);
         });
         current.closest(parent).css('height', height);
     }
@@ -87,50 +86,101 @@ const createYouTubeEmbedLink = (btn, container) => {
     });
 };
 
-
-
-const isVisible = (el) => {
-    let t = $(el),
-        w = $(window),
-        wt = w.scrollTop(),
-        tt = t.offset().top,
-        tb = tt + t.height();
-    return (tb <= wt + w.height()) && (tt >= wt);
+const scrollToAnchor = e => {
+    e.preventDefault();
+    const aid = $(e.currentTarget).attr("href");
+    $('html,body').animate({scrollTop: $(aid).offset().top},'slow');
 }
 
 
-let lastScrollTop = 0;
-const circleAnim = (el) => {
-    let st = $(window).scrollTop();
-    let range = parseInt($(el).attr('data-range'));
-    if (st < lastScrollTop) {
-        $(el).attr('data-range', range += 4)
-            .css('top', range + 'px')
-    } else {
-        $(el).attr('data-range', range -= 4)
-            .css('top', range + 'px')
+
+
+
+
+
+// const isVisible = (el) => {
+//     let t = $(el),
+//         w = $(window),
+//         wt = w.scrollTop(),
+//         tt = t.offset().top,
+//         tb = tt + t.height();
+//     return (tb <= wt + w.height()) && (tt >= wt);
+// }
+
+
+const parallaxEffect = (items) => {
+    items.forEach((el, i) => {
+        const startPos = parseInt(getComputedStyle(el)['top']);
+        let cur,
+        anchor;
+        window.addEventListener('scroll', () => {
+            anchor = el.getBoundingClientRect().top;
+            if (anchor >= 0) {
+                cur = el.getBoundingClientRect().top + document.body.scrollTop;
+                el.style.top = startPos + (cur * 0.3) + 'px';
+            }
+        })
+    })
+}
+
+
+
+// let lastScrollTop = 0;
+// const circleAnim = (el) => {
+//     const st = $(window).scrollTop(),
+//         range = $(el).attr('data-range').split(',');
+//     let top = parseInt($(el).attr('data-top'));
+//     if (st < lastScrollTop) {
+//         if (top < range[1]) {
+//             $(el).attr('data-top', top += 7)
+//                 .css('top', top + 'px')
+//         }
+//     } else {
+//         if (top > range[0]) {
+//             $(el).attr('data-top', top -= 7)
+//                 .css('top', top + 'px')
+//         }
+//     }
+//     lastScrollTop = st;
+// }
+
+const popup = (e, popup, button) => {
+    const current = $(e.currentTarget);
+    if ($(popup).hasClass('active') && !$(e.target).closest(popup).length) {
+        $(popup).removeClass('active');
     }
-    lastScrollTop = st;
+    if ($(e.target).closest(button).length && !$(popup).hasClass('active')) {
+        $(popup).addClass('active');
+    }
 }
 
 $().ready(() => {
-    
+
     bindModalListeners([{
         trigger: '.header__basket',
         modal: '.modal--cart'
     }]);
 
-    if (!mobile) {
-        $(window).on('scroll', e => {
-            $('.circle').each((i, el) => {
-                if (isVisible(el)) {
-                    circleAnim(el);
-                } else {
-                    $(el).attr('data-range', 0).css('top', 0);
-                }
-            })
-        })
-    }
+    $("a[href^='#'").on( 'click', e => {
+        scrollToAnchor(e);
+    });
+
+    if (!mobile) parallaxEffect(document.querySelectorAll('.circle'));
+
+    // if (!mobile) {
+    //     $(window).on('scroll', e => {
+    //         $('.circle').each((i, el) => {
+    //             // const byDefault = $(el).attr('data-default');
+    //             // if (i === 1) console.log(isVisible(el));
+    //             // if (isVisible(el)) {
+    //             //     circleAnim(el);
+    //             // }
+    //             // else {
+    //             //     $(el).attr('data-range', byDefault).css('top', byDefault + 'px');
+    //             // }
+    //         })
+    //     })
+    // }
 
 
     $('.result__item').on('click', e => {
@@ -148,8 +198,21 @@ $().ready(() => {
     });
     $('.choose__program').on('click', e => {
         switchActive(e);
+        $('.choose__container').attr('data-program', $(e.currentTarget).attr('data-name'));
     });
     $('.choose__day').on('click', e => {
         switchActive(e);
+    });
+    $('.header__burger').on('click', e => {
+        $(e.currentTarget).toggleClass('active');
+        $('.header__nav').toggleClass('active');
+        if ($(e.currentTarget).hasClass('active')) {
+            stopScroll();
+        } else {
+            freeScroll();
+        }
+    })
+    $('body').on('click', e => {
+        popup(e, '.dpicker', '.result__choose');
     });
 });

@@ -16,13 +16,24 @@
 /*<button class="burger"><span></span></button>*/
 
 .dpicker {
-  display: none;
+  position: absolute;
+  left: -120%;
+  top: 0;
   width: 390px;
   height: 450px;
   padding: 16px 18px 30px 18px;
   border-radius: 16px;
   background-color: #F2F2F2;
   overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: opacity .3s, visibility .3s;
+}
+
+.dpicker.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dpicker__header--nav {

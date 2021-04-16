@@ -1,14 +1,22 @@
 @import 'calendar';
-@import 'main';
 
 .intro {
     padding-top: 25px;
+
     &__container {
         @extend %flexbox;
         justify-content: space-between;
+        position: relative;
+
+        & .circle {
+            top: 260px;
+            background-color: #B7D972;
+        }
     }
+
     &__block {
         width: 360px;
+
         &:last-child {
             position: relative;
             width: 780px;
@@ -16,6 +24,7 @@
             border-radius: 24px;
             overflow: hidden;
             background: linear-gradient(0deg, rgba(33, 33, 33, 0.1), rgba(33, 33, 33, 0.1));
+
             & img {
                 width: 100%;
                 height: 100%;
@@ -23,27 +32,28 @@
             }
         }
     }
-    &__title {
-        font-size: 48px;
-        line-height: 1.15;
-    }
+
     &__text {
         max-width: 90%;
-        margin-top: 26px;
+        margin-top: 36px;
     }
+
     &__link {
         @extend %button--empty;
         width: 240px;
         margin-top: 38px;
     }
+
     &__social {
         position: absolute;
         right: 30px;
         bottom: 26px;
         transition: transform .3s;
+
         &:hover {
             transform: scale(1.07);
         }
+
         & svg {
             width: 50px;
             height: 50px;
@@ -53,12 +63,15 @@
 
 .offers {
     padding-top: 50px;
+
     &__container {
         position: relative;
     }
+
     &__slider {
         @extend %loaded;
         overflow: hidden;
+
         & .owl-stage {
             display: flex;
         }
@@ -71,7 +84,7 @@
         width: 380px;
         min-height: 200px;
         height: 100%;
-        padding: 10px 21px 22px 24px;
+        padding: 18px 21px 22px 24px;
         border-radius: 16px;
         color: #ffffff;
 
@@ -95,40 +108,47 @@
 
     &__discount {
         display: flex;
-        justify-content: space-between;
+        align-items: center;
+        // justify-content: space-between;
         width: 100%;
     }
 
     &__title {
+        margin-right: 18px;
         font-size: 72px;
         font-weight: 700;
+        line-height: 1;
         letter-spacing: -3px;
     }
 
-    &__image {
-        @extend %flexbox;
-        justify-content: center;
-        width: 57px;
-        height: 57px;
-        border-radius: 50%;
-        background-color: #ffffff;
-
-        & img {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
-        }
+    &__desc {
+        text-transform: uppercase;
     }
 
+    // &__image {
+    //     @extend %flexbox;
+    //     justify-content: center;
+    //     width: 57px;
+    //     height: 57px;
+    //     border-radius: 50%;
+    //     background-color: #ffffff;
+
+    //     & img {
+    //         width: 70%;
+    //         height: 70%;
+    //         object-fit: contain;
+    //     }
+    // }
+
     &__text {
-        max-width: 186px;
-        margin-top: 2px;
+        max-width: 250px;
+        margin-top: 12px;
     }
 
     &__footer {
         align-self: flex-end;
         width: 100%;
-        margin-top: 18px;
+        margin-top: 14px;
     }
 
     &__join {
@@ -146,11 +166,20 @@
     padding-top: 52px;
 
     &__container {
-        @extend %flexbox;
+        display: flex;
         justify-content: space-between;
-        padding: 30px 33px 32px 56px;
+        position: relative;
+        padding: 58px 60px;
         border-radius: 24px;
         background-color: $light;
+
+        & .circle {
+            right: -50px;
+            left: unset;
+            width: 233px;
+            height: 233px;
+            top: 220px;
+        }
     }
 
     &__block {
@@ -159,7 +188,6 @@
         &:last-child {
             position: relative;
             width: 470px;
-            height: 310px;
             border-radius: 16px;
             overflow: hidden;
         }
@@ -171,13 +199,13 @@
 
     &__text {
         max-width: 80%;
-        margin-top: 30px;
+        margin-top: 12px;
     }
 
     &__link {
         @extend %button;
         width: 210px;
-        margin-top: 44px;
+        margin-top: 37px;
     }
 
     &__video {
@@ -200,8 +228,15 @@
     &__container {
         @extend %flexbox;
         justify-content: space-between;
+        position: relative;
         background: linear-gradient(0deg, #F0F1E8, #F0F1E8);
         border-radius: 24px;
+
+        & .circle {
+            width: 233px;
+            height: 233px;
+            background-color: $red;
+        }
     }
 
     &__content {
@@ -251,3 +286,58 @@
     }
 }
 
+
+@media (max-width: 1240px) {
+    .intro {
+        padding-top: 0;
+
+        &__block {
+            width: 260px;
+
+            &:last-child {
+                width: 660px;
+                height: 380px;
+            }
+        }
+    }
+
+    .offers {
+        padding-top: 33px;
+
+        &__nav {
+            margin-top: 15px;
+        }
+    }
+
+    .about {
+        padding-top: 48px;
+        &__container {
+            padding: 40px;
+            & .circle {
+                right: 0;
+                top: 140px;
+            }
+        }
+
+        &__block {
+            width: 350px;
+        }
+
+        &__title {
+            margin-top: 0;
+        }
+    }
+
+    .trial {
+        padding-top: 50px;
+    }
+    .reviews {
+        padding-top: 70px;
+        &__slider {
+            margin-top: 34px;
+        }
+        &__nav {
+            margin-top: 40px;
+        }
+    }
+}
