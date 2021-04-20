@@ -9,9 +9,9 @@
     <meta name="keywords" content="ключевые, слова, через, запятую">
     <link rel="shortcut icon" type='image/png' href="img/icons/favicon.ico" />
     <title>Title</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
     <link rel="stylesheet" href="css/product.css" type="text/css">
     <link rel="stylesheet" href="vendors/css/owl.carousel.min.css" type="text/css">
-    <!-- <link rel="stylesheet" href="vendors/css/owl.theme.default.min.css" type="text/css"> -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Raleway:wght@600;700&display=swap"
@@ -37,8 +37,8 @@
             </div>
         </section>
         <section class="choose choose--chosen">
-			<div class="wrapper">
-				<div class="choose__container">
+			<div class="wrapper wrapper--mobile">
+				<div class="choose__container" data-program='Lite'>
 					<div class="choose__box">
 
 						<span class="choose__subtitle">Программа</span>
@@ -106,6 +106,7 @@
 								</div>
 							</div>
 						</div>
+						<div class="choose__nav"></div>
 					</div>
 					<div class="calc">
 						<div class="calc__section">
@@ -269,19 +270,22 @@
                                 <p class="features__text">Разнообразный ежедневный рацион клиентов строго по рекомендациям диетолога-нутрициолога</p>
                             </li>
                             <li class="features__item">
-                                <h3 class="features__name">У нас <strong>1120 <br>клиентов</strong></h3>
-                                <p class="features__text">40% покупателей с нами <br>уже три года</p>
+                                <h3 class="features__name">У нас <strong>1120 клиентов</strong></h3>
+                                <p class="features__text">40% покупателей с нами уже три года</p>
                             </li>
                         </ul>
                     </div>
-                   
-                    <img src="img/features.webp" alt="" class="features__image">
+					<div class="features__image">
+						<img src="img/features.webp" alt=""/>
+					</div>
                 </div>
             </div>
         </section>
     </main>
     @import "footer.html"
     <script src="vendors/js/jquery-3.5.1.min.js"></script>
+	<script src="vendors/js/owl.carousel.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="vendors/js/product.js"></script>
 </body>
 

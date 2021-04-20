@@ -2,7 +2,18 @@
     from {
         transform: rotate(0);
     }
+
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeTop {
+    from {
+        transform: translateY(50px);
+    }
+
+    to {
+        transform: translateY(0);
     }
 }

@@ -1,4 +1,5 @@
-const mobile = $(window).width() < 1240;
+const tablet = $(window).width() < 1240,
+    mobile = $(window).width() < 768;
 
 //навешиваем  обработчики открытия и закрытия на модалки
 const bindModalListeners = modalArr => {
@@ -66,11 +67,36 @@ const list = (box, e) => {
 }
 
 
-const switchActive = e => {
+const switchActive = (e, all) => {
     if (!$(e.currentTarget).hasClass('active')) {
-        $(e.currentTarget).siblings().removeClass('active');
+        $(all).removeClass('active');
         $(e.currentTarget).addClass('active');
     }
+}
+
+const switchProgram = () => {
+    const currentProgram = $('.choose__program.active').attr('data-name');
+    $('.specific__day').hide().removeClass('active animated');
+    $(`.specific[data-program=${currentProgram}] .specific__day:first-child`)
+        .fadeIn(500)
+        .addClass('active animated');
+    $('.choose__day').removeClass('active');
+    $('.choose__day:first-child').addClass('active');
+    $('.result__name').text(currentProgram);
+    $('.result__amount').text($('.choose__program.active .choose__programAmount').text());
+}
+
+const switchDay = e => {
+    const currentProgram = $('.choose__program.active').attr('data-name'),
+        currentDay = $(e.currentTarget).attr('data-day');
+    $(`.specific[data-program="${currentProgram}"]`)
+        .find('.specific__day')
+        .each((i, el) => {
+            if ($(el).attr('data-day') === currentDay) {
+                $('.specific__day').removeClass('active animated');
+                $(el).addClass('active');
+            }
+        })
 }
 
 const createYouTubeEmbedLink = (btn, container) => {
@@ -89,10 +115,10 @@ const createYouTubeEmbedLink = (btn, container) => {
 const scrollToAnchor = e => {
     e.preventDefault();
     const aid = $(e.currentTarget).attr("href");
-    $('html,body').animate({scrollTop: $(aid).offset().top},'slow');
+    $('html,body').animate({
+        scrollTop: $(aid).offset().top
+    }, 'slow');
 }
-
-
 
 
 
@@ -112,7 +138,7 @@ const parallaxEffect = (items) => {
     items.forEach((el, i) => {
         const startPos = parseInt(getComputedStyle(el)['top']);
         let cur,
-        anchor;
+            anchor;
         window.addEventListener('scroll', () => {
             anchor = el.getBoundingClientRect().top;
             if (anchor >= 0) {
@@ -145,7 +171,6 @@ const parallaxEffect = (items) => {
 // }
 
 const popup = (e, popup, button) => {
-    const current = $(e.currentTarget);
     if ($(popup).hasClass('active') && !$(e.target).closest(popup).length) {
         $(popup).removeClass('active');
     }
@@ -154,6 +179,9 @@ const popup = (e, popup, button) => {
     }
 }
 
+
+
+
 $().ready(() => {
 
     bindModalListeners([{
@@ -161,11 +189,11 @@ $().ready(() => {
         modal: '.modal--cart'
     }]);
 
-    $("a[href^='#'").on( 'click', e => {
+    $("a[href^='#'").on('click', e => {
         scrollToAnchor(e);
     });
 
-    if (!mobile) parallaxEffect(document.querySelectorAll('.circle'));
+    if (!tablet) parallaxEffect(document.querySelectorAll('.circle'));
 
     // if (!mobile) {
     //     $(window).on('scroll', e => {
@@ -194,14 +222,18 @@ $().ready(() => {
         list('.cart__box', e);
     })
     $('.calc__checkbox').on('click', e => {
-        switchActive(e);
+        switchActive(e, $(e.target).closest('div').find('button'));
     });
     $('.choose__program').on('click', e => {
-        switchActive(e);
-        $('.choose__container').attr('data-program', $(e.currentTarget).attr('data-name'));
+        if (!$(e.target).hasClass('active')) {
+            switchActive(e, '.choose__program');
+            switchProgram();
+            $('.choose__container').attr('data-program', $(e.currentTarget).attr('data-name'));
+        }
     });
     $('.choose__day').on('click', e => {
-        switchActive(e);
+        switchActive(e, '.choose__day');
+        switchDay(e);
     });
     $('.header__burger').on('click', e => {
         $(e.currentTarget).toggleClass('active');
@@ -215,4 +247,6 @@ $().ready(() => {
     $('body').on('click', e => {
         popup(e, '.dpicker', '.result__choose');
     });
+
+
 });

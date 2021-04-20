@@ -294,7 +294,7 @@
         height: 39px;
         border-radius: 6px;
         background-color: $light;
-        transition: height .3s, box-shadow .3s, z-index .5s;
+        transition: height .3s, box-shadow .3s;
         z-index: 1;
 
         &.open {
@@ -368,6 +368,31 @@
         & .owl-prev,
         & .owl-next {
             transform: none;
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    %video {
+        &>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 81px;
+            height: 81px;
+            &::before {
+                content: '';
+                display: block;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: #FEFEFE;
+            }
+           
+            & svg {
+                display: none;
+            }
         }
     }
 }

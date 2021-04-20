@@ -10,6 +10,16 @@
   }
 }
 
+@keyframes fadeTop {
+  from {
+    transform: translateY(50px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
 /*Кнопка меню*/
 
 /*В разметке обязательно должна иметь внутренний span */

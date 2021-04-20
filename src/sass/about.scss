@@ -1,6 +1,4 @@
 @import 'features';
-@import 'main';
-
 .about {
     &__header {
         display: flex;
@@ -35,7 +33,14 @@
         @extend %flexbox;
         justify-content: space-between;
     }
-
+    &__item {
+        width: 280px;
+        height: 400px;
+        & img {
+            height: 100%;
+            object-fit: contain;
+        }
+    }
     &__nav {
         & .owl-prev {
             margin-right: 12px;
@@ -54,5 +59,43 @@
     }
     &__slider {
         margin-top: 36px;
+    }
+}
+
+@media (max-width: 1240px) {
+    .about {
+        &__title {
+            margin-right: 240px;
+        }
+    }   
+}
+
+@media (max-width: 768px) {
+    .about {
+        &__header {
+            flex-wrap: wrap;
+        }
+        &__title {
+            margin-right: 0;
+        }
+        &__text {
+            margin-top: 16px;
+        }
+        &__video {
+            height: 227px;
+            margin-top: 32px;
+        }
+    }
+    .certificates {
+        &__nav {
+            display: none;
+        }
+        &__slider {
+            margin-top: 30px;
+        }
+        &__item {
+            width: 254px;
+            height: 360px;
+        }
     }
 }

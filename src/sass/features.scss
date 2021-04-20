@@ -3,44 +3,131 @@
 
 .features {
     padding-top: 75px;
+
     &--about {
         padding-top: 40px;
     }
+
     &__container {
         position: relative;
+        overflow: hidden;
         padding: 64px 0 66px 64px;
         border-radius: 12px 12px 0 0;
         background-color: $light;
     }
+
     &__content {
         position: relative;
         width: 620px;
         z-index: 1;
     }
+
     &__title {
         @extend %accent;
     }
+
     &__list {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
     }
+
     &__item {
         width: 45%;
         margin-top: 55px;
     }
+
     &__name {
         @extend %accent;
         min-height: 60px;
     }
+
     &__text {
         margin-top: 20px;
     }
+
     &__image {
         position: absolute;
         right: 0;
         bottom: 0;
         width: auto;
         max-width: 570px;
+        max-height: 80%;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(175deg, #F2F2F2 10%, transparent);
+        }
+
+        & img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+@media (max-width: 1240px) {
+    .features__content {
+        width: 430px;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .features {
+        padding-top: 50px;
+
+        &__container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            border-radius: 12px;
+        }
+
+        &__content {
+            padding: 0 25px 46px 25px;
+        }
+
+        &__image {
+            position: relative;
+            right: unset;
+            bottom: unset;
+            order: -1;
+            width: 100%;
+            height: 396px;
+
+            &::after {
+                background: linear-gradient(0deg, #f2f2f2 10%, transparent);
+            }
+        }
+
+        &__title {
+            margin-top: 45px;
+            font-size: 24px;
+            line-height: 30px;
+
+        }
+
+        &__item {
+            width: 90%;
+            margin-top: 30px;
+
+            &:first-child {
+                margin-top: 50px;
+            }
+        }
+
+        &__name {
+            min-height: 0;
+        }
+
+        &__text {
+            margin-top: 8px;
+        }
     }
 }

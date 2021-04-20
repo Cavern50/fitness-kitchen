@@ -1,5 +1,4 @@
 @import 'features';
-@import 'main';
 
 .intro {
     &__container {
@@ -44,4 +43,40 @@
     }
 }
 
+@media (max-width: 1240px) {
+    .intro {
+        &__order {
+            width: 238px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .intro {
+        &__container {
+            height: auto;
+        }
+        &__header {
+            height: auto;
+            padding: 23px 23px 35px 23px;
+        }
+        &__block {
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        &__order {
+            width: 100%;
+            margin-top: 35px;
+        }
+        &__image {
+            height: 220px;
+            border-radius: 0px 0 12px 12px;
+        }
+        &__subtitle {
+            max-width: 314px;
+            margin-top: 35px;
+            font-size: 20px;
+        }
+    }
+}
 

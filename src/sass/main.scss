@@ -872,6 +872,7 @@ span {
             height: 7px;
             background-color: $accent;
             z-index: 0;
+            border-radius: 8px;
         }
     }
 
@@ -898,11 +899,6 @@ span {
         &:last-child {
             margin-right: 0;
         }
-    }
-
-    &__body {
-        display: flex;
-        flex-wrap: wrap;
     }
 
     &__card {
@@ -960,6 +956,21 @@ span {
     &__amount {
         margin-top: 10px;
         color: $grey;
+    }
+}
+
+.specific {
+    &__day {
+        display: none !important;
+        flex-wrap: wrap;
+        &.active {
+            display: flex !important;
+            &.animated {
+                animation: fadeTop ease-in-out 0.4s alternate;
+                animation-iteration-count: 1;
+                animation-fill-mode: forwards;
+            }
+        }
     }
 }
 
@@ -1663,12 +1674,36 @@ span {
 }
 
 
-
+.not-found {
+    &__container {
+        margin-top: 90px;
+        text-align: center;
+        & .circle {
+            top: 200px;
+        }
+    }
+    &__number {
+        color: $accent;
+        font-size: 250px;
+        line-height: 190px;
+        font-weight: 700;
+    }
+    &__text {
+        margin-top: 52px;
+        font-weight: 500;
+    }
+    &__back {
+        @extend %button;
+        width: 251px;
+        margin: 60px auto 0 auto;
+    }
+}
 
 @media (max-width: 1240px) {
 
     // tablets
-    h1 {
+    h1,
+    .number {
         font-size: 36px;
         line-height: 40px;
     }
@@ -1690,6 +1725,11 @@ span {
     .wrapper {
         width: calc(100% - 32px);
         max-width: 100%;
+
+        &--mobile {
+            width: 100%;
+            padding-left: 16px;
+        }
     }
 
     .breadcrumbs__back {
@@ -1700,9 +1740,11 @@ span {
     .header {
         position: relative;
         height: 108px;
+
         &__link {
             margin-right: 0;
         }
+
         &__nav {
             position: absolute;
             left: 0;
@@ -1718,6 +1760,7 @@ span {
             background-color: $accent;
             z-index: 99;
             transition: opacity .3s, visibility .3s;
+
             &.active {
                 opacity: 1;
                 visibility: visible;
@@ -1728,14 +1771,17 @@ span {
             width: 100%;
             display: block;
             align-self: flex-start;
+            margin-right: 0;
         }
 
         &__item {
             font-size: 20px;
             text-transform: none;
+
             & a {
                 color: #ffffff;
-                &:hover  {
+
+                &:hover {
                     color: $gen;
                 }
             }
@@ -1751,6 +1797,7 @@ span {
             font-size: 20px;
             padding-left: 58px;
             color: #ffffff;
+
             &::before {
                 content: '';
                 position: absolute;
@@ -1783,39 +1830,316 @@ span {
 
     .programs {
         padding-top: 60px;
+
+        &--catalog {
+            padding-top: 0;
+        }
+
         &__container {
             margin-top: 33px;
         }
+
         &__card,
         &__individual {
             &:nth-of-type(3n) {
                 margin-right: 20px;
             }
+
             &:nth-of-type(2n) {
                 margin-right: 0;
             }
+
             &:hover {
                 transform: none;
             }
+        }
+
+        &__desc {
+            margin-left: 190px;
         }
     }
 
     .choose {
         padding-top: 65px;
+
+        &--chosen {
+            padding-top: 30px;
+        }
+
         &__container {
             flex-wrap: wrap;
         }
-    } 
+    }
+
     .calc {
         padding-top: 80px;
     }
+
     .footer {
         padding: 62px 0 28px;
+    }
+
+    .contacts {
+        &__container {
+            margin-top: 50px;
+        }
+
+        &__box {
+            margin-top: 30px;
+        }
+    }
+
+    .map {
+        padding-top: 30px;
+    }
+    .not-found {
+        &__container {
+            & .circle {
+                display: none;
+            }
+        }
     }
 }
 
 @media (max-width: 768px) {
-    .header {
+    .breadcrumbs {
+        margin-top: 5px;
+    }
+
+    .programs {
+        &__header {
+            flex-wrap: wrap;
+        }
+
+        &__title {
+            width: 100%;
+        }
+
+        &__desc {
+            margin-left: 0;
+            margin-top: 20px;
+            max-width: 315px;
+        }
+
+        &__card,
+        &__individual {
+            min-height: 250px;
+        }
+
+        &__card {
+            margin-right: 0;
+            margin-bottom: 20px;
+
+            &:nth-of-type(3n) {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .choose {
+
+        &__program {
+            &.choose__program--chosen {
+                margin-right: 16px;
+            }
+        }
+
+        &__box {
+            width: 100%;
+        }
+
+        & .owl-item {
+            counter-increment: num;
+        }
+
+        & .choose__card {
+            counter-increment: none;
+            margin-right: 0;
+
+            & .choose__image {
+                width: 200px;
+            }
+        }
+
+        &__nav {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 16px;
+
+            & .owl-prev {
+                margin-right: 9px;
+            }
+        }
+    }
+
+    .calc {
+        width: 100%;
+        padding-right: 16px;
+
+        &__field {
+
+            &--level,
+            &--point {
+                & button:last-child {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        &__line {
+            margin-top: 7px;
+        }
+    }
+
+
+    .cart {
+        &__title {
+            font-size: 28px;
+        }
+        &__container {
+            width: 100%;
+        }
         
+        &__order {
+            margin-top: 50px;
+        }
+        &__block {
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        &__field,
+        &__input,
+        &__list {
+            width: 100%;
+        }
+        &__field {
+            &--half {
+                width: calc(50% - 5px);
+            }
+        }
+        &__input {
+            &--address {
+                margin-right: 0;
+            }
+        }
+
+        & .cart__field {
+            &:nth-child(odd) {
+                margin-right: 0;
+            }
+            &:not(:first-child) {
+                margin-top: 20px;
+            }
+            & input {
+                width: 100%;
+            }
+        }
+        &__add {
+            font-size: 12px;
+        }
+        &__price {
+            &Label {
+                font-size: 14px;
+            }
+        }
+        &__total {
+            align-items: baseline;
+            &Value {
+                font-size: 14px;
+            }
+        }
+        &__submit,
+        &__checkout {
+            width: 176px;
+            margin-top: 50px;
+        }
+    }
+
+    .order {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        padding-bottom: 13px;
+        &::before {
+            transform: none;
+            top: 35px;
+        }
+        &__program,
+        &__list {
+            width: 100%;
+            margin-right: 0;
+        }
+        &__list {
+            margin-top: 10px;
+            margin-bottom: 22px;
+        }
+        &__amount {
+            margin-right: 20px;   
+        }
+        
+    }
+
+    .modal--cart .modal__box {
+        width: 100%;
+        padding: 30px 15px;
+        transform: translateX(100vw);
+    }
+    .footer {
+        &__box {
+            flex-wrap: wrap;
+        }
+
+        &__nav {
+            margin-top: 30px;
+        }
+
+        &__link {
+            margin-right: 47px;
+            margin-bottom: 31px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &__social {
+            margin-top: 56px;
+        }
+
+        &__info {
+            align-items: flex-start;
+            margin-top: 44px;
+        }
+
+        &__block {
+            max-width: 220px;
+        }
+
+        &__resp {
+            margin-right: 0;
+        }
+
+        &__agree {
+            text-align: left;
+            margin-top: 12px;
+        }
+    }
+    .not-found {
+        &__container {
+            margin-top: 84px;
+        }
+        &__number {
+            font-size: 120px;
+            line-height: 100px;
+        }
+        &__text {
+            font-size: 22px;
+            max-width: 280px;
+            margin: 28px auto 0 auto;
+        }
+        &__back {
+            margin-top: 37px;
+        }
     }
 }
