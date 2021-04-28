@@ -159,27 +159,27 @@
 						<span class="choose__subtitle">Программы</span>
 						<header class="choose__header">
 							<div class="choose__programs">
-								<button type='button' class="choose__program active" data-name='Lite'>
+								<button type='button' class="choose__program active" data-name='Lite' data-cost='1200'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Lite</span>
 									<span class="choose__programAmount">1000 Ккал.</span>
 								</button>
-								<button type='button' class="choose__program" data-name='Fit'>
+								<button type='button' class="choose__program" data-name='Fit' data-cost='1500'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Fit</span>
 									<span class="choose__programAmount">1500 Ккал.</span>
 								</button>
-								<button type='button' class="choose__program" data-name='Active'>
+								<button type='button' class="choose__program" data-name='Active' data-cost='2000'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Active</span>
 									<span class="choose__programAmount">2000 Ккал.</span>
 								</button>
-								<button type='button' class="choose__program" data-name='Balance'>
+								<button type='button' class="choose__program" data-name='Balance' data-cost='2500'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Balance</span>
 									<span class="choose__programAmount">2500 Ккал.</span>
 								</button>
-								<button type='button' class="choose__program" data-name='Vitality'>
+								<button type='button' class="choose__program" data-name='Vitality' data-cost='3000'>
 									<span class="choose__programBackground"></span>
 									<span class="choose__programName">Vitality</span>
 									<span class="choose__programAmount">3000 Ккал.</span>
@@ -646,7 +646,7 @@
 										<div class="result__params">
 											<span class="result__label">Дни доставки</span>
 											<div class="result__list">
-												<div class="result__box">
+												<div class="result__box result__box--days">
 													<button type='button' class="result__item active">
 														<span class='result__value'>1 день</span>
 													</button>
@@ -673,7 +673,6 @@
 																d="M4.92357 18.3333H16.83C17.768 18.3333 18.5309 17.5858 18.5309 16.6667V5.00001C18.5309 4.08084 17.768 3.33334 16.83 3.33334H15.1291V1.66667H13.4281V3.33334H8.3254V1.66667H6.62448V3.33334H4.92357C3.98552 3.33334 3.22266 4.08084 3.22266 5.00001V16.6667C3.22266 17.5858 3.98552 18.3333 4.92357 18.3333ZM16.83 6.66667L16.8308 16.6667H4.92357V6.66667H16.83Z"
 																fill="white" />
 														</svg>
-
 													</button>
 												</div>
 												<svg class='result__arrow' width="10" height="7" viewBox="0 0 10 7"
@@ -747,15 +746,7 @@
 				<h2 class="reviews__title">Нас рекомендуют</h2>
 				<div class="reviews__container">
 					<div class="reviews__slider">
-						<div class="reviews__item">
-							<img src="img/inst_1.webp" alt="">
-						</div>
-						<div class="reviews__item">
-							<img src="img/inst_2.webp" alt="">
-						</div>
-						<div class="reviews__item">
-							<img src="img/inst_3.webp" alt="">
-						</div>
+						
 					</div>
 					<div class="reviews__nav"></div>
 				</div>
@@ -770,6 +761,9 @@
 	<script src="vendors/js/calculator.js"></script>
 	<script src="vendors/js/index.js"></script>
 	<script src="vendors/js/calendar.js"></script>
+	<script src="vendors/js/jquery.instagramFeed.min.js"></script>
+	<script src="vendors/js/instagram.js"></script>
+	<script src="vendors/js/chooseProgram.js"></script>
 </body>
 
 </html>

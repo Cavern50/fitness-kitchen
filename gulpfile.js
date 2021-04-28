@@ -168,17 +168,17 @@ gulp.task('deployAll', function() {
 
         const css = () => {
             return gulp.src(CSSglob, { buffer: false })
-                .pipe(conn.dest(`/assets/templates/css`))
+                .pipe(conn.dest(`${url}/public_html/assets/templates/css`))
         };
 
         const js = () => {
             return gulp.src(JSglob, { buffer: false })
-                .pipe(conn.dest(`/assets/templates/js`))
+                .pipe(conn.dest(`${url}/public_html/assets/templates/js`))
         };
 
         const vendors = () => {
             return gulp.src(vendorsGlob, { buffer: false })
-                .pipe(conn.dest(`/assets/templates/vendors`))
+                .pipe(conn.dest(`${url}/public_html/assets/templates/vendors`))
         }
 
         css();

@@ -12,15 +12,14 @@ const params = {
 
 
 const programs = {
-    Lite: [0, 1400],
-    Fit: [1400, 1800],
-    Active: [1800, 2300],
-    Balance: [2300, 2800],
-    Vitality: [2800, 99999]
+    Lite: [0, 1200],
+    Fit: [1200, 1400],
+    Active: [1400, 1600],
+    Balance: [1600, 2000],
+    Vitality: [2200, 99999]
 }
 
-let blocker = true;
-let sum = 0;
+let blocker = true, sum = 0;
 
 const paramsCalculate = e => {
     const current = $(e.target);
@@ -37,12 +36,13 @@ const personCalculate = e => {
     if (current.hasClass('height')) person.height = current.val();
     if (current.hasClass('weight')) person.weight = current.val();
     for (let key in person) {
-        if (person[key] < 1) blocker = true;
+        if (person[key] < 10) blocker = true;
     }
 }
 
 const calculate = () => {
     sum = Math.round(((9.99 * person.weight) + (6.25 * person.height) - (4.92 * person.age) - +params.gender) * params.level * params.goal);
+    console.log(sum);
     for (let key in programs) {
         if (sum > programs[key][0] && sum < programs[key][1]) {
             $(`.choose__program[data-name="${key}"]`).trigger('click');

@@ -138,7 +138,7 @@ const clickToActiveRange = (e) => {
         $(e.currentTarget).addClass('first');
     }
     if (!$(e.currentTarget).hasClass('active')) {
-        switch($('.dpicker__item.active').length) {
+        switch ($('.dpicker__item.active').length) {
             case 0:
                 $(e.currentTarget).addClass('first');
                 break;
@@ -148,7 +148,7 @@ const clickToActiveRange = (e) => {
             case 2:
                 return false;
         }
-        $(e.currentTarget).addClass('active');    
+        $(e.currentTarget).addClass('active');
     } else {
         $(e.currentTarget).removeClass('active');
         $('.dpicker__item').removeClass('last first ranged');
@@ -160,7 +160,7 @@ const hoverOnActiveRange = (e) => {
     if ($('.dpicker__item.last').length) {
         return false;
     }
-    if ($('.dpicker__item.first').length)  {
+    if ($('.dpicker__item.first').length) {
         $('.dpicker__body .dpicker__item').each((i, el) => {
             if ($('.dpicker__item.first').index() <= i && i <= $(e.currentTarget).index()) {
                 $(el).addClass('ranged');
@@ -169,9 +169,51 @@ const hoverOnActiveRange = (e) => {
             }
         })
     }
-    
+
 }
 
+
+const calcDays = (days) => {
+
+    const discount = (days) => {
+        switch (true) {
+            case (days >= 7 && days <= 13):
+                return '-10%';
+            case (days >= 14 && days <= 29):
+                return '-15%';
+            case (days >= 30):
+                return '-20%';
+            default:
+                return '';
+        }
+    }
+
+    const daysForm = (days) => {
+        const n = days % 10;
+        switch (true) {
+            case (n > 4 || n === 0 || (days > 10 && days < 20)):
+                return days + ' дней';
+            case ((days > 1 && days < 5) || (n > 1 && n < 5)):
+                return days + ' дня';
+            default:
+                return days + ' день'
+        }
+    }
+
+    const button = `<button type='button' class="result__item custom active">
+                        <span class='result__value'>${daysForm(days)}</span>
+                        <span class="result__discount">${discount(days)}</span>
+                    </button>`;
+    $('.result__box--days button:not(.custom)').removeClass('active');
+    if ($('.result__item.custom').length) {
+        $('.result__item.custom .result__value')
+            .text(daysForm(days));
+        $('.result__item.custom .result__discount')
+            .text(discount(days));
+    } else {
+        $('.result__box--days').prepend(button);
+    }
+}
 
 window.onload = () => {
     dPicker($('.dpicker__body'), new Date());
@@ -182,4 +224,11 @@ window.onload = () => {
     $(document).on('mouseover', '.dpicker__body .dpicker__item', e => {
         hoverOnActiveRange(e);
     });
+    $('.dpicker__done').on('click', () => {
+        $('.dpicker').removeClass('active');
+        $('.result__box--days').removeClass('open').attr('style', '');
+        if ($('.dpicker__item.ranged').length) {
+            calcDays($('.dpicker__item.ranged').length)
+        }
+    })
 }

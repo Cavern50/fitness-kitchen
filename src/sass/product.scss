@@ -1,16 +1,32 @@
-@import 'features';
+@import 'mixins';
+@import 'root';
 
 .intro {
     &__container {
         height: 576px;
         margin-top: 34px;
+        border-radius: 12px;
+        overflow: hidden;
     }
     &__header {
         height: 192px;
         padding: 48px 45px 0 38px;
-        background-color: $accent;
-        border-radius: 12px 12px 0px 0px;
         color: #ffffff;
+        &[data-program='Lite'] {
+            background-color: $accent;
+        }
+        &[data-program='Fit'] {
+            background-color: $blue;
+        }
+        &[data-program='Active'] {
+            background-color: $yellow;
+        }
+        &[data-program='Balance'] {
+            background-color: $red;
+        }
+        &[data-program='Vitality'] {
+            background-color: $aqua;
+        }
     }
     &__image {
         height: calc(100% - 192px);

@@ -1,49 +1,99 @@
 <!DOCTYPE html>
 <html lang="ru">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Описание страницы для SEO и соцсетей">
-        <meta name="keywords" content="ключевые, слова, через, запятую">
-        <link rel="shortcut icon" type='image/png' href="img/icons/favicon.ico" />
-        <title>Title</title>
-        <link rel="stylesheet" href="css/main.css" type="text/css">
-        <link rel="stylesheet" href="css/delivery.css" type="text/css">
-        <link rel="stylesheet" href="vendors/css/owl.carousel.min.css" type="text/css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Raleway:wght@600;700&display=swap"
-            rel="stylesheet">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Описание страницы для SEO и соцсетей">
+    <meta name="keywords" content="ключевые, слова, через, запятую">
+    <link rel="shortcut icon" type='image/png' href="img/icons/favicon.ico" />
+    <title>Title</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/delivery.css" type="text/css">
+    <link rel="stylesheet" href="vendors/css/owl.carousel.min.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Raleway:wght@600;700&display=swap"
+        rel="stylesheet">
+</head>
 
-    <body>
-        @import "header.html"
-        <main class="main">
-            <section class="delivery">
-                <div class="wrapper">
-                    @import "breadcrumbs.html"
-                    <div class="delivery__container">
-                        <h1 class="delivery__title">Доставка и оплата</h1>
-                        <div class="delivery__terms">
-                            <div class="delivery__block">
-                                <h3 class="delivery__subtitle">Ежежневная доставка <strong>5-ти</strong> разового
-                                    здорового питания </h3>
-                                <ul class="delivery__list">
-                                    <li class="delivery__item">Своей курьерской службой</li>
-                                    <li class="delivery__item">Бесконтактная доставка</li>
-                                    <li class="delivery__item">Доставка в офис</li>
-                                </ul>
-                            </div>
-                            <div class="delivery__block">
-                                <h3 class="delivery__subtitle">Ежедневная стоимость доставки питания - <strong>от
-                                        70р</strong></h3>
-                                <ul class="delivery__list">
-                                    <li class="delivery__item">Наличными курьеру</li>
-                                    <li class="delivery__item">Картой курьеру</li>
-                                    <li class="delivery__item delivery__item--payment">
-                                        <span>Оплата онлайн</span>
+<body>
+    @import "header.html"
+    <main class="main">
+
+        <section class="delivery">
+            <div class="wrapper">
+                @import "breadcrumbs.html"
+                <h1 class="delivery__title">Доставка и&nbsp;оплата</h1>
+            </div>
+        </section>
+        <section class="features features--delivery">
+            <div class="wrapper">
+                <div class="features__container">
+                    <span class="circle"></span>
+                    <div class="features__content">
+                        <h1 class="features__title">Ежедневная доставка <strong>с&nbsp;18:00 до&nbsp;22:00</strong></h1>
+                        <ul class="features__list">
+                            <li class="features__item">
+                                <h3 class="features__name">Доставка еды <strong>домой или в офис к вам на
+                                        работу</strong></h3>
+                                <p class="features__text">Мы готовим и доставляем ее каждый день. Вечером вы получаете
+                                    набор здорового питания на весь следующий день</p>
+                            </li>
+                            <li class="features__item">
+                                <h3 class="features__name"><strong>Гибкие условия</strong> доставки</h3>
+                                <p class="features__text">У нас своя курьерская служба, поэтому мы мобильно и оперативно
+                                    подстраиваемся под изменения в запросе клиента.</p>
+                            </li>
+                            <li class="features__item">
+                                <h3 class="features__name">Кэшбек <strong>с UDS 5%</strong></h3>
+                                <p class="features__text">Сделайте заказ, используя приложение UDS, и получите 300
+                                    баллов, сэкономленные средства на кэшбеке вы сможете потратить на следующую покупку
+                                    у нас.</p>
+                            </li>
+                            <li class="features__item">
+                                <h3 class="features__name"><strong>Бесконтактная</strong> доставка </h3>
+                                <p class="features__text">Все курьеры обеспечены перчатками. трогать пакеты без перчаток
+                                    - запрещено.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="features__image">
+                        <img src="img/features.webp" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map">
+            <div class="wrapper">
+                <h3 class="map__title">Выберите область доставки</h3>
+                <div class="map__container" id='map'>
+                </div>
+                <input type="button" value="Завершить редактирование" id="stopEditPolyline"/>
+<div id="geometry"></div>
+            </div>
+        </section>
+
+        <section class="delivery">
+            <div class="wrapper">
+                <div class="delivery__container">
+                    <div class="delivery__terms">
+                        <div class="delivery__block">
+                            <ul class="delivery__list">
+                                <li class="delivery__item">Своей курьерской службой</li>
+                                <li class="delivery__item">Бесконтактная доставка</li>
+                                <li class="delivery__item">Доставка в офис</li>
+                            </ul>
+                        </div>
+                        <div class="delivery__block">
+                            <ul class="delivery__list">
+                                <li class="delivery__item">Наличными курьеру</li>
+                                <li class="delivery__item">Картой курьеру</li>
+                                <li class="delivery__item delivery__item--payment">
+                                    <span>Оплата онлайн</span>
+                                    <div class="delivery__itemBlock">
                                         <span class="delivery__itemPay">
                                             <img src="/img/visa.webp" alt="">
                                         </span>
@@ -53,41 +103,23 @@
                                         <span class="delivery__itemPay">
                                             <img src="/img/ya.webp" alt="">
                                         </span>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section class="terms">
-                <div class="wrapper">
-                    <div class="terms__container">
-                        <div class="terms__box">
-                            <div class="terms__text">
-                                <h2>Бесконтактная доставка</h2>
-                                <p>Мы ввели бесконтактную доставку для всех клиентов.</p>
-                                <p>Курьер оставит пакет у вашей двери, позвонит в дверь и отойдет на 2 метра. вы
-                                    заберете пакет, не контактируя с курьером.</p>
-                                <p>Все курьеры обеспечены перчатками. трогать пакеты без перчаток - запрещено.</p>
-                            </div>
-                            <img src="img/delivery.webp" alt="" class="terms__image">
-                        </div>
-                        <div class="terms__box">
-                            <div class="terms__text">
-                                <h2>Привезем нашу еду в ваш офис</h2>
-                                <p>Курьер оставит пакет у вашей двери, позвонит в дверь и отойдет на 2 метра. вы
-                                    заберете пакет, не контактируя с курьером.</p>
-                                <button type='button' class="terms__order">заказать программу</button>
-                            </div>
-                            <img src="img/bring.webp" alt="" class="terms__image">
-                        </div>
+                    <div class="delivery__more">
+                        <div class="delivery__details">Подробности можете уточнить у менеджера по&nbsp;телефону: </div>
+                        <a href="tel:88452248324 " class="delivery__phone">(8452) 24-83-24 </a>
+                        
                     </div>
                 </div>
-                </div>
-            </section>
-        </main>
-        @import "footer.html"
-        <script src="vendors/js/jquery-3.5.1.min.js"></script>
-        <script src="js/scripts.js"></script>
-    </body>
+            </div>
+        </section>
+    </main>
+    @import "footer.html"
+    <script src="vendors/js/jquery-3.5.1.min.js"></script>
+    <script src='https://api-maps.yandex.ru/2.1/?apikey=2ff635c1-bfdc-4f37-93f4-47fbda8be38d&lang=ru_RU'></script>
+    <script src="js/scripts.js"></script>
+    <script src="vendors/js/map.js"></script>
+</body>

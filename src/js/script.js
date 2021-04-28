@@ -1,6 +1,7 @@
 const tablet = $(window).width() < 1240,
     mobile = $(window).width() < 768;
 
+
 //навешиваем  обработчики открытия и закрытия на модалки
 const bindModalListeners = modalArr => {
     modalArr.forEach(obj => {
@@ -66,37 +67,44 @@ const list = (box, e) => {
     }
 }
 
-
-const switchActive = (e, all) => {
-    if (!$(e.currentTarget).hasClass('active')) {
+const switchActive = (that, all) => {
+    if (!that.hasClass('active')) {
         $(all).removeClass('active');
-        $(e.currentTarget).addClass('active');
+        that.addClass('active');
     }
 }
 
-const switchProgram = () => {
-    const currentProgram = $('.choose__program.active').attr('data-name');
-    $('.specific__day').hide().removeClass('active animated');
-    $(`.specific[data-program=${currentProgram}] .specific__day:first-child`)
-        .fadeIn(500)
-        .addClass('active animated');
-    $('.choose__day').removeClass('active');
-    $('.choose__day:first-child').addClass('active');
-    $('.result__name').text(currentProgram);
-    $('.result__amount').text($('.choose__program.active .choose__programAmount').text());
-}
-
-const switchDay = e => {
-    const currentProgram = $('.choose__program.active').attr('data-name'),
-        currentDay = $(e.currentTarget).attr('data-day');
-    $(`.specific[data-program="${currentProgram}"]`)
-        .find('.specific__day')
-        .each((i, el) => {
-            if ($(el).attr('data-day') === currentDay) {
-                $('.specific__day').removeClass('active animated');
-                $(el).addClass('active');
+const counters = {};
+const timer = (slider, timer, changed, e = false) => {
+    timer = $(timer).find('.timer');
+    let tick = 140,
+        blocker = false;
+    if (changed) {
+        clearInterval(counters[`counter${slider}`]);
+    }
+    $(slider).on('mouseenter mouseleave', e => {
+        if (e.type === 'mouseenter') {
+            blocker = true;
+        } else {
+            blocker = false;
+        }
+    });
+    counters[`counter${slider}`] = setInterval(() => {
+        if (!blocker) {
+            timer.attr('stroke-dashoffset', tick);
+            tick--;
+            if (tick === 0) {
+                $(slider).trigger('next.owl.carousel');
             }
-        })
+        }
+    }, 40);
+    if (e) {
+        if (e.item.index === e.item.count - 1) {
+            timer.attr('stroke-dashoffset', 140);
+            clearInterval(counters[`counter${slider}`]);
+            blocker = true;
+        }
+    }
 }
 
 const createYouTubeEmbedLink = (btn, container) => {
@@ -109,6 +117,7 @@ const createYouTubeEmbedLink = (btn, container) => {
             $(this).parent(container).empty().append(`<iframe class="about__frame" src="${newLink}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
         })
         $(el).siblings('img').attr('src', 'http://img.youtube.com/vi/' + newLink.slice(newLink.indexOf('embed') + 6, newLink.indexOf('?')) + '/0.jpg')
+       
     });
 };
 
@@ -119,20 +128,6 @@ const scrollToAnchor = e => {
         scrollTop: $(aid).offset().top
     }, 'slow');
 }
-
-
-
-
-
-// const isVisible = (el) => {
-//     let t = $(el),
-//         w = $(window),
-//         wt = w.scrollTop(),
-//         tt = t.offset().top,
-//         tb = tt + t.height();
-//     return (tb <= wt + w.height()) && (tt >= wt);
-// }
-
 
 const parallaxEffect = (items) => {
     items.forEach((el, i) => {
@@ -150,6 +145,67 @@ const parallaxEffect = (items) => {
 }
 
 
+const popup = (e, popup, button) => {
+    if ($(popup).hasClass('active') && !$(e.target).closest(popup).length) {
+        $(popup).removeClass('active');
+    }
+    if ($(e.target).closest(button).length && !$(popup).hasClass('active')) {
+        $(popup).addClass('active');
+    }
+}
+
+
+$().ready(() => {
+
+    bindModalListeners([{
+        trigger: '.header__basket',
+        modal: '.modal--cart'
+    }]);
+
+    if (!tablet) parallaxEffect(document.querySelectorAll('.circle'));
+
+    $("a[href^='#'").on('click', e => {
+        scrollToAnchor(e);
+    });
+
+    $('.result').on('click', '.result__item', e => {
+        list('.result__box', e);
+    });
+
+    $('body').on('click', '.order__item', e => {
+        list('.order__box', e);
+    })
+    $('.cart__city').on('click', e => {
+        list('.cart__box', e);
+    })
+    $('.calc__checkbox').on('click', e => {
+        switchActive($(e.currentTarget), $(e.target).closest('div').find('button'));
+    });
+
+    $('.header__burger').on('click', e => {
+        $(e.currentTarget).toggleClass('active');
+        $('.header__nav').toggleClass('active');
+        if ($(e.currentTarget).hasClass('active')) {
+            stopScroll();
+        } else {
+            freeScroll();
+        }
+    })
+
+    $('body').on('click', e => {
+        popup(e, '.dpicker', '.result__choose');
+    });
+    
+});
+
+// const isVisible = (el) => {
+//     let t = $(el),
+//         w = $(window),
+//         wt = w.scrollTop(),
+//         tt = t.offset().top,
+//         tb = tt + t.height();
+//     return (tb <= wt + w.height()) && (tt >= wt);
+// }
 
 // let lastScrollTop = 0;
 // const circleAnim = (el) => {
@@ -170,32 +226,7 @@ const parallaxEffect = (items) => {
 //     lastScrollTop = st;
 // }
 
-const popup = (e, popup, button) => {
-    if ($(popup).hasClass('active') && !$(e.target).closest(popup).length) {
-        $(popup).removeClass('active');
-    }
-    if ($(e.target).closest(button).length && !$(popup).hasClass('active')) {
-        $(popup).addClass('active');
-    }
-}
-
-
-
-
-$().ready(() => {
-
-    bindModalListeners([{
-        trigger: '.header__basket',
-        modal: '.modal--cart'
-    }]);
-
-    $("a[href^='#'").on('click', e => {
-        scrollToAnchor(e);
-    });
-
-    if (!tablet) parallaxEffect(document.querySelectorAll('.circle'));
-
-    // if (!mobile) {
+ // if (!mobile) {
     //     $(window).on('scroll', e => {
     //         $('.circle').each((i, el) => {
     //             // const byDefault = $(el).attr('data-default');
@@ -209,44 +240,3 @@ $().ready(() => {
     //         })
     //     })
     // }
-
-
-    $('.result__item').on('click', e => {
-        list('.result__box', e);
-    });
-
-    $('.order__item').on('click', e => {
-        list('.order__box', e);
-    })
-    $('.cart__city').on('click', e => {
-        list('.cart__box', e);
-    })
-    $('.calc__checkbox').on('click', e => {
-        switchActive(e, $(e.target).closest('div').find('button'));
-    });
-    $('.choose__program').on('click', e => {
-        if (!$(e.target).hasClass('active')) {
-            switchActive(e, '.choose__program');
-            switchProgram();
-            $('.choose__container').attr('data-program', $(e.currentTarget).attr('data-name'));
-        }
-    });
-    $('.choose__day').on('click', e => {
-        switchActive(e, '.choose__day');
-        switchDay(e);
-    });
-    $('.header__burger').on('click', e => {
-        $(e.currentTarget).toggleClass('active');
-        $('.header__nav').toggleClass('active');
-        if ($(e.currentTarget).hasClass('active')) {
-            stopScroll();
-        } else {
-            freeScroll();
-        }
-    })
-    $('body').on('click', e => {
-        popup(e, '.dpicker', '.result__choose');
-    });
-
-
-});
