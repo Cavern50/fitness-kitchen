@@ -30,6 +30,10 @@
             border-radius: 19px;
             overflow: hidden;
         }
+        & img {
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
     &__nav {
@@ -104,10 +108,10 @@
         &__text {
             margin-top: 16px;
         }
-
-        &__video {
-            height: 227px;
-            margin-top: 32px;
+        &__slider {
+            & .owl-item {
+                height: 227px;
+            }
         }
     }
 

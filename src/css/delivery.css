@@ -303,7 +303,11 @@
     margin-top: 40px;
   }
 
+  .map__container {
+    height: 365px;
+  }
+
   .map__container iframe {
-    height: 475px;
+    height: 100%;
   }
 }

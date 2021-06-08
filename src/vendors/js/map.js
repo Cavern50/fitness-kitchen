@@ -26,8 +26,8 @@ function init() {
     myPolygon90 = new ymaps.Polygon(delivery90, {
         balloonContent: "Доставка - 90 рублей"
     }, {
-        fillColor: '#FE8B2E',
-        strokeColor: '#FE8B2E',
+        fillColor: '#f4d160',
+        strokeColor: '#f4d160',
         strokeWidth: 3,
         opacity: 0.65,
     }),
@@ -102,29 +102,43 @@ const geocode = (street, house) => {
                 $('.geoloc__place').text('Зеленая зона');
                 $('.geoloc__price').attr('data-cost', 'free')
                 .text('бесплатно');
+                $('.cart__priceDelivery').text('0')
+                $('.cart__delivery').val(1)
+                deliveryPrice = 0;
+                totalPrice('.cart__totalVal');
             } else if (myPolygon90.geometry.contains(result)) {
                 $('.geoloc__place').text('Желтая зона');
                 $('.geoloc__price').attr('data-cost', 'cost')
                 .text('90');
+                $('.cart__priceDelivery').text('90')
+                $('.cart__delivery').val(2)
+                deliveryPrice = 90;
+                totalPrice('.cart__totalVal');
             } else if (myPolygon150.geometry.contains(result)) {
                 $('.geoloc__place').text('Оранжевая зона');
                 $('.geoloc__price').attr('data-cost', 'cost')
                 .text('150');
+                $('.cart__priceDelivery').text('150')
+                $('.cart__delivery').val(3)
+                deliveryPrice = 150;
+                totalPrice('.cart__totalVal');
             } else if (myPolygon200.geometry.contains(result)) {
                 $('.geoloc__place').text('Фиолетовая зона');
                 $('.geoloc__price').attr('data-cost', 'cost')
                 .text('200');
+                $('.cart__priceDelivery').text('200')
+                $('.cart__delivery').val(4)
+                deliveryPrice = 200;
+                totalPrice('.cart__totalVal');
             } else if (myPolygon250.geometry.contains(result)) {
                 $('.geoloc__place').text('Серая зона');
                 $('.geoloc__price').attr('data-cost', 'cost')
                 .text('250');
-            } else {
-                $('.geoloc__place').text('Вне зоны');
-                $('.geoloc__price').attr('data-cost', 'free')
-                .text('выб');
-            }
-            
-           
+                $('.cart__priceDelivery').text('250')
+                $('.cart__delivery').val(5)
+                deliveryPrice = 250;
+                totalPrice('.cart__totalVal');
+            } 
         }
     })
 }

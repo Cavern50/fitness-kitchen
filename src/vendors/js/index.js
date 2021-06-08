@@ -1,3 +1,30 @@
+let blockOrder = true;
+const phoneRequest = () => {
+    const number = $('#phone-trial').val().replace(/\D/g, '');
+    $.ajax({
+        url: 'http://fitness.asap-lp.ru/resource.json',
+        dataType: 'json',
+        success: (data) => {
+            blockOrder = data.number === +number ? false : true;
+            $('.cart__alert').text(`${blockOrder ? 'К сожалению Ваш номер не может участвовать в акции "Пробный день."' : 'Как новому клиенту, Вам начислена 25% скидка на первый день.'}`)
+            if (!blockOrder) {
+                for (let key in cartData) {
+                    removeItem(cartData[key].name);
+                }
+                const currentTrial = $('.try__program.active');
+                const trialItem = {
+                    id: $(`.cart__data-items span[data-name="${currentTrial.attr('data-name')}"]`).attr('data-id'),
+                    name: currentTrial.attr('data-name'),
+                    callories: parseInt(currentTrial.find('.try__programAmount').text()),
+                    totalCostPerDay: currentTrial.attr('data-cost') - Math.abs(currentTrial.attr('data-cost') * ( $('.discount_trial').attr('data-discount') / 100 ))
+                }
+                myCart.setItem('trial', JSON.stringify(trialItem));
+                myCart.setItem('programs', JSON.stringify(cartData));
+            }
+        }
+    })
+}
+
 $(window).on('load', () => {
     // sliders
     $('.offers__slider').owlCarousel({
@@ -18,9 +45,36 @@ $(window).on('load', () => {
         }
     });
     timer('.offers__slider', '.offers__nav', false);
-   
-
-    
 
     createYouTubeEmbedLink('.about__videoButton', '.about__video');
+    $('#phone-trial').mask("+7 (999) 999-99-99");
+
+    $('.cart__trialCheck').on('click', e => {
+        phoneRequest();
+    });
+
+    $('.cart__checkout--trial').on('click', e => {
+        e.preventDefault();
+        if (!blockOrder) {
+            location.href = $(e.target).attr('href');
+        }
+    })
+
+    $('.try__program').on('click', e => {
+        switchActive($(e.currentTarget), $('.try__program'));
+        $('.try__total').text($(e.currentTarget).attr('data-cost'));
+        if (myCart.getItem('trial') !== null) {
+            //если номер проверен, но пользователь выбрал другой товар в промо-дне
+            const currentTrial = $('.try__program.active');
+            const trialItem = {
+                id: $(`.cart__data-items span[data-name="${currentTrial.attr('data-name')}"]`).attr('data-id'),
+                name: currentTrial.attr('data-name'),
+                callories: parseInt(currentTrial.find('.try__programAmount').text()),
+                totalCostPerDay: $(e.currentTarget).attr('data-cost') - Math.abs($(e.currentTarget).attr('data-cost') * ( $('.discount_trial').attr('data-discount') / 100 ))
+            }
+            myCart.setItem('trial', JSON.stringify(trialItem));
+        } else {
+            $('.try__total').text($(e.currentTarget).attr('data-cost'));
+        }
+    })
 });

@@ -44,6 +44,7 @@
     &__order {
         @extend %button--empty;
         width: 238px;
+        background-color: transparent;
         border-color: #ffffff;
         color: #ffffff;
         &:hover {
@@ -59,10 +60,66 @@
     }
 }
 
+.choose__box[data-program='Lite'] {
+    .choose__day:hover,
+    .choose__day.active,
+    .choose__eating::before {
+        background-color: $accent;
+    }
+    .choose__eating {
+        color: $accent;
+    }
+}
+
+.choose__box[data-program='Fit'] {
+    .choose__day:hover,
+    .choose__day.active,
+    .choose__eating::before {
+        background-color: $blue;
+    }
+    .choose__eating {
+        color: $blue;
+    }
+}
+
+.choose__box[data-program='Active'] {
+    .choose__day:hover,
+    .choose__day.active,
+    .choose__eating::before {
+        background-color: $yellow;
+    }
+    .choose__eating {
+        color: $yellow;
+    }
+}
+
+.choose__box[data-program='Balance'] {
+    .choose__day:hover,
+    .choose__day.active,
+    .choose__eating::before {
+        background-color: $red;
+    }
+    .choose__eating {
+        color: $red;
+    }
+}
+
+.choose__box[data-program='Vitality'] {
+    .choose__day:hover,
+    .choose__day.active,
+    .choose__eating::before {
+        background-color: $aqua;
+    }
+    .choose__eating {
+        color: $aqua;
+    }
+}
+
 @media (max-width: 1240px) {
     .intro {
         &__order {
             width: 238px;
+            background-color: transparent;
         }
     }
 }

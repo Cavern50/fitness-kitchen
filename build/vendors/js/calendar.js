@@ -56,7 +56,6 @@ const dPicker = (box, date) => {
 
         for (let i = 1; i < lastDay + 1; i++) {
             eventDate = i + ' ' + (month + 1) + ' ' + year;
-            // if (i !== today) {
             if (eventDate !== fullTodaysDate) {
                 box.append(scheme(i, 'current'))
             } else {
@@ -101,11 +100,17 @@ const dPicker = (box, date) => {
                 $("[data-date='" + newEventDate + "']").addClass('dpicker__item active')
             }
         }
+        let j = 1;
+        $('.dpicker__body .dpicker__item').each((i, el) => {
+            if (j === 5 || j === 6) $(el).attr('data-weekend', true);
+            j === 7 ? j = 1 : j++;
+        })
     }
 
     if (!!document.querySelector(".dpicker__body")) {
         document.querySelector(".dpicker__body").innerHTML = "";
     }
+
     renderBtn();
 }
 
@@ -113,26 +118,29 @@ const dPicker = (box, date) => {
 const switchMonth = () => {
     const [arrowPrev, arrowNext] = document.querySelectorAll(".dpicker__arrow");
     let index = 1;
-
     let date = new Date(),
         year = date.getFullYear(), //текущий год (с 0)
         month = date.getUTCMonth(), //текущий месяц (с 0)
-        today = date.getDate(); // текунщая дата
+        today = date.getDate(); // текущая дата
+    let next = null;
+    arrowNext.addEventListener('click', () => {
+        next ? index++ : 0
+        console.log(index);
+        date = new Date(year, month + index, today);
+        dPicker($('.dpicker__body'), date);
+        next = true;
+    })
 
-    !!arrowNext && arrowNext.addEventListener('click', () => {
-            date = new Date(year, month + index, today);
-            dPicker($('.dpicker__body'), date);
-            index++;
-        })
-
-        !!arrowPrev && arrowPrev.addEventListener('click', () => {
-            date = new Date(year, index + 1, today);
-            dPicker($('.dpicker__body'), date);
-            index--;
-        })
+    arrowPrev.addEventListener('click', () => {
+        !next ? index-- : 0;
+        console.log(index);
+        date = new Date(year, month + index - 1, today);
+        dPicker($('.dpicker__body'), date);
+        next = false;
+    });
 }
 
-const clickToActiveRange = (e) => {
+const clickToActiveRange = e => {
     if ($('.dpicker__item.first').index() > $(e.currentTarget).index() && !$('.dpicker__item.last').length) {
         $('.dpicker__item').removeClass('first active');
         $(e.currentTarget).addClass('first');
@@ -156,66 +164,39 @@ const clickToActiveRange = (e) => {
     }
 }
 
-const hoverOnActiveRange = (e) => {
+const hoverOnActiveRange = e => {
     if ($('.dpicker__item.last').length) {
         return false;
     }
+    console.log(!!$(e.target).attr('data-weekend'))
     if ($('.dpicker__item.first').length) {
         $('.dpicker__body .dpicker__item').each((i, el) => {
-            if ($('.dpicker__item.first').index() <= i && i <= $(e.currentTarget).index()) {
+            if ($('.dpicker__item.first').index() <= i && i <= $(e.currentTarget).index() && !$(el).hasClass('disabled')) {
                 $(el).addClass('ranged');
             } else {
                 $(el).removeClass('ranged');
             }
         })
     }
-
 }
 
 
-const calcDays = (days) => {
-
-    const discount = (days) => {
-        switch (true) {
-            case (days >= 7 && days <= 13):
-                return '-10%';
-            case (days >= 14 && days <= 29):
-                return '-15%';
-            case (days >= 30):
-                return '-20%';
-            default:
-                return '';
-        }
-    }
-
-    const daysForm = (days) => {
-        const n = days % 10;
-        switch (true) {
-            case (n > 4 || n === 0 || (days > 10 && days < 20)):
-                return days + ' дней';
-            case ((days > 1 && days < 5) || (n > 1 && n < 5)):
-                return days + ' дня';
-            default:
-                return days + ' день'
-        }
-    }
-
-    const button = `<button type='button' class="result__item custom active">
-                        <span class='result__value'>${daysForm(days)}</span>
-                        <span class="result__discount">${discount(days)}</span>
-                    </button>`;
-    $('.result__box--days button:not(.custom)').removeClass('active');
-    if ($('.result__item.custom').length) {
-        $('.result__item.custom .result__value')
-            .text(daysForm(days));
-        $('.result__item.custom .result__discount')
-            .text(discount(days));
-    } else {
-        $('.result__box--days').prepend(button);
-    }
-}
 
 window.onload = () => {
+
+    $('body').on('click', '.result__choose', e => {
+        if ($(e.currentTarget).hasClass('result__choose--order')) {
+            $('.dpicker').addClass('dpicker--order');
+            dPicker($('.dpicker__body'), new Date());
+            switchMonth();
+        } else {
+            $('.dpicker').removeClass('dpicker--order');
+            dPicker($('.dpicker__body'), new Date());
+            switchMonth();
+        }
+        popup(e, '.dpicker', '.result__choose');
+        clicked = $(e.currentTarget);
+    });
     dPicker($('.dpicker__body'), new Date());
     switchMonth();
     $(document).on('click', '.dpicker__body .dpicker__item', e => {
@@ -224,11 +205,9 @@ window.onload = () => {
     $(document).on('mouseover', '.dpicker__body .dpicker__item', e => {
         hoverOnActiveRange(e);
     });
-    $('.dpicker__done').on('click', () => {
-        $('.dpicker').removeClass('active');
-        $('.result__box--days').removeClass('open').attr('style', '');
-        if ($('.dpicker__item.ranged').length) {
-            calcDays($('.dpicker__item.ranged').length)
-        }
-    })
+
+    $('.dpicker__checkbox').on('change', () => {
+        $('.dpicker__item[data-weekend]').toggleClass('disabled weekend');
+    });
+
 }

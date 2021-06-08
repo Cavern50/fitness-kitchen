@@ -261,8 +261,9 @@
 
     .map {
         &__container {
+            height: 365px;
             & iframe {
-                height: 475px;
+                height: 100%;
             }
         }
     }

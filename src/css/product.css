@@ -94,6 +94,7 @@
 
 .intro__order {
   width: 238px;
+  background-color: transparent;
   border-color: #ffffff;
   color: #ffffff;
 }
@@ -110,6 +111,56 @@
   line-height: 1.5;
 }
 
+.choose__box[data-program='Lite'] .choose__day:hover,
+.choose__box[data-program='Lite'] .choose__day.active,
+.choose__box[data-program='Lite'] .choose__eating::before {
+  background-color: #92B676;
+}
+
+.choose__box[data-program='Lite'] .choose__eating {
+  color: #92B676;
+}
+
+.choose__box[data-program='Fit'] .choose__day:hover,
+.choose__box[data-program='Fit'] .choose__day.active,
+.choose__box[data-program='Fit'] .choose__eating::before {
+  background-color: #70B4ED;
+}
+
+.choose__box[data-program='Fit'] .choose__eating {
+  color: #70B4ED;
+}
+
+.choose__box[data-program='Active'] .choose__day:hover,
+.choose__box[data-program='Active'] .choose__day.active,
+.choose__box[data-program='Active'] .choose__eating::before {
+  background-color: #FFB700;
+}
+
+.choose__box[data-program='Active'] .choose__eating {
+  color: #FFB700;
+}
+
+.choose__box[data-program='Balance'] .choose__day:hover,
+.choose__box[data-program='Balance'] .choose__day.active,
+.choose__box[data-program='Balance'] .choose__eating::before {
+  background-color: #FF7A6C;
+}
+
+.choose__box[data-program='Balance'] .choose__eating {
+  color: #FF7A6C;
+}
+
+.choose__box[data-program='Vitality'] .choose__day:hover,
+.choose__box[data-program='Vitality'] .choose__day.active,
+.choose__box[data-program='Vitality'] .choose__eating::before {
+  background-color: #74BDC1;
+}
+
+.choose__box[data-program='Vitality'] .choose__eating {
+  color: #74BDC1;
+}
+
 @media (max-width: 1240px) {
   .intro__order {
     width: 100%;
@@ -120,6 +171,7 @@
 
   .intro__order {
     width: 238px;
+    background-color: transparent;
   }
 }
 

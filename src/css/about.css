@@ -122,6 +122,11 @@
   overflow: hidden;
 }
 
+.about__slider img {
+  height: 100%;
+  object-fit: cover;
+}
+
 .certificates {
   padding-top: 95px;
 }
@@ -215,9 +220,8 @@
     margin-top: 16px;
   }
 
-  .about__video {
+  .about__slider .owl-item {
     height: 227px;
-    margin-top: 32px;
   }
 
   .certificates__nav {

@@ -1,5 +1,6 @@
 @import 'root';
 @import 'mixins';
+
 .dpicker {
     position: absolute;
     left: -120%;
@@ -15,10 +16,20 @@
     box-shadow: 4px 4px 10px rgba(0, 0, 0, .2);
     transition: opacity .3s, visibility .3s;
     z-index: 2;
+
     &.active {
         opacity: 1;
         visibility: visible;
     }
+
+    &--order {
+        position: fixed;
+        left: unset;
+        right: 760px;
+        top: 10vh;
+        z-index: 100;
+    }
+
     &__header {
         @extend %flexbox;
 
@@ -73,6 +84,11 @@
         background-color: #dfdfdf;
         transition: background-color 0.3s, color 0.3s;
         font-family: $inter;
+        &.weekend + .dpicker__item {
+            &:before {
+                visibility: hidden;
+            }
+        }
         &::before {
             content: '';
             position: absolute;
@@ -86,6 +102,7 @@
             pointer-events: none;
             transition: opacity .3s;
         }
+
         &:nth-child(7n) {
             margin-right: 0;
         }
@@ -111,6 +128,7 @@
                 content: '';
                 position: absolute;
             }
+
             &:hover,
             &.active,
             &.ranged {
@@ -118,6 +136,7 @@
                 border-color: #ffffff;
                 color: #ffffff;
             }
+
             &.ranged {
                 &:not(.first)::before {
                     opacity: .2;
@@ -130,6 +149,7 @@
             }
         }
     }
+
     &__done {
         @extend %button;
         justify-content: space-between;
@@ -138,8 +158,23 @@
         height: 28px;
         margin-top: 10px;
         padding: 0 12px;
+        border-color: transparent;
     }
 }
+
+
+.cart .dpicker--order {
+    position: absolute;
+    left: -296px;
+    right: unset;
+    top: 9px;
+}
+
+// .modal .dpicker {
+//     left: unset;
+//     right: 740px;
+//     top: 210px;
+// }
 
 
 @media (max-width: 1240px) {
@@ -147,29 +182,49 @@
         left: 120%;
         top: -65px;
         z-index: 5;
+
+        &--order {
+            z-index: 100;
+        }
     }
 }
 
 @media (max-width: 768px) {
     .dpicker {
-        left: -50%;
+        left: 50%;
         transform: translateX(-50%);
+        left: -20px;
         width: 330px;
         height: 420px;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, .35);
+
         &__item {
             width: 33px;
             height: 33px;
             margin-right: 10px;
             margin-bottom: 10px;
             font-size: 10px;
+
             &::before {
                 left: -40px;
                 width: 60px;
             }
         }
+
         &__done {
             width: 141px;
         }
+
+        &--order {
+            // left: unset;
+            // right: -150px;
+            left: 50%;
+        transform: translateX(-50%);
+            top: 170px;
+        }
+    }
+
+    .cart .dpicker--order {
+        left: 50%;
     }
 }

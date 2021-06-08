@@ -1,6 +1,3 @@
-
-
-
 const chooseProgramSlider = () => {
     $('.choose__programs')
         .addClass('owl-carousel')
@@ -21,7 +18,7 @@ const chooseDaySlider = () => {
 
 const menuSlider = () => {
     $('.specific__day.active')
-        .addClass('owl-carousel')
+        .addClass('owl-carousel owl-loaded')
         .owlCarousel({
             autoWidth: true,
             margin: 8,
@@ -38,9 +35,22 @@ const switchProgram = () => {
         .fadeIn(500)
         .addClass('active animated');
     $('.choose__day').removeClass('active');
-    $('.choose__day:first-child').addClass('active');
+    if (mobile) {
+        $('.choose__days .owl-item:first-child .choose__day').addClass('active');
+    } else {
+        $('.choose__day:first-child').addClass('active');
+    }
     $('.result__name').text(currentProgram);
     $('.result__amount').text($('.choose__program.active .choose__programAmount').text());
+    $('.result__program').attr('data-name', currentProgram);
+    $('.result').attr('data-name', currentProgram);
+    $('.result__nutrientsAmount').each((i, el) => {
+        if (i === 0) $(el).text($('.choose__program.active').attr('data-proteins'));
+        if (i === 1) $(el).text($('.choose__program.active').attr('data-fats'));
+        if (i === 2) $(el).text($('.choose__program.active').attr('data-carbohydrates'));
+    })
+    $('.result__priceBefore').addClass('hidden');
+    $('.result__priceAfter, .result__priceBefore').text($(`.choose__program.active`).attr('data-cost'));
 }
 
 const switchDay = that => {
@@ -58,34 +68,42 @@ const switchDay = that => {
 
 $(window).on('load', () => {
     if (mobile) {
-        chooseProgramSlider();
+        if (!$('.hidden--programs').length) chooseProgramSlider();
         chooseDaySlider();
         menuSlider();
-        $('.owl-carousel').each((i,el) => {
+        $('.owl-carousel').each((i, el) => {
             $(el).on('click', (e) => {
                 let index = $(e.target).parent().index(),
                     count = $(el).find('.owl-item').length;
-                console.log(count);
-                if(index > 0 && index < count - 1) {
+                if (index > 0 && index < count - 1) {
                     $(el).trigger('to.owl.carousel', index - 1);
                 }
             });
         })
     }
     $('.choose__program').on('click', e => {
-        if (mobile) {
-            $('.specific__day.active').trigger("destroy.owl.carousel");
-            $('.choose__days').trigger("destroy.owl.carousel");
-        }
-        switchActive($(e.currentTarget), '.choose__program');
-        switchProgram();
         $('.choose__container').attr('data-program', $(e.currentTarget).attr('data-name'));
+        if (!$('.hidden--programs').length > 0) {
+            switchActive($(e.currentTarget), '.choose__program');
+            switchProgram();
+        } else {
+            switchActive($(e.currentTarget), '.hidden--programs .choose__program');
+            $('.result__name').text($('.hidden--programs .choose__program.active').attr('data-name'));
+            $('.result__priceAfter, .result__priceBefore').text($('.hidden--programs .choose__program.active').attr('data-cost'));
+            $('.result__amount').text($('.hidden--programs .choose__program.active .choose__programAmount').text());
+            $('.result').attr('data-name', $('.hidden--programs .choose__program.active .choose__programName').text());
+        }
         if (mobile) {
+            $('.specific__day').trigger("destroy.owl.carousel").removeClass('owl-carousel');
+            $('.choose__days').trigger("destroy.owl.carousel").removeClass('owl-carousel');
             menuSlider();
             chooseDaySlider();
         }
+        $('.result__item').removeClass('active');
+        // сбрасываем результаты при переключении
+        $('.result__box--person .result__item').eq(0).addClass('active');
+        $('.result__box--days .result__item:not(.custom)').eq(0).addClass('active');
     });
-
 
     if (!mobile) {
         $('.choose__day').on('click', e => {
@@ -100,7 +118,4 @@ $(window).on('load', () => {
             menuSlider();
         })
     }
-    
 })
-
-

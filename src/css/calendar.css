@@ -53,6 +53,14 @@
   visibility: visible;
 }
 
+.dpicker--order {
+  position: fixed;
+  left: unset;
+  right: 760px;
+  top: 10vh;
+  z-index: 100;
+}
+
 .dpicker__header--nav {
   justify-content: space-between;
   margin-bottom: 25px;
@@ -97,6 +105,10 @@
   background-color: #dfdfdf;
   transition: background-color 0.3s, color 0.3s;
   font-family: "Inter", sans-serif;
+}
+
+.dpicker__item.weekend + .dpicker__item:before {
+  visibility: hidden;
 }
 
 .dpicker__item::before {
@@ -161,6 +173,14 @@
   height: 28px;
   margin-top: 10px;
   padding: 0 12px;
+  border-color: transparent;
+}
+
+.cart .dpicker--order {
+  position: absolute;
+  left: -296px;
+  right: unset;
+  top: 9px;
 }
 
 @media (max-width: 1240px) {
@@ -176,12 +196,17 @@
     top: -65px;
     z-index: 5;
   }
+
+  .dpicker--order {
+    z-index: 100;
+  }
 }
 
 @media (max-width: 768px) {
   .dpicker {
-    left: -50%;
+    left: 50%;
     transform: translateX(-50%);
+    left: -20px;
     width: 330px;
     height: 420px;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.35);
@@ -202,5 +227,15 @@
 
   .dpicker__done {
     width: 141px;
+  }
+
+  .dpicker--order {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 170px;
+  }
+
+  .cart .dpicker--order {
+    left: 50%;
   }
 }

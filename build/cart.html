@@ -9,7 +9,7 @@
     <meta name="keywords" content="ключевые, слова, через, запятую">
     <link rel="shortcut icon" type='image/png' href="img/icons/favicon.ico" />
     <title>Title</title>
-    <link rel="stylesheet" href="css/main.css?t=1619615187599" type="text/css">
+    <link rel="stylesheet" href="css/main.css?t=1623132488530" type="text/css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Raleway:wght@600;700&display=swap"
@@ -63,7 +63,7 @@
     </span>
     <span class="breadcrumbs__text">Главная</span>
 </button>
-                <form class="cart__form cart__form--main" id='main-form'>
+                <form class="cart__form cart__form--main" id='main-form' method='POST'>
                     <div class="cart__container">
                         <h2 class="cart__title">Корзина</h2>
                         <div class="cart__order">
@@ -253,6 +253,46 @@
                         </div>
                         <h3 class="cart__subtitle">Комментарий к заказу</h3>
                         <textarea name="comment" id="comment" class='cart__input cart__input--comment'></textarea>
+                        <div class="uds">
+                            <div class="uds__block">
+                                <div class="uds__logo">
+                                    <img src="/img/uds.png" alt="">
+                                </div>
+                                <div class="uds__terms">
+                                    <span class="uds__title">Установи приложение UDS и получай бонусы:</span>
+                                    <ul class="uds__list">
+                                        <li class="uds__item">Установи приложение UDS на свой смартфон</li>
+                                        <li class="uds__item">Введи промокод <b>zeodetoxru</b> в установленном приложении</li>
+                                        <li class="uds__item">Сразу после этого ты получишь 500 приветственных баллов на счет!</li>
+                                        <li class="uds__item">В поле скидки на этой странице введи код своей персональной скидки и ты получишь 10% кэшбек!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="uds__block">
+                                <input type="text" class="uds__input uds__login" name="uds-login">
+                                <button type='button' class="uds__get" tabindex="-1">Получить скидку</button>
+                            </div>
+                            <div class="uds__info active">
+                                <div class="uds__data">
+                                    <div class="uds__fields">
+                                        <span class="uds__label uds__label--name">Данные клиента: </span>
+                                        <span class="uds__name">Иннокентий</span>
+                                    </div>
+                                    <div class="uds__fields">
+                                        <span class="uds__label uds__label--points">Баллы: </span>
+                                        <span class="uds__points">300</span>
+                                    </div>
+                                    <div class="uds__fields">
+                                        <span class="uds__label uds__label--discount">Скидка: </span>
+                                        <span class="uds__discount">10%</span>
+                                    </div>
+                                </div>
+                                <div class="uds__block">
+                                    <input type="text" class="uds__input uds__count">
+                                    <button type='button' class="uds__writeoff" tabindex="-1">Получить скидку</button>
+                                </div>
+                            </div>
+                        </div>
                         <h3 class="cart__subtitle">Способы оплаты</h3>
                         <div class="cart__field">
                             <div class="cart__list cart__list--payment">
@@ -399,9 +439,9 @@
         </div>
     </div>
 </footer>
-    <script src="vendors/js/jquery-3.5.1.min.js?t=1619615187599"></script>
+    <script src="vendors/js/jquery-3.5.1.min.js?t=1623132488530"></script>
     <script src='https://api-maps.yandex.ru/2.1/?apikey=2ff635c1-bfdc-4f37-93f4-47fbda8be38d&lang=ru_RU'></script>
-    <script src="js/scripts.js?t=1619615187599"></script>
-    <script src="vendors/js/cart.js?t=1619615187599"></script>
-    <script src="vendors/js/map.js?t=1619615187599"></script>
+    <script src="js/scripts.js?t=1623132488530"></script>
+    <script src="vendors/js/cart.js?t=1623132488530"></script>
+    <script src="vendors/js/map.js?t=1623132488530"></script>
 </body>
