@@ -6,6 +6,7 @@ let clicked = null,
 
 
 const arrDays = [
+    ['','Пробный день'],
     [1, 'день'],
     [7, 'дней', $('.discount_7').attr('data-discount')],
     [14, 'дней', $('.discount_14').attr('data-discount')],
@@ -50,8 +51,6 @@ if (myCart.programs === undefined) {
     myCart.setItem('programs', JSON.stringify(cartData));
 } else {
     const temp = JSON.parse(myCart.getItem('programs'));
-    console.log(temp)
-    console.log(cartData);
     for (let key in temp) {
         temp[key].cost = cartData[key].cost;
     }
@@ -158,7 +157,7 @@ const daysTemplate = (el, i, params) => `<button type='button' class="order__ite
 const personTemplate = (el, i, params) => `<button type='button' class="order__item order__item--persons ${el[0] === params.count || (params.count === 1 && i === 0) ? 'active' : ''}"><span class="order__value">${el[0]} ${el[1]}</span></button>`;
 
 
-const totalPrice = (container) => {
+const totalPrice = container => {
     let totalPrice = 0,
         count = 0;
     for (let key in cartData) {
@@ -181,7 +180,6 @@ const totalPrice = (container) => {
         $('.cart__priceDelivery-total').text(totalPrice + deliveryPrice * maxDays)
     }
     $(container).text(totalPrice);
-    console.log(cartData)
 }
 
 
@@ -190,10 +188,6 @@ const totalPrice = (container) => {
 
 const costCalc = (name, target) => {
     let discountFamily = 0;
-    // for (let key in cartData) {
-    //     cartData[key].count 
-    // }
-    // cartData[name].totalDiscount = cartData[name].discountDays + cartData[name].discountPersons;
     cartData[name].totalDiscount = cartData[name].discountDays;
     cartData[name].totalCost = cartData[name].count * cartData[name].cost * cartData[name].days;
     cartData[name].totalCostPerDay = cartData[name].count * cartData[name].cost;
@@ -241,15 +235,15 @@ const calcDays = (days, that) => {
                         <span class="result__discount">${discount(days) ? discount(days) + '%' : ''}</span>
                     </button>`;
     if ($(that).siblings('.custom').length) {
-        $(that).siblings('.custom .result__value')
-            .text(daysForm(days));
+        $(that).siblings('.custom').find('.result__value')
+            .text(days + ' ' + daysForm(days));
         $(that).siblings('.custom .result__discount')
-            .text(discount(days) + '%');
+            .text(discount(days) ? discount(days) + '%' : '');
     } else {
         $(that).siblings('button').removeClass('active');
         $(that).closest('div').prepend(button);
-        $(that).siblings('input').val(`${days}`);
     }
+    $(that).siblings('input').val(`${days}`);
     cartData[$(that).closest('div[data-name]').attr('data-name')]['allDays'][4] = [days, daysForm(days), discount(days)];
     cartData[$(that).closest('div[data-name]').attr('data-name')]['days'] = days;
     if (discount(days)) cartData[$(that).closest('div[data-name]').attr('data-name')]['discountDays'] = discount(days);
@@ -384,29 +378,30 @@ $(window).on('load', () => {
 
     //расчет стоимости в калькуляторе
 
+    // $('.result').on('click', '.result__item', e => {
+    //     list('.result__box', e);
+    //     const thatProgram = $(e.currentTarget).closest('div[data-name]').attr('data-name');
+    //     let totalDiscount = 0,
+    //         count = 1;
+    //     $('.result__item.active .result__discount').each((i, el) => {
+    //         totalDiscount += parseInt($(el).text());
+    //     });
+    //     count = parseInt($('.result__item:not(.order__item--days):not(.custom).active .result__value').text());
+    //     let totalPricePerDay = count * cartData[thatProgram].cost;
+    //     totalPricePerDay = totalPricePerDay + (totalPricePerDay * (totalDiscount / 100))
+
+    //     if (cartData[thatProgram].cost * count !== totalPricePerDay) {
+    //         $('.result__priceBefore').removeClass('hidden');
+    //     } else {
+    //         $('.result__priceBefore').addClass('hidden');
+    //     }
+    //     $('.result__priceBefore').text(cartData[thatProgram].cost * count);
+    //     $('.result__priceAfter').text(totalPricePerDay);
+    // });
+
     $('.result').on('click', '.result__item', e => {
-        list('.result__box', e);
-        const thatProgram = $(e.currentTarget).closest('div[data-name]').attr('data-name');
-            // value = parseInt($(e.currentTarget).siblings('input').val());
-        let totalDiscount = 0,
-            count = 1;
-        $('.result__item.active .result__discount').each((i, el) => {
-            totalDiscount += parseInt($(el).text());
-        });
-        count = parseInt($('.result__item:not(.order__item--days):not(.custom).active .result__value').text());
-        let totalPricePerDay = count * cartData[thatProgram].cost;
-        totalPricePerDay = totalPricePerDay + (totalPricePerDay * (totalDiscount / 100))
-
-        if (cartData[thatProgram].cost * count !== totalPricePerDay) {
-            $('.result__priceBefore').removeClass('hidden');
-        } else {
-            $('.result__priceBefore').addClass('hidden');
-        }
-        $('.result__priceBefore').text(cartData[thatProgram].cost * count);
-        $('.result__priceAfter').text(totalPricePerDay);
-    });
-
-
+        list('.result__box', e, true);
+    })
     //добавить в корзину из калькулятора
 
     //здесь были фиксики
@@ -425,6 +420,7 @@ $(window).on('load', () => {
 
   
 })
+
 
 
 

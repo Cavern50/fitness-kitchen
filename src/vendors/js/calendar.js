@@ -125,7 +125,7 @@ const switchMonth = () => {
     let next = null;
     arrowNext.addEventListener('click', () => {
         next ? index++ : 0
-        console.log(index);
+        // console.log(index);
         date = new Date(year, month + index, today);
         dPicker($('.dpicker__body'), date);
         next = true;
@@ -133,7 +133,7 @@ const switchMonth = () => {
 
     arrowPrev.addEventListener('click', () => {
         !next ? index-- : 0;
-        console.log(index);
+        // console.log(index);
         date = new Date(year, month + index - 1, today);
         dPicker($('.dpicker__body'), date);
         next = false;
@@ -168,7 +168,7 @@ const hoverOnActiveRange = e => {
     if ($('.dpicker__item.last').length) {
         return false;
     }
-    console.log(!!$(e.target).attr('data-weekend'))
+    // console.log(!!$(e.target).attr('data-weekend'))
     if ($('.dpicker__item.first').length) {
         $('.dpicker__body .dpicker__item').each((i, el) => {
             if ($('.dpicker__item.first').index() <= i && i <= $(e.currentTarget).index() && !$(el).hasClass('disabled')) {
