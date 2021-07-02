@@ -89,19 +89,20 @@
                 visibility: hidden;
             }
         }
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50px;
-            height: 100%;
-            width: 80px;
-            background-color: $accent;
-            border-radius: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .3s;
-        }
+        // &.weekend 
+        // &::before {
+        //     content: '';
+        //     position: absolute;
+        //     top: 0;
+        //     left: -50px;
+        //     height: 100%;
+        //     width: 80px;
+        //     background-color: $accent;
+        //     border-radius: 20px;
+        //     opacity: 0;
+        //     pointer-events: none;
+        //     transition: opacity .3s;
+        // }
 
         &:nth-child(7n) {
             margin-right: 0;
@@ -130,7 +131,7 @@
             }
 
             &:hover,
-            &.active,
+            // &.active,
             &.ranged {
                 background-color: $accent;
                 border-color: #ffffff;
@@ -142,6 +143,10 @@
                     opacity: .2;
                 }
             }
+            // &.removed {
+            //     background-color: #dfdfdf !important;
+            //     color: $gen !important; 
+            // }
 
             &--header {
                 border-color: transparent;
@@ -149,14 +154,17 @@
             }
         }
     }
-
+    &__footer {
+        @extend %flexbox;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
     &__done {
         @extend %button;
         justify-content: space-between;
-        float: right;
         width: 141px;
         height: 28px;
-        margin-top: 10px;
         padding: 0 12px;
         border-color: transparent;
     }
@@ -193,7 +201,7 @@
     .dpicker {
         left: 50%;
         transform: translateX(-50%);
-        left: -20px;
+        // left: -20px;
         width: 330px;
         height: 420px;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, .35);

@@ -24,13 +24,13 @@
 }
 
 .intro__order:hover {
-  background-color: #6D9240;
+  background-color: #6d9240;
 }
 
 .intro__order {
   background-color: transparent;
   color: #3F4C5A;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .intro__order:hover {

@@ -22,6 +22,8 @@
 
 .cart__trialCheck,
 .breadcrumbs__back,
+.add__submit,
+.menu__submit,
 .cart__checkout,
 .cart__submit,
 .uds__get,
@@ -32,8 +34,11 @@
 .calc__checkbox,
 .calc__input,
 .result__list button,
+.menu__list button,
 .cart__list button,
 .order__list button,
+.result__weekend,
+.order__weekend,
 .modal,
 .breadcrumbs,
 .header__container,
@@ -44,9 +49,10 @@
 .footer__box,
 .footer__social,
 .footer__menu,
+.programs__menu,
 .footer__info,
 .choose__programs,
-.choose__days,
+.choose__days-box,
 .choose__day,
 .choose__eating::before,
 .calc__fields,
@@ -55,9 +61,11 @@
 .result__nutrients,
 .result__nutrientsItem,
 .try__programs,
+.add__programs,
 .cart__header,
 .cart__trial,
 .uds__logo,
+.preloader,
 .order,
 .order__amount,
 .order__change,
@@ -67,17 +75,20 @@
   align-self: center;
 }
 
-body::-webkit-scrollbar {
-  width: .5%;
+body::-webkit-scrollbar,
+.modal__box::-webkit-scrollbar {
+  width: 0.5%;
   min-width: 8px;
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+.modal__box::-webkit-scrollbar-track {
   background: transparent;
 }
 
-body::-webkit-scrollbar-thumb {
-  border-left: 1px solid #F2F2F2;
+body::-webkit-scrollbar-thumb,
+.modal__box::-webkit-scrollbar-thumb {
+  border-left: 1px solid #f2f2f2;
   background: #92B676;
 }
 
@@ -92,8 +103,8 @@ body::-webkit-scrollbar-thumb {
 
 .modal__close::after,
 .modal__close::before {
-  transition: background-color .3s;
-  content: '';
+  transition: background-color 0.3s;
+  content: "";
   width: 100%;
   height: 1px;
   background-color: #3F4C5A;
@@ -138,13 +149,13 @@ body::-webkit-scrollbar-thumb {
 .header__burger > span::before {
   background-color: #92B676;
   height: 2px;
-  transition: background-color .3s, transform .3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .header__burger > span::after,
 .header__burger > span::before {
   position: absolute;
-  content: '';
+  content: "";
   left: 0;
   top: 5px;
   width: 100%;
@@ -177,6 +188,8 @@ body::-webkit-scrollbar-thumb {
 
 .cart__trialCheck,
 .breadcrumbs__back,
+.add__submit,
+.menu__submit,
 .cart__checkout,
 .cart__submit,
 .uds__get,
@@ -194,18 +207,20 @@ body::-webkit-scrollbar-thumb {
 
 .cart__trialCheck:hover,
 .breadcrumbs__back:hover,
+.add__submit:hover,
+.menu__submit:hover,
 .cart__checkout:hover,
 .cart__submit:hover,
 .uds__get:hover,
 .uds__writeoff:hover,
 .not-found__back:hover {
-  background-color: #6D9240;
+  background-color: #6d9240;
 }
 
 .cart__trialCheck {
   background-color: transparent;
   color: #3F4C5A;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .cart__trialCheck:hover {
@@ -230,7 +245,7 @@ body::-webkit-scrollbar-thumb {
   font-weight: 600;
   text-transform: uppercase;
   border-radius: 8px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .programs__more:hover,
@@ -249,105 +264,160 @@ body::-webkit-scrollbar-thumb {
 }
 
 .result__list,
+.menu__list,
 .cart__list,
 .order__list {
   position: relative;
-  height: 40px;
+  height: 39px;
 }
 
-.result__list [class*=arrow],
-.cart__list [class*=arrow],
-.order__list [class*=arrow] {
+.result__list [class*="arrow"],
+.menu__list [class*="arrow"],
+.cart__list [class*="arrow"],
+.order__list [class*="arrow"] {
   position: absolute;
   right: 16px;
   top: 13px;
   z-index: 2;
   pointer-events: none;
-  transition: transform .3s, z-index .1s;
+  transition: transform 0.3s, z-index 0.1s;
 }
 
-.result__list [class*=box],
-.cart__list [class*=box],
-.order__list [class*=box] {
+.result__list [class*="box"],
+.menu__list [class*="box"],
+.cart__list [class*="box"],
+.order__list [class*="box"] {
   position: absolute;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   width: 100%;
-  height: 39px;
+  height: 38px;
   border-radius: 6px;
   background-color: #F2F2F2;
-  transition: height .3s, box-shadow .3s;
+  transition: height 0.3s, box-shadow 0.3s;
   z-index: 1;
 }
 
-.result__list [class*=box].open,
-.cart__list [class*=box].open,
-.order__list [class*=box].open {
+.result__list [class*="box"].open,
+.menu__list [class*="box"].open,
+.cart__list [class*="box"].open,
+.order__list [class*="box"].open {
   z-index: 3;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
-.result__list [class*=box].open ~ [class*=arrow],
-.cart__list [class*=box].open ~ [class*=arrow],
-.order__list [class*=box].open ~ [class*=arrow] {
+.result__list [class*="box"].open ~ [class*="arrow"],
+.menu__list [class*="box"].open ~ [class*="arrow"],
+.cart__list [class*="box"].open ~ [class*="arrow"],
+.order__list [class*="box"].open ~ [class*="arrow"] {
   z-index: 4;
   transform: rotate(-180deg);
 }
 
 .result__list button,
+.menu__list button,
 .cart__list button,
 .order__list button {
   justify-content: space-between;
   width: 100%;
   height: 30px;
-  padding: 10px 42px 12px 11px;
+  padding: 10px 32px 12px 11px;
+  font-size: 13px;
   font-family: "Inter", sans-serif;
 }
 
 .result__list button.active,
+.menu__list button.active,
 .cart__list button.active,
 .order__list button.active {
   height: 40px;
   order: -1;
 }
 
-.result__list button:not(.active):not([class*='choose']),
-.cart__list button:not(.active):not([class*='choose']),
-.order__list button:not(.active):not([class*='choose']) {
+.result__list button:not(.active):not([class*="choose"]),
+.menu__list button:not(.active):not([class*="choose"]),
+.cart__list button:not(.active):not([class*="choose"]),
+.order__list button:not(.active):not([class*="choose"]) {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.result__list button:not(.active):not([class*='choose']):hover,
-.cart__list button:not(.active):not([class*='choose']):hover,
-.order__list button:not(.active):not([class*='choose']):hover {
+.result__list button:not(.active):not([class*="choose"]):hover,
+.menu__list button:not(.active):not([class*="choose"]):hover,
+.cart__list button:not(.active):not([class*="choose"]):hover,
+.order__list button:not(.active):not([class*="choose"]):hover {
   background-color: #92B676;
   color: #ffffff;
   border-color: #92B676;
 }
 
-.result__list button:not(.active):not([class*='choose']):hover [class*=discount],
-.cart__list button:not(.active):not([class*='choose']):hover [class*=discount],
-.order__list button:not(.active):not([class*='choose']):hover [class*=discount] {
+.result__list button:not(.active):not([class*="choose"]):hover [class*="discount"],
+.menu__list button:not(.active):not([class*="choose"]):hover [class*="discount"],
+.cart__list button:not(.active):not([class*="choose"]):hover [class*="discount"],
+.order__list button:not(.active):not([class*="choose"]):hover [class*="discount"] {
   color: #ffffff;
 }
 
-.result__list button:not(.active):not([class*='choose']) span,
-.cart__list button:not(.active):not([class*='choose']) span,
-.order__list button:not(.active):not([class*='choose']) span {
-  transition: color .3s;
-}
-
 .result__list button.active,
+.menu__list button.active,
 .cart__list button.active,
 .order__list button.active {
   transition: none;
 }
 
-.result__list [class*=discount],
-.cart__list [class*=discount],
-.order__list [class*=discount] {
+.result__list button.disabled,
+.menu__list button.disabled,
+.cart__list button.disabled,
+.order__list button.disabled {
+  pointer-events: none;
+}
+
+.result__list [class*="discount"],
+.menu__list [class*="discount"],
+.cart__list [class*="discount"],
+.order__list [class*="discount"] {
   color: #FF7A6C;
+}
+
+.result__weekend,
+.order__weekend {
+  justify-content: flex-start !important;
+}
+
+.result__weekend:hover,
+.order__weekend:hover {
+  background-color: unset !important;
+  color: unset !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.checked.result__weekend [class$="check"]::before,
+.checked.order__weekend [class$="check"]::before {
+  background-color: #92B676;
+}
+
+.result__weekend [class$="check"],
+.order__weekend [class$="check"] {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-right: 16px;
+}
+
+.result__weekend [class$="check"]::before,
+.order__weekend [class$="check"]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 17px;
+  height: 17px;
+  background-color: #ffffff;
+  background-image: url("../img/done.svg");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 html {
@@ -396,7 +466,7 @@ a {
   color: #3F4C5A;
   display: inline-block;
   text-decoration: none;
-  transition: background-color .3s, border-color .3s, opacity .3s, color .3s;
+  transition: background-color 0.3s, border-color 0.3s, opacity 0.3s, color 0.3s;
 }
 
 svg {
@@ -406,7 +476,7 @@ svg {
 
 path,
 circle {
-  transition: fill .3s, stroke .3s;
+  transition: fill 0.3s, stroke 0.3s;
 }
 
 textarea,
@@ -419,14 +489,14 @@ input {
   border: none;
   background: none;
   outline: none;
-  transition: background-color .3s, border-color .3s, opacity .3s;
+  transition: background-color 0.3s, border-color 0.3s, opacity 0.3s, color 0.3s;
 }
 
 textarea[disabled],
 button[disabled],
 input[disabled] {
   cursor: default;
-  opacity: .7;
+  opacity: 0.7;
 }
 
 button {
@@ -447,7 +517,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -553,7 +623,7 @@ span {
 }
 
 .breadcrumbs:hover .breadcrumbs__back {
-  background-color: #6D9240;
+  background-color: #6d9240;
 }
 
 .breadcrumbs:hover .breadcrumbs__text {
@@ -565,15 +635,15 @@ span {
   height: 46px;
   margin-right: 16px;
   border-radius: 50%;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
 }
 
 .breadcrumbs__text {
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: .72px;
+  letter-spacing: 0.72px;
   color: #979C9E;
-  transition: color .3s;
+  transition: color 0.3s;
 }
 
 .rub {
@@ -583,7 +653,19 @@ span {
 }
 
 .header {
-  padding-top: 20px;
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 98;
+  padding: 20px 0;
+  box-shadow: none;
+  transition: box-shadow 0.3s;
+}
+
+.header.scrolled {
+  -webkit-box-shadow: 0px 9px 15px -6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 9px 15px -6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 9px 15px -6px rgba(0, 0, 0, 0.2);
 }
 
 .header__container {
@@ -614,7 +696,7 @@ span {
   text-transform: uppercase;
   font-size: 12px;
   font-family: "Raleway", sans-serif;
-  letter-spacing: .72px;
+  letter-spacing: 0.72px;
 }
 
 .header__item:last-child {
@@ -627,7 +709,7 @@ span {
 }
 
 .header__item a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -3px;
@@ -635,7 +717,7 @@ span {
   height: 1px;
   opacity: 0;
   background-color: #92B676;
-  transition: opacity .3s, width .3s;
+  transition: opacity 0.3s, width 0.3s;
 }
 
 .header__item a.active,
@@ -686,15 +768,15 @@ span {
   font-weight: 600;
   font-family: "Inter", sans-serif;
   opacity: 1;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .header__basket.disabled {
   pointer-events: none;
 }
 
-.header__basket[data-count='']::after,
-.header__basket[data-count='0']::after {
+.header__basket[data-count=""]::after,
+.header__basket[data-count="0"]::after {
   opacity: 0;
 }
 
@@ -705,6 +787,10 @@ span {
 
 .header__burger {
   display: none;
+}
+
+.main {
+  padding-top: 80px;
 }
 
 .footer {
@@ -740,11 +826,11 @@ span {
   margin-right: 20px;
   font-family: "Raleway", sans-serif;
   font-size: 12px;
-  letter-spacing: .72px;
+  letter-spacing: 0.72px;
 }
 
 .footer__link::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -3px;
@@ -752,7 +838,7 @@ span {
   height: 1px;
   opacity: 0;
   background-color: #92B676;
-  transition: opacity .3s, width .3s;
+  transition: opacity 0.3s, width 0.3s;
 }
 
 .footer__link:hover {
@@ -778,7 +864,8 @@ span {
   height: 100%;
 }
 
-.footer__menu {
+.footer__menu,
+.programs__menu {
   justify-content: center;
   border: 1px solid #92B676;
   border-radius: 12px;
@@ -789,16 +876,19 @@ span {
   color: #92B676;
 }
 
-.footer__menu span {
+.footer__menu span,
+.programs__menu span {
   margin-right: 14px;
 }
 
-.footer__menu:hover {
+.footer__menu:hover,
+.programs__menu:hover {
   color: #ffffff;
   background-color: #92B676;
 }
 
-.footer__menu:hover path {
+.footer__menu:hover path,
+.programs__menu:hover path {
   fill: #ffffff;
   stroke: #ffffff;
 }
@@ -816,7 +906,7 @@ span {
 .footer__agree {
   font-size: 12px;
   opacity: 0.8;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .footer__agree:hover {
@@ -834,6 +924,10 @@ span {
 
 .programs {
   padding-top: 60px;
+}
+
+.programs__menu {
+  margin: 0 auto;
 }
 
 .programs--catalog {
@@ -874,7 +968,7 @@ span {
   background-color: #92B676;
   color: #ffffff;
   border-radius: 12px;
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 
 .programs__card:hover,
@@ -955,6 +1049,10 @@ span {
   padding-top: 95px;
 }
 
+.choose__label {
+  display: none;
+}
+
 .choose--chosen {
   padding-top: 53px;
 }
@@ -970,153 +1068,153 @@ span {
   margin-top: 22px;
 }
 
-.choose__container[data-program='Lite'] .choose__day:hover,
-.choose__container[data-program='Lite'] .choose__day.active,
-.choose__container[data-program='Lite'] .choose__eating::before,
-.choose__container[data-program='Lite'] .calc__checkbox:hover,
-.choose__container[data-program='Lite'] .calc__checkbox.active,
-.choose__container[data-program='Lite'] .result__program,
-.choose__container[data-program='Lite'] .result__order,
-.choose__container[data-program='Lite'] .result__item:not(.active):hover,
-.choose__container[data-program='Lite'] .result__choose,
-.choose__container[data-program='Lite'] button.dpicker__item:not(.dpicker__item--header).active,
-.choose__container[data-program='Lite'] button.dpicker__item:not(.dpicker__item--header).ranged,
-.choose__container[data-program='Lite'] button.dpicker__item:not(.dpicker__item--header):hover,
-.choose__container[data-program='Lite'] button.dpicker__item::before,
-.choose__container[data-program='Lite'] .dpicker__done {
+.choose__container[data-program="Lite"] .choose__day:hover,
+.choose__container[data-program="Lite"] .choose__day.active,
+.choose__container[data-program="Lite"] .choose__eating::before,
+.choose__container[data-program="Lite"] .calc__checkbox:hover,
+.choose__container[data-program="Lite"] .calc__checkbox.active,
+.choose__container[data-program="Lite"] .result__program,
+.choose__container[data-program="Lite"] .result__order,
+.choose__container[data-program="Lite"] .result__item:not(.active):hover,
+.choose__container[data-program="Lite"] .result__choose,
+.choose__container[data-program="Lite"] button.dpicker__item:not(.dpicker__item--header).ranged,
+.choose__container[data-program="Lite"] button.dpicker__item:not(.dpicker__item--header):hover,
+.choose__container[data-program="Lite"] button.dpicker__item::before,
+.choose__container[data-program="Lite"] .dpicker__done,
+.choose__container[data-program="Lite"] .dpicker__checkbox:checked ~ label::before {
   background-color: #92B676;
 }
 
-.choose__container[data-program='Lite'] .choose__eating {
+.choose__container[data-program="Lite"] .choose__eating {
   color: #92B676;
 }
 
-.choose__container[data-program='Lite'] .result__nutrientsItem,
-.choose__container[data-program='Lite'] .dpicker__item.today {
+.choose__container[data-program="Lite"] .result__nutrientsItem,
+.choose__container[data-program="Lite"] .dpicker__item.today {
   border-color: #92B676;
 }
 
-.choose__container[data-program='Lite'] .result__choose:hover {
+.choose__container[data-program="Lite"] .result__choose:hover {
   background-color: #7faa5f;
 }
 
-.choose__container[data-program='Fit'] .choose__day:hover,
-.choose__container[data-program='Fit'] .choose__day.active,
-.choose__container[data-program='Fit'] .choose__eating::before,
-.choose__container[data-program='Fit'] .calc__checkbox:hover,
-.choose__container[data-program='Fit'] .calc__checkbox.active,
-.choose__container[data-program='Fit'] .result__program,
-.choose__container[data-program='Fit'] .result__order,
-.choose__container[data-program='Fit'] .result__item:not(.active):hover,
-.choose__container[data-program='Fit'] .result__choose,
-.choose__container[data-program='Fit'] button.dpicker__item:not(.dpicker__item--header).active,
-.choose__container[data-program='Fit'] button.dpicker__item:not(.dpicker__item--header).ranged,
-.choose__container[data-program='Fit'] button.dpicker__item:not(.dpicker__item--header):hover,
-.choose__container[data-program='Fit'] button.dpicker__item::before,
-.choose__container[data-program='Fit'] .dpicker__done {
+.choose__container[data-program="Fit"] .choose__day:hover,
+.choose__container[data-program="Fit"] .choose__day.active,
+.choose__container[data-program="Fit"] .choose__eating::before,
+.choose__container[data-program="Fit"] .calc__checkbox:hover,
+.choose__container[data-program="Fit"] .calc__checkbox.active,
+.choose__container[data-program="Fit"] .result__program,
+.choose__container[data-program="Fit"] .result__order,
+.choose__container[data-program="Fit"] .result__item:not(.active):hover,
+.choose__container[data-program="Fit"] .result__choose,
+.choose__container[data-program="Fit"] button.dpicker__item:not(.dpicker__item--header).ranged,
+.choose__container[data-program="Fit"] button.dpicker__item:not(.dpicker__item--header):hover,
+.choose__container[data-program="Fit"] button.dpicker__item::before,
+.choose__container[data-program="Fit"] .dpicker__done,
+.choose__container[data-program="Fit"] .dpicker__checkbox:checked ~ label::before {
   background-color: #70B4ED;
 }
 
-.choose__container[data-program='Fit'] .choose__eating {
+.choose__container[data-program="Fit"] .choose__eating {
   color: #70B4ED;
 }
 
-.choose__container[data-program='Fit'] .result__nutrientsItem,
-.choose__container[data-program='Fit'] .dpicker__item.today {
+.choose__container[data-program="Fit"] .result__nutrientsItem,
+.choose__container[data-program="Fit"] .dpicker__item.today {
   border-color: #70B4ED;
 }
 
-.choose__container[data-program='Fit'] .result__choose:hover {
+.choose__container[data-program="Fit"] .result__choose:hover {
   background-color: #50a3e9;
 }
 
-.choose__container[data-program='Active'] .choose__day:hover,
-.choose__container[data-program='Active'] .choose__day.active,
-.choose__container[data-program='Active'] .choose__eating::before,
-.choose__container[data-program='Active'] .calc__checkbox:hover,
-.choose__container[data-program='Active'] .calc__checkbox.active,
-.choose__container[data-program='Active'] .result__program,
-.choose__container[data-program='Active'] .result__order,
-.choose__container[data-program='Active'] .result__item:not(.active):hover,
-.choose__container[data-program='Active'] .result__choose,
-.choose__container[data-program='Active'] button.dpicker__item:not(.dpicker__item--header).active,
-.choose__container[data-program='Active'] button.dpicker__item:not(.dpicker__item--header).ranged,
-.choose__container[data-program='Active'] button.dpicker__item:not(.dpicker__item--header):hover,
-.choose__container[data-program='Active'] button.dpicker__item::before,
-.choose__container[data-program='Active'] .dpicker__done {
+.choose__container[data-program="Active"] .choose__day:hover,
+.choose__container[data-program="Active"] .choose__day.active,
+.choose__container[data-program="Active"] .choose__eating::before,
+.choose__container[data-program="Active"] .calc__checkbox:hover,
+.choose__container[data-program="Active"] .calc__checkbox.active,
+.choose__container[data-program="Active"] .result__program,
+.choose__container[data-program="Active"] .result__order,
+.choose__container[data-program="Active"] .result__item:not(.active):hover,
+.choose__container[data-program="Active"] .result__choose,
+.choose__container[data-program="Active"] button.dpicker__item:not(.dpicker__item--header).ranged,
+.choose__container[data-program="Active"] button.dpicker__item:not(.dpicker__item--header):hover,
+.choose__container[data-program="Active"] button.dpicker__item::before,
+.choose__container[data-program="Active"] .dpicker__done,
+.choose__container[data-program="Active"] .dpicker__checkbox:checked ~ label::before {
   background-color: #FFB700;
 }
 
-.choose__container[data-program='Active'] .choose__eating {
+.choose__container[data-program="Active"] .choose__eating {
   color: #FFB700;
 }
 
-.choose__container[data-program='Active'] .result__nutrientsItem,
-.choose__container[data-program='Active'] .dpicker__item.today {
+.choose__container[data-program="Active"] .result__nutrientsItem,
+.choose__container[data-program="Active"] .dpicker__item.today {
   border-color: #FFB700;
 }
 
-.choose__container[data-program='Active'] .result__choose:hover {
+.choose__container[data-program="Active"] .result__choose:hover {
   background-color: #db9d00;
 }
 
-.choose__container[data-program='Balance'] .choose__day:hover,
-.choose__container[data-program='Balance'] .choose__day.active,
-.choose__container[data-program='Balance'] .choose__eating::before,
-.choose__container[data-program='Balance'] .calc__checkbox:hover,
-.choose__container[data-program='Balance'] .calc__checkbox.active,
-.choose__container[data-program='Balance'] .result__program,
-.choose__container[data-program='Balance'] .result__order,
-.choose__container[data-program='Balance'] .result__item:not(.active):hover,
-.choose__container[data-program='Balance'] .result__choose,
-.choose__container[data-program='Balance'] button.dpicker__item:not(.dpicker__item--header).active,
-.choose__container[data-program='Balance'] button.dpicker__item:not(.dpicker__item--header).ranged,
-.choose__container[data-program='Balance'] button.dpicker__item:not(.dpicker__item--header):hover,
-.choose__container[data-program='Balance'] button.dpicker__item::before,
-.choose__container[data-program='Balance'] .dpicker__done {
+.choose__container[data-program="Balance"] .choose__day:hover,
+.choose__container[data-program="Balance"] .choose__day.active,
+.choose__container[data-program="Balance"] .choose__eating::before,
+.choose__container[data-program="Balance"] .calc__checkbox:hover,
+.choose__container[data-program="Balance"] .calc__checkbox.active,
+.choose__container[data-program="Balance"] .result__program,
+.choose__container[data-program="Balance"] .result__order,
+.choose__container[data-program="Balance"] .result__item:not(.active):hover,
+.choose__container[data-program="Balance"] .result__choose,
+.choose__container[data-program="Balance"] button.dpicker__item:not(.dpicker__item--header).ranged,
+.choose__container[data-program="Balance"] button.dpicker__item:not(.dpicker__item--header):hover,
+.choose__container[data-program="Balance"] button.dpicker__item::before,
+.choose__container[data-program="Balance"] .dpicker__done,
+.choose__container[data-program="Balance"] .dpicker__checkbox:checked ~ label::before {
   background-color: #FF7A6C;
 }
 
-.choose__container[data-program='Balance'] .choose__eating {
+.choose__container[data-program="Balance"] .choose__eating {
   color: #FF7A6C;
 }
 
-.choose__container[data-program='Balance'] .result__nutrientsItem,
-.choose__container[data-program='Balance'] .dpicker__item.today {
+.choose__container[data-program="Balance"] .result__nutrientsItem,
+.choose__container[data-program="Balance"] .dpicker__item.today {
   border-color: #FF7A6C;
 }
 
-.choose__container[data-program='Balance'] .result__choose:hover {
+.choose__container[data-program="Balance"] .result__choose:hover {
   background-color: #ff5a48;
 }
 
-.choose__container[data-program='Vitality'] .choose__day:hover,
-.choose__container[data-program='Vitality'] .choose__day.active,
-.choose__container[data-program='Vitality'] .choose__eating::before,
-.choose__container[data-program='Vitality'] .calc__checkbox:hover,
-.choose__container[data-program='Vitality'] .calc__checkbox.active,
-.choose__container[data-program='Vitality'] .result__program,
-.choose__container[data-program='Vitality'] .result__order,
-.choose__container[data-program='Vitality'] .result__item:not(.active):hover,
-.choose__container[data-program='Vitality'] .result__choose,
-.choose__container[data-program='Vitality'] button.dpicker__item:not(.dpicker__item--header).active,
-.choose__container[data-program='Vitality'] button.dpicker__item:not(.dpicker__item--header).ranged,
-.choose__container[data-program='Vitality'] button.dpicker__item:not(.dpicker__item--header):hover,
-.choose__container[data-program='Vitality'] button.dpicker__item::before,
-.choose__container[data-program='Vitality'] .dpicker__done {
+.choose__container[data-program="Vitality"] .choose__day:hover,
+.choose__container[data-program="Vitality"] .choose__day.active,
+.choose__container[data-program="Vitality"] .choose__eating::before,
+.choose__container[data-program="Vitality"] .calc__checkbox:hover,
+.choose__container[data-program="Vitality"] .calc__checkbox.active,
+.choose__container[data-program="Vitality"] .result__program,
+.choose__container[data-program="Vitality"] .result__order,
+.choose__container[data-program="Vitality"] .result__item:not(.active):hover,
+.choose__container[data-program="Vitality"] .result__choose,
+.choose__container[data-program="Vitality"] button.dpicker__item:not(.dpicker__item--header).ranged,
+.choose__container[data-program="Vitality"] button.dpicker__item:not(.dpicker__item--header):hover,
+.choose__container[data-program="Vitality"] button.dpicker__item::before,
+.choose__container[data-program="Vitality"] .dpicker__done,
+.choose__container[data-program="Vitality"] .dpicker__checkbox:checked ~ label::before {
   background-color: #74BDC1;
 }
 
-.choose__container[data-program='Vitality'] .choose__eating {
+.choose__container[data-program="Vitality"] .choose__eating {
   color: #74BDC1;
 }
 
-.choose__container[data-program='Vitality'] .result__nutrientsItem,
-.choose__container[data-program='Vitality'] .dpicker__item.today {
+.choose__container[data-program="Vitality"] .result__nutrientsItem,
+.choose__container[data-program="Vitality"] .dpicker__item.today {
   border-color: #74BDC1;
 }
 
-.choose__container[data-program='Vitality'] .result__choose:hover {
+.choose__container[data-program="Vitality"] .result__choose:hover {
   background-color: #5bb1b6;
 }
 
@@ -1125,7 +1223,8 @@ span {
 }
 
 .choose__program,
-.try__program {
+.try__program,
+.add__program {
   position: relative;
   width: 144px;
   height: 70px;
@@ -1136,38 +1235,63 @@ span {
   background-color: #F2F2F2;
 }
 
-.choose__program[data-name='Lite'] .choose__programBackground,
-.try__program[data-name='Lite'] .choose__programBackground,
-.choose__program[data-name='Lite'] .try__programBackground,
-.try__program[data-name='Lite'] .try__programBackground {
+.choose__program[data-name="Lite"] .choose__programBackground,
+.try__program[data-name="Lite"] .choose__programBackground,
+.add__program[data-name="Lite"] .choose__programBackground,
+.choose__program[data-name="Lite"] .try__programBackground,
+.try__program[data-name="Lite"] .try__programBackground,
+.add__program[data-name="Lite"] .try__programBackground,
+.choose__program[data-name="Lite"] .add__programBackground,
+.try__program[data-name="Lite"] .add__programBackground,
+.add__program[data-name="Lite"] .add__programBackground {
   background-color: #92B676;
 }
 
 .choose__program[data-name="Fit"] .choose__programBackground,
 .try__program[data-name="Fit"] .choose__programBackground,
+.add__program[data-name="Fit"] .choose__programBackground,
 .choose__program[data-name="Fit"] .try__programBackground,
-.try__program[data-name="Fit"] .try__programBackground {
+.try__program[data-name="Fit"] .try__programBackground,
+.add__program[data-name="Fit"] .try__programBackground,
+.choose__program[data-name="Fit"] .add__programBackground,
+.try__program[data-name="Fit"] .add__programBackground,
+.add__program[data-name="Fit"] .add__programBackground {
   background-color: #70B4ED;
 }
 
 .choose__program[data-name="Active"] .choose__programBackground,
 .try__program[data-name="Active"] .choose__programBackground,
+.add__program[data-name="Active"] .choose__programBackground,
 .choose__program[data-name="Active"] .try__programBackground,
-.try__program[data-name="Active"] .try__programBackground {
+.try__program[data-name="Active"] .try__programBackground,
+.add__program[data-name="Active"] .try__programBackground,
+.choose__program[data-name="Active"] .add__programBackground,
+.try__program[data-name="Active"] .add__programBackground,
+.add__program[data-name="Active"] .add__programBackground {
   background-color: #FFB700;
 }
 
 .choose__program[data-name="Balance"] .choose__programBackground,
 .try__program[data-name="Balance"] .choose__programBackground,
+.add__program[data-name="Balance"] .choose__programBackground,
 .choose__program[data-name="Balance"] .try__programBackground,
-.try__program[data-name="Balance"] .try__programBackground {
+.try__program[data-name="Balance"] .try__programBackground,
+.add__program[data-name="Balance"] .try__programBackground,
+.choose__program[data-name="Balance"] .add__programBackground,
+.try__program[data-name="Balance"] .add__programBackground,
+.add__program[data-name="Balance"] .add__programBackground {
   background-color: #FF7A6C;
 }
 
 .choose__program[data-name="Vitality"] .choose__programBackground,
 .try__program[data-name="Vitality"] .choose__programBackground,
+.add__program[data-name="Vitality"] .choose__programBackground,
 .choose__program[data-name="Vitality"] .try__programBackground,
-.try__program[data-name="Vitality"] .try__programBackground {
+.try__program[data-name="Vitality"] .try__programBackground,
+.add__program[data-name="Vitality"] .try__programBackground,
+.choose__program[data-name="Vitality"] .add__programBackground,
+.try__program[data-name="Vitality"] .add__programBackground,
+.add__program[data-name="Vitality"] .add__programBackground {
   background-color: #74BDC1;
 }
 
@@ -1182,56 +1306,74 @@ span {
 }
 
 .choose__program:last-child,
-.try__program:last-child {
+.try__program:last-child,
+.add__program:last-child {
   margin-right: 0;
 }
 
 .choose__program:hover .choose__programBackground,
 .try__program:hover .choose__programBackground,
+.add__program:hover .choose__programBackground,
 .choose__program:hover .try__programBackground,
 .try__program:hover .try__programBackground,
+.add__program:hover .try__programBackground,
+.choose__program:hover .add__programBackground,
+.try__program:hover .add__programBackground,
+.add__program:hover .add__programBackground,
 .choose__program.active .choose__programBackground,
 .active.try__program .choose__programBackground,
+.active.add__program .choose__programBackground,
 .choose__program.active .try__programBackground,
-.active.try__program .try__programBackground {
+.active.try__program .try__programBackground,
+.active.add__program .try__programBackground,
+.choose__program.active .add__programBackground,
+.active.try__program .add__programBackground,
+.active.add__program .add__programBackground {
   height: 100%;
 }
 
 .choose__program:hover span,
 .try__program:hover span,
+.add__program:hover span,
 .choose__program.active span,
-.active.try__program span {
+.active.try__program span,
+.active.add__program span {
   color: #ffffff;
 }
 
 .choose__program.active,
-.active.try__program {
+.active.try__program,
+.active.add__program {
   pointer-events: none;
 }
 
 .choose__program span,
-.try__program span {
+.try__program span,
+.add__program span {
   display: block;
   text-align: left;
-  transition: color .3s, height .3s;
+  transition: color 0.3s, height 0.3s;
   font-family: "Inter", sans-serif;
 }
 
 .choose__programName,
-.try__programName {
+.try__programName,
+.add__programName {
   position: relative;
   text-transform: uppercase;
 }
 
 .choose__programAmount,
-.try__programAmount {
+.try__programAmount,
+.add__programAmount {
   position: relative;
   margin-top: 6px;
   color: #979C9E;
 }
 
 .choose__programBackground,
-.try__programBackground {
+.try__programBackground,
+.add__programBackground {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1242,8 +1384,12 @@ span {
   border-radius: 8px;
 }
 
-.choose__days {
+.choose__days-list {
   margin-top: 18px;
+}
+
+.choose__days-arrow {
+  display: none;
 }
 
 .choose__day {
@@ -1287,6 +1433,7 @@ span {
   top: -75px;
   width: 198px;
   height: 150px;
+  object-fit: contain;
 }
 
 .choose__eating {
@@ -1294,7 +1441,7 @@ span {
   display: block;
   color: #70B4ED;
   padding-left: 40px;
-  transition: color .3s;
+  transition: color 0.3s;
 }
 
 .choose__eating::before {
@@ -1309,7 +1456,7 @@ span {
   border-radius: 50%;
   background-color: #70B4ED;
   color: #ffffff;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
 }
 
 .choose__name {
@@ -1415,11 +1562,11 @@ span {
 }
 
 .calc__field--height::after {
-  content: 'см.';
+  content: "см.";
 }
 
 .calc__field--weight::after {
-  content: 'кг.';
+  content: "кг.";
 }
 
 .calc__field--level {
@@ -1483,7 +1630,7 @@ span {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   color: #ffffff;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
 }
 
 .result__body {
@@ -1503,7 +1650,7 @@ span {
   margin-right: 10px;
   border: 1px solid #70B4ED;
   border-radius: 6px;
-  transition: border-color .3s;
+  transition: border-color 0.3s;
 }
 
 .result__nutrientsItem span {
@@ -1519,7 +1666,7 @@ span {
 }
 
 .result__nutrientsAmount::after {
-  content: '\a0г';
+  content: "\a0г";
 }
 
 .result__nutrientsStuff {
@@ -1548,7 +1695,7 @@ span {
 }
 
 .result__price > *::after {
-  content: '\20₽/ день';
+  content: "\20₽/ день";
 }
 
 .result__priceBefore {
@@ -1599,59 +1746,114 @@ button.result__choose:hover {
   background-color: #6d9240;
 }
 
-.try {
+.try:not(.hidden) {
+  display: block;
+}
+
+.try__label.try__label--warn {
+  font-size: 16px;
+  margin-top: 12px;
+  font-weight: 400;
+  color: #6d9240;
+}
+
+.try,
+.add {
   width: 480px;
 }
 
-.try__title {
+.try__title,
+.add__title {
   margin-top: 36px;
 }
 
-.try__programs {
+.try__programs,
+.add__programs {
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
-.try__program {
+.try__program,
+.add__program {
   margin-bottom: 28px;
   margin-right: 23px;
 }
 
-.try__program:nth-child(3n) {
+.try__program:nth-child(3n),
+.add__program:nth-child(3n) {
   margin-right: 0;
 }
 
-.try__info {
+.try__info,
+.add__info {
   padding-bottom: 12px;
-  border-bottom: 1px solid #F2F2F2;
+  border-bottom: 1px solid #f2f2f2;
 }
 
-.try__label {
+.try__label,
+.add__label {
   display: block;
   color: #979C9E;
   font-size: 12px;
   font-weight: 600;
 }
 
-.try__label:last-child {
+.try__label:last-child,
+.add__label:last-child {
   margin-top: 4px;
 }
 
-.try__total {
+.try__total,
+.add__total {
   margin-top: 25px;
   line-height: 1;
   text-align: right;
 }
 
-.try__total::before {
-  content: 'Итого';
+.try__total::before,
+.add__total::before {
+  content: "Итого";
   margin-right: 25px;
   font-size: 14px;
   color: #979C9E;
 }
 
-.try__total::after {
-  content: '\20₽';
+.try__total::after,
+.add__total::after {
+  content: "\20₽";
+}
+
+.add {
+  display: none;
+  position: relative;
+  width: 100%;
+  padding: 16px 0 8px 24px;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.add.active {
+  display: block;
+}
+
+.add__title {
+  margin-top: 0;
+}
+
+.add__submit {
+  justify-content: space-between;
+  align-self: flex-end;
+  width: 144px;
+  height: 28px;
+  margin-bottom: 28px;
+  padding: 0 12px;
+  border-color: transparent;
+}
+
+.add__close {
+  position: absolute;
+  right: 0;
+  top: 20px;
 }
 
 .contacts__container {
@@ -1717,16 +1919,16 @@ button.result__choose:hover {
   padding-right: 26px;
 }
 
-.message[href^=tg] {
+.message[href^="tg"] {
   background-color: #70B4ED;
 }
 
-.message[href^=viber] {
-  background-color: #804FA1;
+.message[href^="viber"] {
+  background-color: #804fa1;
 }
 
 .message.message--whatsapp {
-  background-color: #59C663;
+  background-color: #59c663;
 }
 
 .message__block:first-child {
@@ -1778,26 +1980,26 @@ button.result__choose:hover {
   opacity: 0.7;
   filter: blur(60px);
   z-index: -1;
-  transition: top .1s;
+  transition: top 0.1s;
 }
 
 .modal {
   justify-content: flex-end;
   visibility: hidden;
-  transition: visibility .3s;
+  transition: visibility 0.3s;
 }
 
 .modal::before {
-  content: '';
+  content: "";
   width: 100%;
   height: 100%;
   position: absolute;
   right: 0;
   top: 0;
-  background: linear-gradient(90deg, #222B45 48.47%, rgba(34, 43, 69, 0) 100%);
+  background: linear-gradient(90deg, #222b45 48.47%, rgba(34, 43, 69, 0) 100%);
   opacity: 0;
   transform: matrix(-1, 0, 0, 1, 0, 0);
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .modal .modal__box {
@@ -1810,7 +2012,7 @@ button.result__choose:hover {
   height: 100%;
   padding: 49px 64px 57px 64px;
   background-color: #ffffff;
-  transition: transform .5s;
+  transition: transform 0.5s;
 }
 
 .modal.active {
@@ -1827,6 +2029,72 @@ button.result__choose:hover {
 
 .modal--trial .modal__box {
   padding-left: 100px;
+}
+
+.modal--menu .modal__box {
+  display: block;
+}
+
+.menu__title {
+  width: fit-content;
+  margin: 34px auto 0 auto;
+}
+
+.menu__text {
+  max-width: 314px;
+  margin: 18px auto 50px auto;
+  text-align: center;
+  color: #979C9E;
+}
+
+.menu__field {
+  width: 400px;
+  margin: 25px auto 0 auto;
+}
+
+.menu__label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #979C9E;
+}
+
+.menu__input {
+  width: 100%;
+  height: 56px;
+  margin-top: 14px;
+  padding: 0 16px;
+  border: 1px solid #c6cbce;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+}
+
+.menu__submit {
+  width: 211px;
+  margin: 40px auto 0 auto;
+}
+
+.menu__list {
+  height: 56px;
+  margin-top: 14px;
+}
+
+.menu .menu__box {
+  height: 53px;
+  background-color: #fff;
+  border: 1px solid #C6CBCE;
+  border-radius: 4px;
+}
+
+.menu .menu__product,
+.menu .menu__product.active {
+  height: 56px;
+  padding: 18px 26px;
+  font-size: 14px;
+}
+
+.menu .menu__arrow {
+  top: 20px;
 }
 
 .cart__header {
@@ -1866,7 +2134,7 @@ button.result__choose:hover {
 }
 
 .cart__add:hover {
-  color: #6D9240;
+  color: #6d9240;
 }
 
 .cart__trial {
@@ -1899,10 +2167,10 @@ button.result__choose:hover {
   height: 56px;
   margin-top: 8px;
   padding: 12px;
-  border: 1px solid #CBCDCE;
+  border: 1px solid #cbcdce;
   border-radius: 6px;
   font-family: "Inter", sans-serif;
-  transition: border-color .3s, color .3s;
+  transition: border-color 0.3s, color 0.3s;
 }
 
 .cart__input:focus {
@@ -1915,8 +2183,8 @@ button.result__choose:hover {
 }
 
 .cart__input.error {
-  border-color: #FE6F5F;
-  color: #FE6F5F;
+  border-color: #fe6f5f;
+  color: #fe6f5f;
 }
 
 .cart__input--street {
@@ -1983,13 +2251,11 @@ button.result__choose:hover {
 .cart__totalVal {
   margin-left: 20px;
   color: #3F4C5A;
-  font-size: 14px;
   line-height: 1;
-  font-weight: 500;
 }
 
 .cart__totalVal::after {
-  content: '\20₽';
+  content: "\20₽";
 }
 
 .cart__totalVal--cart {
@@ -2015,7 +2281,7 @@ button.result__choose:hover {
   margin-top: 40px;
 }
 
-.cart__block--personal .cart__field:not(:nth-child(-n+2)) {
+.cart__block--personal .cart__field:not(:nth-child(-n + 2)) {
   margin-top: 20px;
 }
 
@@ -2027,7 +2293,7 @@ button.result__choose:hover {
   width: 287px;
 }
 
-.cart__block--delivery .cart__field:not(:nth-child(-n+2)) {
+.cart__block--delivery .cart__field:not(:nth-child(-n + 2)) {
   margin-top: 25px;
 }
 
@@ -2063,7 +2329,7 @@ button.result__choose:hover {
 }
 
 .cart__list .cart__arrow path {
-  fill: #979C9E;
+  fill: #979c9e;
 }
 
 .cart__list button {
@@ -2114,12 +2380,17 @@ button.result__choose:hover {
   font-weight: 600;
 }
 
+.cart__priceDelivery-total {
+  font-weight: 500;
+  font-size: 14px;
+}
+
 .cart__priceDelivery::after {
-  content: '\20₽ / день';
+  content: "\20₽ / день";
 }
 
 .cart__priceTotal::after {
-  content: '\20₽';
+  content: "\20₽";
 }
 
 .cart__prepay {
@@ -2207,7 +2478,7 @@ button.result__choose:hover {
 }
 
 .uds__item:before {
-  content: '-';
+  content: "-";
   position: absolute;
   left: 0;
   top: 0;
@@ -2222,7 +2493,7 @@ button.result__choose:hover {
   height: 56px;
   margin-right: 22px;
   padding: 0 12px;
-  border: 1px solid #C6CBCE;
+  border: 1px solid #c6cbce;
   border-radius: 6px;
   font-family: "Inter", sans-serif;
   font-size: 18px;
@@ -2258,6 +2529,55 @@ button.result__choose:hover {
   margin-top: 0;
 }
 
+.preloader,
+.cart__loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 99;
+}
+
+.preloader {
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  pointer-events: none;
+}
+
+.preloader.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.preloader svg {
+  width: 30vw;
+  height: 30vh;
+}
+
+.preloader .lds-ellipsis {
+  position: relative;
+  left: unset;
+  top: unset;
+  transform: none;
+  opacity: 1;
+}
+
+.cart__loader.active {
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(4px);
+}
+
+.cart__loader .lds-ellipsis {
+  position: fixed;
+  opacity: 1;
+}
+
 .lds-ellipsis {
   display: inline-block;
   position: absolute;
@@ -2268,7 +2588,7 @@ button.result__choose:hover {
   height: 80px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .lds-ellipsis div {
@@ -2351,23 +2671,23 @@ button.result__choose:hover {
   top: 35px;
 }
 
-.order[data-name='Lite'] .order__program {
+.order[data-name="Lite"] .order__program {
   background-color: #92B676;
 }
 
-.order[data-name='Fit'] .order__program {
+.order[data-name="Fit"] .order__program {
   background-color: #70B4ED;
 }
 
-.order[data-name='Active'] .order__program {
+.order[data-name="Active"] .order__program {
   background-color: #FFB700;
 }
 
-.order[data-name='Balance'] .order__program {
+.order[data-name="Balance"] .order__program {
   background-color: #FF7A6C;
 }
 
-.order[data-name='Vitality'] .order__program {
+.order[data-name="Vitality"] .order__program {
   background-color: #74BDC1;
 }
 
@@ -2382,7 +2702,7 @@ button.result__choose:hover {
   border-radius: 6px;
   background-color: #92B676;
   color: #ffffff;
-  transition: border-color .3s;
+  transition: border-color 0.3s;
 }
 
 .order__name {
@@ -2416,7 +2736,7 @@ button.result__choose:hover {
 }
 
 .order__change:hover path {
-  stroke: #222B45;
+  stroke: #222b45;
 }
 
 .order__change--plus svg {
@@ -2450,7 +2770,7 @@ button.result__choose:hover {
 }
 
 .order__priceVal--trial::after {
-  content: '\20₽';
+  content: "\20₽";
 }
 
 .order__remove {
@@ -2465,6 +2785,19 @@ button.result__choose:hover {
 
 .order__remove:hover path {
   fill: #FF7A6C;
+}
+
+.order__value {
+  text-align: left;
+}
+
+.order__item--try .order__value,
+.order__item--try .result__value {
+  display: none;
+}
+
+.order__item.disabled {
+  pointer-events: none;
 }
 
 .success__subtitle {
@@ -2504,6 +2837,7 @@ button.result__choose:hover {
   padding: 18px 6px 18px 30px;
   background-color: #92B676;
   border-radius: 14px;
+  transition: background-color 0.3s;
 }
 
 .geoloc--cart {
@@ -2587,13 +2921,13 @@ button.result__choose:hover {
 }
 
 .features__image::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(175deg, #F2F2F2 10%, rgba(255, 255, 255, 0));
+  background: linear-gradient(175deg, #f2f2f2 10%, rgba(255, 255, 255, 0));
 }
 
 .features__image img {
@@ -2614,6 +2948,8 @@ button.result__choose:hover {
 @media (max-width: 1240px) {
   .cart__trialCheck,
   .breadcrumbs__back,
+  .add__submit,
+  .menu__submit,
   .cart__checkout,
   .cart__submit,
   .uds__get,
@@ -2663,11 +2999,6 @@ button.result__choose:hover {
     height: 46px;
   }
 
-  .header {
-    position: relative;
-    height: 108px;
-  }
-
   .header__link {
     margin-right: 0;
   }
@@ -2675,9 +3006,9 @@ button.result__choose:hover {
   .header__nav {
     position: absolute;
     left: 0;
-    top: 108px;
+    top: 95px;
     width: 100%;
-    height: calc(100vh - 108px);
+    height: calc(100vh - 95px);
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -2686,7 +3017,7 @@ button.result__choose:hover {
     padding: 25px;
     background-color: #92B676;
     z-index: 99;
-    transition: opacity .3s, visibility .3s;
+    transition: opacity 0.3s, visibility 0.3s;
   }
 
   .header__nav.active {
@@ -2727,13 +3058,14 @@ button.result__choose:hover {
   .header__call {
     position: relative;
     align-self: flex-end;
-    font-size: 20px;
+    margin-bottom: 20vh;
     padding-left: 58px;
+    font-size: 20px;
     color: #ffffff;
   }
 
   .header__call::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -2758,6 +3090,10 @@ button.result__choose:hover {
 
   .header__buttons {
     display: flex;
+  }
+
+  .main {
+    padding-top: 100px;
   }
 
   .programs {
@@ -2861,6 +3197,112 @@ button.result__choose:hover {
 }
 
 @media (max-width: 768px) {
+  .choose__days {
+    width: calc(100% - 15px);
+  }
+
+  .choose__days-arrow {
+    display: block;
+  }
+
+  .choose__days-list {
+    position: relative;
+    height: 39px;
+  }
+
+  .choose__days-list [class*="arrow"] {
+    position: absolute;
+    right: 16px;
+    top: 13px;
+    z-index: 2;
+    pointer-events: none;
+    transition: transform 0.3s, z-index 0.1s;
+  }
+
+  .choose__days-list [class*="box"] {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    height: 38px;
+    border-radius: 6px;
+    background-color: #F2F2F2;
+    transition: height 0.3s, box-shadow 0.3s;
+    z-index: 1;
+  }
+
+  .choose__days-list [class*="box"].open {
+    z-index: 3;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .choose__days-list [class*="box"].open ~ [class*="arrow"] {
+    z-index: 4;
+    transform: rotate(-180deg);
+  }
+
+  .choose__days-list button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    padding: 10px 32px 12px 11px;
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .choose__days-list button.active {
+    height: 40px;
+    order: -1;
+  }
+
+  .choose__days-list button:not(.active):not([class*="choose"]) {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .choose__days-list button:not(.active):not([class*="choose"]):hover {
+    background-color: #92B676;
+    color: #ffffff;
+    border-color: #92B676;
+  }
+
+  .choose__days-list button:not(.active):not([class*="choose"]):hover [class*="discount"] {
+    color: #ffffff;
+  }
+
+  .choose__days-list button:not(.active):not([class*="choose"]) span {
+    transition: color 0.3s;
+  }
+
+  .choose__days-list button.active {
+    transition: none;
+  }
+
+  .choose__days-list button.disabled {
+    pointer-events: none;
+  }
+
+  .choose__days-list [class*="discount"] {
+    color: #FF7A6C;
+  }
+
+  .choose__day {
+    font-size: 14px !important;
+    margin-right: 0;
+  }
+
+  .choose__day.active {
+    background-color: #F2F2F2 !important;
+    color: #3F4C5A !important;
+  }
+
+  .choose__label {
+    display: block;
+  }
+
   .breadcrumbs {
     margin-top: 5px;
   }
@@ -2897,42 +3339,65 @@ button.result__choose:hover {
   }
 
   .choose__program:hover span,
-  .try__program:hover span {
+  .try__program:hover span,
+  .add__program:hover span {
     color: unset;
   }
 
   .choose__program:hover .choose__programAmount,
   .try__program:hover .choose__programAmount,
+  .add__program:hover .choose__programAmount,
   .choose__program:hover .try__programAmount,
-  .try__program:hover .try__programAmount {
+  .try__program:hover .try__programAmount,
+  .add__program:hover .try__programAmount,
+  .choose__program:hover .add__programAmount,
+  .try__program:hover .add__programAmount,
+  .add__program:hover .add__programAmount {
     color: #979C9E;
   }
 
   .choose__program:hover .choose__programBackground,
   .try__program:hover .choose__programBackground,
+  .add__program:hover .choose__programBackground,
   .choose__program:hover .try__programBackground,
-  .try__program:hover .try__programBackground {
+  .try__program:hover .try__programBackground,
+  .add__program:hover .try__programBackground,
+  .choose__program:hover .add__programBackground,
+  .try__program:hover .add__programBackground,
+  .add__program:hover .add__programBackground {
     height: 7px;
   }
 
   .choose__program.active span,
   .active.try__program span,
+  .active.add__program span,
   .choose__program.active .choose__programAmount,
   .active.try__program .choose__programAmount,
+  .active.add__program .choose__programAmount,
   .choose__program.active .try__programAmount,
-  .active.try__program .try__programAmount {
+  .active.try__program .try__programAmount,
+  .active.add__program .try__programAmount,
+  .choose__program.active .add__programAmount,
+  .active.try__program .add__programAmount,
+  .active.add__program .add__programAmount {
     color: #fff;
   }
 
   .choose__program.active .choose__programBackground,
   .active.try__program .choose__programBackground,
+  .active.add__program .choose__programBackground,
   .choose__program.active .try__programBackground,
-  .active.try__program .try__programBackground {
+  .active.try__program .try__programBackground,
+  .active.add__program .try__programBackground,
+  .choose__program.active .add__programBackground,
+  .active.try__program .add__programBackground,
+  .active.add__program .add__programBackground {
     height: 100%;
   }
 
   .choose__program.choose__program--chosen,
-  .choose__program--chosen.try__program {
+  .choose__program--chosen.try__program,
+  .choose__program--chosen.add__program {
     margin-right: 16px;
   }
 
@@ -2951,6 +3416,10 @@ button.result__choose:hover {
 
   .choose .choose__card .choose__image {
     width: 200px;
+  }
+
+  .choose__name {
+    min-height: 38px;
   }
 
   .choose__nav {
@@ -3142,12 +3611,14 @@ button.result__choose:hover {
     transform: translateX(100vw);
   }
 
-  .modal--trial .modal__box {
+  .modal--trial .modal__box,
+  .modal--agree .modal__box,
+  .modal--menu .modal__box {
     padding: 40px 20px;
   }
 
-  .modal--agree .modal__box {
-    padding: 40px 20px;
+  .menu__field {
+    width: 100%;
   }
 
   .try,
@@ -3155,20 +3626,32 @@ button.result__choose:hover {
     width: 100%;
   }
 
-  .try__programs {
+  .try__programs,
+  .add__programs {
     margin-top: 18px;
   }
 
-  .try__program {
+  .try__program,
+  .add__program {
     margin-right: 18px;
   }
 
-  .try__program:nth-child(3n) {
+  .try__program:nth-child(3n),
+  .add__program:nth-child(3n) {
     margin-right: 18px;
   }
 
-  .try__program:nth-child(2n) {
+  .try__program:nth-child(2n),
+  .add__program:nth-child(2n) {
     margin-right: 0;
+  }
+
+  .add {
+    padding-left: 0;
+  }
+
+  .add__submit {
+    height: 40px;
   }
 
   .footer__box {
@@ -3278,5 +3761,9 @@ button.result__choose:hover {
 
   .features__text {
     margin-top: 8px;
+  }
+
+  .preloader svg {
+    width: 80vw;
   }
 }

@@ -142,7 +142,7 @@ const switchMonth = () => {
 
 const clickToActiveRange = e => {
     if ($('.dpicker__item.first').index() > $(e.currentTarget).index() && !$('.dpicker__item.last').length) {
-        $('.dpicker__item').removeClass('first active');
+        $('.dpicker__item').removeClass('first removed active');
         $(e.currentTarget).addClass('first');
     }
     if (!$(e.currentTarget).hasClass('active')) {
@@ -159,7 +159,7 @@ const clickToActiveRange = e => {
         $(e.currentTarget).addClass('active');
     } else {
         $(e.currentTarget).removeClass('active');
-        $('.dpicker__item').removeClass('last first ranged');
+        $('.dpicker__item').removeClass('last first ranged removed weekend');
         $('.dpicker__item.active').addClass('first');
     }
 }
@@ -183,9 +183,12 @@ const hoverOnActiveRange = e => {
 
 
 window.onload = () => {
-
+    $(document).on('click', e => {
+        popup(e, '.dpicker', '.result__choose');
+    })
     $('body').on('click', '.result__choose', e => {
         if ($(e.currentTarget).hasClass('result__choose--order')) {
+            $('.order__box').removeClass('open').attr('style', '');
             $('.dpicker').addClass('dpicker--order');
             dPicker($('.dpicker__body'), new Date());
             switchMonth();
@@ -194,7 +197,6 @@ window.onload = () => {
             dPicker($('.dpicker__body'), new Date());
             switchMonth();
         }
-        popup(e, '.dpicker', '.result__choose');
         clicked = $(e.currentTarget);
     });
     dPicker($('.dpicker__body'), new Date());
@@ -206,8 +208,14 @@ window.onload = () => {
         hoverOnActiveRange(e);
     });
 
-    $('.dpicker__checkbox').on('change', () => {
-        $('.dpicker__item[data-weekend]').toggleClass('disabled weekend');
-    });
-
+    // $('.dpicker__checkbox').on('change', (e) => {
+    //     const thatProgram = $('.result__program').attr('data-name');
+    //     if ($(e.target).prop('checked')) {
+    //         $('.dpicker__item[data-weekend].ranged').addClass('weekend');
+    //         $('.dpicker__item[data-weekend].ranged').removeClass('ranged');
+    //     } else {
+    //         $('.dpicker__item[data-weekend].weekend').addClass('ranged');
+    //         $('.dpicker__item[data-weekend].weekend').removeClass('weekend');
+    //     }
+    // });
 }

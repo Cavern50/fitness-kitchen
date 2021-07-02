@@ -83,7 +83,7 @@
 .about__video > span svg {
   width: 35px;
   height: 35px;
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 
 .about__video > span svg path {
@@ -196,12 +196,12 @@
   }
 
   .about__video > span::before {
-    content: '';
+    content: "";
     display: block;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: #FEFEFE;
+    background-color: #fefefe;
   }
 
   .about__video > span svg {

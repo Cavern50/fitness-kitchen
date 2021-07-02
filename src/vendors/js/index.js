@@ -16,7 +16,7 @@ const phoneRequest = () => {
                     id: $(`.cart__data-items span[data-name="${currentTrial.attr('data-name')}"]`).attr('data-id'),
                     name: currentTrial.attr('data-name'),
                     callories: parseInt(currentTrial.find('.try__programAmount').text()),
-                    totalCostPerDay: currentTrial.attr('data-cost') - Math.abs(currentTrial.attr('data-cost') * ( $('.discount_trial').attr('data-discount') / 100 ))
+                    totalCostPerDay: currentTrial.attr('data-cost') - Math.abs(currentTrial.attr('data-cost') * ($('.discount_trial').attr('data-discount') / 100))
                 }
                 myCart.setItem('trial', JSON.stringify(trialItem));
                 myCart.setItem('programs', JSON.stringify(cartData));
@@ -25,7 +25,12 @@ const phoneRequest = () => {
     })
 }
 
+setTimeout(() => {
+    $('.preloader').removeClass('active');
+}, 3000);
+
 $(window).on('load', () => {
+    $('.preloader').removeClass('active');
     // sliders
     $('.offers__slider').owlCarousel({
         autoWidth: true,
@@ -49,32 +54,44 @@ $(window).on('load', () => {
     createYouTubeEmbedLink('.about__videoButton', '.about__video');
     $('#phone-trial').mask("+7 (999) 999-99-99");
 
-    $('.cart__trialCheck').on('click', e => {
-        phoneRequest();
-    });
+    // $('.cart__trialCheck').on('click', e => {
+    //     phoneRequest();
+    // });
 
-    $('.cart__checkout--trial').on('click', e => {
-        e.preventDefault();
-        if (!blockOrder) {
-            location.href = $(e.target).attr('href');
-        }
-    })
+    // $('.cart__checkout--trial').on('click', e => {
+    //     e.preventDefault();
+    //     const thatProgram = $('.try__program.active').attr('data-name');
+    //     const programsInCart = JSON.parse(myCart.getItem('programs'));
+    //     // if (!blockOrder) {
+    //     for (let key in programsInCart) {
+    //         removeItem(programsInCart[key].name);
+    //     }
+    //     cartData[thatProgram].trial = true;
+    //     cartData[thatProgram].count = 1;
+    //     cartData[thatProgram].discountDays = -25;
+    //     costCalc(thatProgram);
+    //     myCart.setItem('programs', JSON.stringify(cartData));
+    //     if (thatProgram.length > 0) location.href = $(e.target).attr('href');
+    //     // }
+    // })
 
     $('.try__program').on('click', e => {
-        switchActive($(e.currentTarget), $('.try__program'));
-        $('.try__total').text($(e.currentTarget).attr('data-cost'));
-        if (myCart.getItem('trial') !== null) {
-            //если номер проверен, но пользователь выбрал другой товар в промо-дне
-            const currentTrial = $('.try__program.active');
-            const trialItem = {
-                id: $(`.cart__data-items span[data-name="${currentTrial.attr('data-name')}"]`).attr('data-id'),
-                name: currentTrial.attr('data-name'),
-                callories: parseInt(currentTrial.find('.try__programAmount').text()),
-                totalCostPerDay: $(e.currentTarget).attr('data-cost') - Math.abs($(e.currentTarget).attr('data-cost') * ( $('.discount_trial').attr('data-discount') / 100 ))
-            }
-            myCart.setItem('trial', JSON.stringify(trialItem));
-        } else {
-            $('.try__total').text($(e.currentTarget).attr('data-cost'));
-        }
+        const $this = $(e.currentTarget);
+        switchActive($this, $('.try__program'));
+        $('.try__total').text($this.attr('data-cost'));
+
+        // if (myCart.getItem('trial') !== null) {
+        //     //если номер проверен, но пользователь выбрал другой товар в промо-дне
+        //     const currentTrial = $('.try__program.active');
+        //     const trialItem = {
+        //         id: $(`.cart__data-items span[data-name="${currentTrial.attr('data-name')}"]`).attr('data-id'),
+        //         name: currentTrial.attr('data-name'),
+        //         callories: parseInt(currentTrial.find('.try__programAmount').text()),
+        //         totalCostPerDay: $(e.currentTarget).attr('data-cost') - Math.abs($(e.currentTarget).attr('data-cost') * ( $('.discount_trial').attr('data-discount') / 100 ))
+        //     }
+        //     myCart.setItem('trial', JSON.stringify(trialItem));
+        // } else {
+        //     $('.try__total').text($(e.currentTarget).attr('data-cost'));
+        // }
     })
 });

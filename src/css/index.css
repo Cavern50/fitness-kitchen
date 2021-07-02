@@ -37,13 +37,13 @@
 .intro__link:hover,
 .about__link:hover,
 .trial__order:hover {
-  background-color: #6D9240;
+  background-color: #6d9240;
 }
 
 .intro__link {
   background-color: transparent;
   color: #3F4C5A;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .intro__link:hover {
@@ -65,7 +65,7 @@
   font-weight: 600;
   text-transform: uppercase;
   border-radius: 8px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .offers__join:hover {
@@ -100,7 +100,7 @@
 .offers__slider,
 .reviews__slider {
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .owl-loaded.offers__slider,
@@ -162,7 +162,7 @@
 .about__video > span svg {
   width: 35px;
   height: 35px;
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 
 .about__video > span svg path {
@@ -427,8 +427,8 @@
 }
 
 .reviews__image {
-  width: 380px;
-  height: 380px;
+  width: 100%;
+  height: 280px;
   object-fit: cover;
 }
 
@@ -438,7 +438,7 @@
 
 .reviews__text {
   max-width: 260px;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0.6px;
 }
 
@@ -555,12 +555,12 @@
   }
 
   .about__video > span::before {
-    content: '';
+    content: "";
     display: block;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: #FEFEFE;
+    background-color: #fefefe;
   }
 
   .about__video > span svg {

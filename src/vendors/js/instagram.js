@@ -11,7 +11,7 @@ let _token = "IGQVJXWWJxeVljSnRhYkpOVHJzMktSTXhsS3JWOXJUWTk3Qk9kcWQtVERtRUZALVmc
 
 const initImages = (data) => {
     const result = data.map(info => {
-        const textSlice = info.caption.slice(0, 250),
+        const textSlice = info.caption.slice(0, 150),
             lastSpace = textSlice.lastIndexOf(' ');
         return `<a href="${info.permalink}" target='_blank' class="reviews__item">
             <img class='reviews__image owl-lazy' data-src="${info.media_type === "VIDEO" ? info.thumbnail_url : info.media_url}" alt="${info.caption}">
@@ -35,7 +35,9 @@ const initImages = (data) => {
         </a>`
     });
     $('.reviews__slider').append(result);
-    $('.reviews__slider').addClass('owl-carousel').owlCarousel({
+    $('.reviews__slider')
+    .addClass('owl-carousel')
+    .owlCarousel({
         autoWidth: true,
         nav: true,
         dots: false,
@@ -49,7 +51,7 @@ const initImages = (data) => {
         responsive: {
             1240: {
                 autoWidth: false,
-                items: 3
+                items: 4
             }
         }
     });
@@ -70,7 +72,8 @@ $.ajax({
                 _token = response.access_token;
                 console.log(data)
                 console.log(response)
-                initImages(data.data);
+                console.log(data.data.slice(0, 12))
+                initImages(data.data.slice(0, 12));
             },
             error: function (data) {
                 console.log(data);
