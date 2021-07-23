@@ -1,6 +1,6 @@
 const form = document.querySelector('#main-form');
 
-// uds autorization code
+// uds authorization code
 const uds = {
     code: null,
     receipt: {
@@ -9,8 +9,6 @@ const uds = {
         total: 0,
     }
 }
-
-
 
 $(window).on('load', () => {
     let maxCount = 0;

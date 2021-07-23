@@ -243,11 +243,18 @@ const getProductCost = (product) => {
 };
 
 const getAllProductsCount = () => {
-   const currentData = JSON.parse(cartStorage.getItem("programs"));
-   return currentData.reduce((total, current) => {
+   return getCurrentStorage().reduce((total, current) => {
       return current.count ? (total += current.count) : total;
    }, 0);
 };
+
+const getAllProductsCountBasket = () => {
+   return getCurrentStorage().reduce((total, current) => {
+      return current.count ? ++total : total;
+   }, 0);
+}
+
+
 
 const getTotalCost = () => {
    const discountFamily = Math.abs(
@@ -397,7 +404,7 @@ $(window).on("load", () => {
       }
    });
    printPrice(".cart__totalVal", ".cart__priceDelivery-total");
-   $(".header__basket").attr("data-count", getAllProductsCount());
+   $(".header__basket").attr("data-count", getAllProductsCountBasket());
 
    //добавить заказ+
 
@@ -422,7 +429,7 @@ $(window).on("load", () => {
          )
       );
       printPrice(".cart__totalVal", ".cart__priceDelivery-total");
-      $(".header__basket").attr("data-count", getAllProductsCount());
+      $(".header__basket").attr("data-count", getAllProductsCountBasket());
    });
 
    $('.intro__order').on('click', e => {
@@ -510,7 +517,7 @@ $(window).on("load", () => {
 
    $(".result__order").on("click", (e) => {
       addItem(getCurrentProgram(e));
-      $(".header__basket").attr("data-count", getAllProductsCount());
+      $(".header__basket").attr("data-count", getAllProductsCountBasket());
       $(".modal--cart").addClass("active");
       printPrice(".cart__totalVal", "");
    });
@@ -537,7 +544,7 @@ $(window).on("load", () => {
    $(document).on("click", ".order__remove", (e) => {
       removeItem(getCurrentProgramIndex(e));
       printPrice(".cart__totalVal", ".cart__priceDelivery-total");
-      $(".header__basket").attr("data-count", getAllProductsCount());
+      $(".header__basket").attr("data-count", getAllProductsCountBasket());
    });
 
    $(document).on("click", ".order__weekend", (e) => {
